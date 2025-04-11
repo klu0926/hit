@@ -3,8 +3,8 @@ import {
   setLocalPlayers,
   removeLocalToken,
   setLocalToken
-} from "../modules/storage";
-import { resMessage } from "../../utils/resMessage";
+} from "../modules/storage.js";
+import { resMessage } from "../../utils/resMessage.js";
 
 // Simulate POST to create an account and store hashed user locally
 export async function createAccount(name, password) {
@@ -54,6 +54,7 @@ export async function createAccount(name, password) {
 // Simulate login by checking against stored hashed players
 export async function login(name, password) {
   try {
+    console.log('login...')
     if (name.trim() === '') throw new Error('Missing name');
     if (password.trim() === '') throw new Error('Missing password');
 
@@ -75,8 +76,8 @@ export async function login(name, password) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: 'eve.holt@reqres.in',
-        password: 'cityslicka'
+        email: 'eve.holt@reqres.in', // placeholder (doesn't matter)
+        password: 'cityslicka' // placeholder (doesn't matter)
       })
     });
 
@@ -92,6 +93,7 @@ export async function login(name, password) {
 
 export function logout() {
   try {
+    console.log('logout...')
     removeLocalToken();
     window.location.hash = '#/login';
   } catch (err) {
