@@ -7,7 +7,7 @@ export async function getRandomUsers(count = 50) {
     console.log('Successfully get', users.length);
     return users;
   } catch (err) {
-    console.error('getRandomUser:', err.message, 'users')
+    console.error('[ERROR] getRandomUser:', err.message, 'users')
   }
 }
 getRandomUsers()
