@@ -80,12 +80,24 @@ export function getLocalToken() {
   }
 }
 
-export function parseLocalToken() {
+export function getLocalTokenPlayer() {
   try {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (!token) return null;
+    console.log('Getting player data with token...')
+    const token = getLocalToken()
+    if (!token) {
+      console.warn('No saved token')
+      return null;
+    }
     const [name, id, timestamp] = token.split('&');
-    return { name, id, timestamp };
+
+    // find player
+    const players = getLocalPlayers()
+    const currentPlayer = players.find(p => Number(p.id) === Number(id))
+    if (!currentPlayer) {
+      console.warn('Cannot find current player with token')
+      return null
+    }
+    return players;
   } catch (err) {
     console.error('[ERROR] parseLocalToken:', err.message)
   }

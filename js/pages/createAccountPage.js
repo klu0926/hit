@@ -1,6 +1,13 @@
 import { createAccount } from "../api/reqresIn.js";
 
 export function createAccountPage(app) {
+  // player already login, return to game page
+  const player = isAuth()
+  if (player) {
+    window.location.hash = '#/game'
+  }
+
+  // Page Render
   app.innerHTML = '';
 
   const createForm = document.createElement('div');
@@ -14,16 +21,24 @@ export function createAccountPage(app) {
   app.appendChild(createForm);
 
   document.getElementById('createBtn').addEventListener('click', async (e) => {
-    e.preventDefault();
-    const name = document.querySelector('#newName').value;
-    const password = document.querySelector('#newPassword').value;
+    try {
+      e.preventDefault();
+      const name = document.querySelector('#newName').value;
+      const password = document.querySelector('#newPassword').value;
 
-    if (name.trim() === '' || password.trim() === '') {
-      alert('Missing name or password');
-      return;
+      if (name.trim() === '' || password.trim() === '') {
+        throw new Error('Missing name or password');
+      }
+
+      const res = await createAccount(name, password);
+      if (res.ok) {
+        window.location.hash = '#/login'
+      } else {
+        throw new Error(res.message)
+      }
+    } catch (err) {
+      alert(err.message)
     }
 
-    const res = await createAccount(name, password);
-    console.log(res.message);
   });
 }

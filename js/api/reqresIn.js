@@ -95,7 +95,7 @@ export function logout() {
   try {
     console.log('logout...')
     removeLocalToken();
-    window.location.hash = '#/login';
+    return resMessage(true, null, 'logout successful');
   } catch (err) {
     console.error('[ERROR] logout:', err.message);
     return resMessage(false, null, err.message);
