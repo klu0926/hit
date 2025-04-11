@@ -1,5 +1,5 @@
-export function renderLeaderboard() {
-  const app = document.getElementById('app');
+export function gamePage(app) {
+  app.innerHTML = ''
 
   app.innerHTML = `
     <h2>Leaderboard</h2>

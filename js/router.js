@@ -1,20 +1,17 @@
 // where it deal with page change for a SPA
-import { renderLogin } from "./views/login.js";
-import { renderLeaderboard } from "./views/leaderboard.js";
+import { loginPage } from "./pages/loginPage.js";
+import { gamePage } from "./pages/gamePage.js";
 
 export function router() {
   const app = document.getElementById('app')
   const route = window.location.hash
 
-  // clear screen
-  app.innerHTML = ''
-
   switch (route) {
     case '#/login':
-      renderLogin();
+      loginPage(app);
       break;
-    case '#/leaderboard':
-      renderLeaderboard();
+    case '#/game':
+      gamePage(app);
       break;
     default:
       window.location.hash = '#/login' // default to login

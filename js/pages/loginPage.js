@@ -1,5 +1,5 @@
-export function renderLogin() {
-  const app = document.getElementById('app')
+export function loginPage(app) {
+  app.innerHTML = ''
 
   const loginForm = document.createElement('div');
   loginForm.innerHTML = `
