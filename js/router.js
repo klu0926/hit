@@ -1,0 +1,1 @@
+// where it deal with page change for a SPA
