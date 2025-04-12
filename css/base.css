@@ -1,1 +1,23 @@
+@import url('./components/gamePage.css');
+
 /* basic css and root varaibles */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main: black;
+  --secondary: white;
+  --red: red;
+}
+
+body {
+  background-color: var(--main);
+  height: 100vh;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}

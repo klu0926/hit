@@ -1,0 +1,8 @@
+#leaderboard {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid red;
+  max-width: 800px;
+  margin: 30px auto;
+  gap: 0px;
+}
