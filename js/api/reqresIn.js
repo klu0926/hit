@@ -5,6 +5,7 @@ import {
   setLocalToken
 } from "../modules/storage.js";
 import { resMessage } from "../../utils/resMessage.js";
+import { playerCreate } from "../modules/characterCreate.js";
 
 // Simulate POST to create an account and store hashed user locally
 export async function createAccount(name, password) {
@@ -30,14 +31,11 @@ export async function createAccount(name, password) {
     const { id } = await res.json();
 
     // Create new player object
-    const player = {
+    const player = playerCreate({
       id,
       name,
-      password: hash,
-      lethality: 100,
-      survival: 100,
-      cool: 0
-    };
+      password: hash
+    })
 
     // Append player to local players array
     const existingPlayers = getLocalPlayers() || [];

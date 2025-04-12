@@ -1,1 +1,60 @@
+@import url('./pages/agentPage.css');
+@import url('./components/navbar.css');
+
 /* basic css and root varaibles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main: black;
+  --main-hover: rgb(70, 70, 70);
+  --secondary: white;
+  --red: rgb(246, 26, 66);
+}
+
+body {
+  background-color: var(--main);
+  height: 100vh;
+  color: var(--secondary);
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.page {
+  max-width: 814px;
+  margin: 30px auto;
+  padding-top: 76px;
+  padding-bottom: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+button {
+  padding: 10px;
+  background-color: var(--main);
+  color: var(--secondary);
+  border: 2px solid var(--secondary);
+  outline: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--red);
+  border: 2px solid var(--red);
+  transform: scale(0.96);
+}

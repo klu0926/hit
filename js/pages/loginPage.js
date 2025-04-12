@@ -5,7 +5,7 @@ export function loginPage(app) {
   // player already login, return to game page
   const player = isAuth()
   if (player) {
-    window.location.hash = '#/game'
+    window.location.hash = '#/agents'
   }
 
   // Page Render
@@ -17,6 +17,8 @@ export function loginPage(app) {
     <input type="text" id="name" placeholder="Enter your alias" required />
     <input type="password" id="password" placeholder="Enter your password" required />
     <button id="loginBtn">Login</button>
+    <a href='/#/create'><button>Create Account</button></a>
+
   `;
 
   app.appendChild(loginForm);

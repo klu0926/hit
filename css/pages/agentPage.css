@@ -1,0 +1,121 @@
+#leaderboard {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 814px;
+  margin: 30px auto;
+  gap: 2px;
+}
+
+.target-card {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  outline: 3px solid transparent;
+  /* transition: outline 0.2s ease-in-out; */
+  cursor: pointer;
+  z-index: 1;
+  --zoom-in-scale: 1.5;
+  --player-zoom-in-scale: 1;
+}
+
+.target-card:hover {
+  outline: 3px solid var(--secondary);
+  z-index: 10;
+}
+
+/* inner div */
+.target-inner {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(1) brightness(0.8);
+  /* transition: all 0.2s ease-in-out; */
+}
+
+/* Apply animation only to inner on hover */
+.target-card:hover .target-inner {
+  filter: grayscale(0) brightness(1);
+  padding-top: 20px;
+}
+
+.target-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  filter: blur(2px) grayscale(1) brightness(1);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Remove blur on hover */
+.target-card:hover .target-inner img {
+  height: 125%;
+  filter: blur(0px) grayscale(1) brightness(2);
+  animation: subtleShake 1s infinite;
+}
+
+/* Player Card */
+.target-card.player {
+  outline: 3px solid var(--red);
+  filter: none;
+}
+
+.target-card.player .target-inner {
+  filter: brightness(1);
+}
+
+.target-card.player .target-inner img {
+  filter: blur(0px) brightness(2);
+}
+
+.target-card.player:hover .target-inner {
+  transform: none;
+  filter: brightness(1);
+  animation: playerSubtleShake 1.5s infinite;
+  padding-top: 0;
+}
+
+.target-card.player:hover .target-inner img {
+  transform: none;
+  filter: blur(0px) brightness(2);
+  animation: none;
+  height: 110%;
+}
+
+@keyframes subtleShake {
+  0% {
+    transform: scale(var(--zoom-in-scale)) translate(0px, 0px);
+  }
+  25% {
+    transform: scale(var(--zoom-in-scale)) translate(0.2px, -0.5px);
+  }
+  50% {
+    transform: scale(var(--zoom-in-scale)) translate(-0.2px, 0.2px);
+  }
+  75% {
+    transform: scale(var(--zoom-in-scale)) translate(0.2px, 0.2px);
+  }
+  100% {
+    transform: scale(var(--zoom-in-scale)) translate(0px, 0px);
+  }
+}
+
+@keyframes playerSubtleShake {
+  0% {
+    transform: scale(var(--player-zoom-in-scale)) translate(0px, 0px);
+  }
+  25% {
+    transform: scale(var(--player-zoom-in-scale)) translate(0.2px, -0.5px);
+  }
+  50% {
+    transform: scale(var(--player-zoom-in-scale)) translate(-0.2px, 0.2px);
+  }
+  75% {
+    transform: scale(var(--player-oom-in-scale)) translate(0.2px, 0.2px);
+  }
+  100% {
+    transform: scale(var(--player-zoom-in-scale)) translate(0px, 0px);
+  }
+}

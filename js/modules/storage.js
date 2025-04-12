@@ -1,27 +1,27 @@
 // deal with all local storage data
-const NPC_KEY = 'HIT_USERS'
+const TARGET_KEY = 'HIT_TARGET'
 const PLAYER_KEY = 'HIT_PLAYER'
 const GAME_KEY = 'HIT_GAME'
 const TOKEN_KEY = 'HIT_TOKEN' // current player id
 
-export function getLocalNPC() {
+export function getLocalTargets() {
   try {
-    const NPCString = localStorage.getItem(NPC_KEY)
-    if (NPCString) {
-      return JSON.parse(NPCString)
+    const targets = localStorage.getItem(TARGET_KEY)
+    if (targets) {
+      return JSON.parse(targets)
     } else {
       return null
     }
   } catch (err) {
-    console.error('[ERROR] NPCString:', err.message)
+    console.error('[ERROR] getLocalTargets:', err.message)
   }
 }
 
-export function setLocalNPC(NPCArray) {
+export function setLocalTargets(targetsArray) {
   try {
-    localStorage.setItem(NPC_KEY, JSON.stringify(NPCArray))
+    localStorage.setItem(TARGET_KEY, JSON.stringify(targetsArray))
   } catch (err) {
-    console.error('[ERROR] setLocalNPC:', err.message)
+    console.error('[ERROR] targetsArray:', err.message)
   }
 }
 
@@ -97,7 +97,7 @@ export function getLocalTokenPlayer() {
       console.warn('Cannot find current player with token')
       return null
     }
-    return players;
+    return currentPlayer;
   } catch (err) {
     console.error('[ERROR] parseLocalToken:', err.message)
   }
@@ -122,7 +122,7 @@ export function removeLocalToken() {
 
 export function removeAllLocal() {
   try {
-    localStorage.removeItem(NPC_KEY)
+    localStorage.removeItem(TARGET_KEY)
     localStorage.removeItem(PLAYER_KEY)
     localStorage.removeItem(GAME_KEY)
     localStorage.removeItem(TOKEN_KEY)
