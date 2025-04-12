@@ -97,7 +97,7 @@ export function getLocalTokenPlayer() {
       console.warn('Cannot find current player with token')
       return null
     }
-    return players;
+    return currentPlayer;
   } catch (err) {
     console.error('[ERROR] parseLocalToken:', err.message)
   }

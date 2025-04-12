@@ -1,7 +1,7 @@
 import { logout } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { getTargets } from "../api/getTargets.js";
-import { targetCard } from "../components/targetCard.js";
+import { targetCard, playerCard } from "../components/targetCard.js";
 
 
 export async function gamePage(app) {
@@ -30,12 +30,15 @@ export async function gamePage(app) {
     // get users
     const users = await getTargets()
 
-    // fill leaderboard
+    // fill leaderboard with target
     users.forEach(target => {
       const _targetCard = targetCard(target)
       leaderboard.appendChild(_targetCard)
     });
 
+    // add in player
+    const _playerCard = playerCard(plalyer)
+    leaderboard.appendChild(_playerCard)
 
     // EVENTS
     logoutBtn.addEventListener('click', (e) => {

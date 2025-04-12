@@ -1,6 +1,6 @@
 import { getLocalTargets, setLocalTargets } from "../modules/storage.js";
 
-export async function getTargets(count = 50) {
+export async function getTargets(count = 87) {
   try {
     const oldTargets = getLocalTargets()
     if (oldTargets) {

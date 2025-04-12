@@ -1,8 +1,75 @@
 #leaderboard {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid red;
-  max-width: 800px;
+  max-width: 814px;
   margin: 30px auto;
-  gap: 0px;
+  gap: 2px;
+}
+
+.target-card {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  padding: 0;
+  filter: grayscale(1) brightness(0.5);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.target-card:hover {
+  filter: grayscale(0) brightness(0.8);
+  z-index: 10;
+}
+
+.target-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(2px);
+  transition: all 0.2s ease-in-out;
+}
+
+.target-card:hover img {
+  transform: scale(1.2);
+  filter: sepia(0.5) contrast(0.85) blur(0px) saturate(5);
+  outline: 3px solid var(--secondary);
+  animation: card-hover-shake 0.2s infinite;
+}
+
+/* player card */
+.target-card.player {
+  filter: grayscale(0) brightness(2);
+  outline: 3px solid var(--red);
+}
+
+.target-card.player img {
+  filter: blur(0px);
+}
+
+.target-card.player:hover img {
+  transform: scale(1);
+  filter: sepia(0) contrast(1) blur(0px) saturate(1);
+  outline: 3px solid var(--red);
+  animation: card-hover-shake 0.2s infinite;
+}
+
+@keyframes card-hover-shake {
+  0% {
+    transform: scale(1.1) translate(0, 0);
+  }
+  25% {
+    transform: scale(1.1) translate(0.3px, -0.3px);
+  }
+  50% {
+    transform: scale(1.1) translate(-0.3px, 0.3px);
+  }
+  75% {
+    transform: scale(1.1) translate(0.3px, -0.3px);
+  }
+  100% {
+    transform: scale(1.1) translate(0, 0);
+  }
 }

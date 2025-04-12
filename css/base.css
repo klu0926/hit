@@ -1,9 +1,12 @@
 @import url('./components/gamePage.css');
 
 /* basic css and root varaibles */
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 :root {

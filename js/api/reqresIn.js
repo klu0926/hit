@@ -36,7 +36,8 @@ export async function createAccount(name, password) {
       password: hash,
       lethality: 100,
       survival: 100,
-      cool: 0
+      cool: 0,
+      avatar: './assets/images/avatar_1.png'
     };
 
     // Append player to local players array

@@ -5,6 +5,7 @@ export function isAuth() {
   const player = getLocalTokenPlayer()
   if (player) {
     console.log('Authenticated!')
+    console.log('current player:', player)
     return player
   } else {
     console.log('Fail to Authenticated, back to login page')
