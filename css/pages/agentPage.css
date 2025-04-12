@@ -20,6 +20,36 @@
   --player-zoom-in-scale: 1;
 }
 
+/* rank */
+.target-card .rank {
+  visibility: hidden;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  z-index: 11;
+  font-family: monospace;
+  color: var(--secondary);
+}
+
+.target-card:hover .rank {
+  visibility: visible;
+}
+
+/* first name */
+.target-card .name {
+  visibility: hidden;
+  position: absolute;
+  bottom: 20px;
+  left: 5px;
+  z-index: 11;
+  font-family: monospace;
+  color: var(--secondary);
+}
+
+.target-card:hover .name {
+  visibility: visible;
+}
+
 .target-card:hover {
   outline: 3px solid var(--secondary);
   z-index: 10;
@@ -60,6 +90,16 @@
 .target-card.player {
   outline: 3px solid var(--red);
   filter: none;
+}
+
+/* rank */
+.target-card.player:hover .rank {
+  color: var(--red);
+}
+
+/* name */
+.target-card.player:hover .name {
+  color: var(--red);
 }
 
 .target-card.player .target-inner {

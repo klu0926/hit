@@ -1,37 +1,38 @@
-export function targetCard(target) {
-  const _targetCard = document.createElement('div')
-  _targetCard.classList.add('target-card')
+export function targetCard(target, isPlayer = false) {
+  const card = document.createElement('div');
+  card.classList.add('target-card');
+  if (isPlayer) {
+    card.classList.add('player');
+    card.id = 'player';
+  }
 
-  // set target uuid to dataset
-  _targetCard.dataset.target = target.uuid || target.id
+  // Set data attribute (for NPCs only)
+  if (!isPlayer) {
+    card.dataset.target = target.uuid || target.id;
+  }
 
-  // inner div
-  const innerDiv = document.createElement('div')
-  innerDiv.classList.add('target-inner')
-  _targetCard.appendChild(innerDiv)
+  // Inner container
+  const innerDiv = document.createElement('div');
+  innerDiv.classList.add('target-inner');
+  card.appendChild(innerDiv);
 
-  // target photo
-  const image = document.createElement('img')
-  image.src = target.avatar
-  innerDiv.appendChild(image)
+  // Image
+  const image = document.createElement('img');
+  image.src = target.avatar;
+  innerDiv.appendChild(image);
 
-  return _targetCard
-}
+  // Rank
+  const Rankspan = document.createElement('span');
+  Rankspan.innerText = target.rank || "?"
+  Rankspan.classList.add('rank')
+  innerDiv.appendChild(Rankspan);
 
-export function playerCard(player) {
-  const _playerCard = document.createElement('div')
-  _playerCard.classList.add('target-card', 'player')
-  _playerCard.id = 'player'
 
-  // inner div
-  const innerDiv = document.createElement('div')
-  innerDiv.classList.add('target-inner')
-  _playerCard.appendChild(innerDiv)
+  // first name
+  const nameSpan = document.createElement('span');
+  nameSpan.innerText = target.firstName || target.name || "?"
+  nameSpan.classList.add('name')
+  innerDiv.appendChild(nameSpan);
 
-  // player photo
-  const image = document.createElement('img')
-  image.src = player.avatar
-  innerDiv.appendChild(image)
-
-  return _playerCard
+  return card;
 }

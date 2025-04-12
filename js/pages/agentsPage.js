@@ -5,14 +5,14 @@ import { getTargets } from "../api/getTargets.js";
 
 // elements
 import { navbar } from "../components/navbar.js";
-import { targetCard, playerCard } from "../components/targetCard.js";
+import { targetCard } from "../components/targetCard.js";
 
 
 export async function agentsPage(app) {
   try {
     // player is not login
-    const plalyer = isAuth()
-    if (!plalyer) {
+    const player = isAuth()
+    if (!player) {
       window.location.hash = '#/login'
     }
 
@@ -46,18 +46,28 @@ export async function agentsPage(app) {
     logoutBtn.innerText = 'Logout'
     page.append(logoutBtn)
 
-    // get users
-    const users = await getTargets()
+    // get targets
+    const targets = await getTargets()
 
-    // fill leaderboard with target
-    users.forEach(target => {
-      const _targetCard = targetCard(target)
-      leaderboard.appendChild(_targetCard)
-    });
+    // put player to the targets array
+    targets.push(player)
 
-    // add in player
-    const _playerCard = playerCard(plalyer)
-    leaderboard.appendChild(_playerCard)
+    // sort agents ranking
+    const sortedTargets = targets.sort((a, b) => b.stats.lethality - a.stats.lethality)
+
+    // Fill leaderboard and assign "rank" (rank is not save in storage)
+    for (let i = 0; i < sortedTargets.length; i++) {
+      const target = sortedTargets[i];
+      target.rank = i + 1; // rank starts at 1
+
+      if (target === player) {
+        const _playerCard = targetCard(target, true);
+        leaderboard.appendChild(_playerCard);
+      } else {
+        const _targetCard = targetCard(target);
+        leaderboard.appendChild(_targetCard);
+      }
+    }
 
     // EVENTS
     logoutBtn.addEventListener('click', (e) => {
