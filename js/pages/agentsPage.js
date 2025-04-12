@@ -8,7 +8,7 @@ import { navbar } from "../components/navbar.js";
 import { targetCard, playerCard } from "../components/targetCard.js";
 
 
-export async function gamePage(app) {
+export async function agentsPage(app) {
   try {
     // player is not login
     const plalyer = isAuth()
@@ -21,7 +21,7 @@ export async function gamePage(app) {
     app.innerHTML = ''
 
     // navbar
-    const _navbar = navbar('leaderboard')
+    const _navbar = navbar('agents')
     app.appendChild(_navbar)
 
     // page
@@ -31,11 +31,11 @@ export async function gamePage(app) {
 
     // show page title
     const title = document.createElement('h1')
-    title.innerText = 'LEADERBOARD'
+    title.innerText = 'AGENTS'
     title.classList.add('title')
     page.appendChild(title)
 
-    // leaderboard
+    // agents leaderboard
     const leaderboard = document.createElement('div')
     leaderboard.id = 'leaderboard'
     page.appendChild(leaderboard)
@@ -74,7 +74,7 @@ export async function gamePage(app) {
     })
 
   } catch (err) {
-    console.error("[ERROR] gamePage", err.message)
+    console.error("[ERROR] agentsPage", err.message)
   }
 
 }

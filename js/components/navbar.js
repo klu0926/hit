@@ -2,14 +2,14 @@ export function navbar(currentPage) {
   const navbar = document.createElement('nav');
   navbar.classList.add('navbar');
   navbar.innerHTML = `
-    <div class="logo">HIT</div>
+    <div class="logo">040147</div>
     <button class="burger" aria-label="Toggle navigation">
       ☰
     </button>
     <ul class="nav-links">
-      <li><a href="#/leaderboard" class="${currentPage === 'leaderboard' ? 'active' : ''}">
+      <li><a href="#/agents" class="${currentPage === 'agents' ? 'active' : ''}">
       <i class="fa-solid fa-earth-asia"></i>
-      LEADERBOARD</a></li>
+      AGENTS</a></li>
       <li><a href="#/shop" class="${currentPage === 'shop' ? 'active' : ''}">
 <i class="fa-regular fa-credit-card"></i>
       SHOP</a></li>

@@ -5,7 +5,7 @@ export function accountPage(app) {
   // player already login, return to game page
   const player = isAuth()
   if (player) {
-    window.location.hash = '#/game'
+    window.location.hash = '#/agents'
   }
 
   // Page Render

@@ -1,5 +1,5 @@
 import { loginPage } from "./pages/loginPage.js";
-import { gamePage } from "./pages/gamePage.js";
+import { agentsPage } from "./pages/agentsPage.js";
 import { accountPage } from "./pages/accountPage.js";
 import { shopPage } from "./pages/shopPage.js";
 import { rulesPage } from "./pages/rulesPages.js";
@@ -15,8 +15,8 @@ export function router() {
     case '#/create':
       accountPage(app)
       break
-    case '#/game':
-      gamePage(app);
+    case '#/agents':
+      agentsPage(app);
       break
     case '#/shop':
       shopPage(app);

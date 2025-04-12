@@ -31,10 +31,30 @@ body {
 .page {
   max-width: 814px;
   margin: 30px auto;
+  padding-top: 76px;
+  padding-bottom: 20px;
 }
 
-
-.title{
+.title {
   text-align: center;
   font-size: 3rem;
+  text-transform: uppercase;
+}
+
+button {
+  padding: 10px;
+  background-color: var(--main);
+  color: var(--secondary);
+  border: 2px solid var(--secondary);
+  outline: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--red);
+  border: 2px solid var(--red);
+  transform: scale(0.96);
 }

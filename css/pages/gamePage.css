@@ -11,68 +11,111 @@
   position: relative;
   width: 100px;
   height: 100px;
-  margin: 0;
-  padding: 0;
-  filter: grayscale(1) brightness(0.5);
-  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  outline: 3px solid transparent;
+  /* transition: outline 0.2s ease-in-out; */
   cursor: pointer;
-  overflow: visible;
+  z-index: 1;
+  --zoom-in-scale: 1.5;
+  --player-zoom-in-scale: 1;
 }
 
 .target-card:hover {
-  filter: grayscale(0) brightness(0.8);
+  outline: 3px solid var(--secondary);
   z-index: 10;
 }
 
-.target-card img {
+/* inner div */
+.target-inner {
   width: 100%;
   height: 100%;
+  filter: grayscale(1) brightness(0.8);
+  /* transition: all 0.2s ease-in-out; */
+}
+
+/* Apply animation only to inner on hover */
+.target-card:hover .target-inner {
+  filter: grayscale(0) brightness(1);
+  padding-top: 20px;
+}
+
+.target-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
   object-fit: cover;
-  filter: blur(2px);
+  filter: blur(2px) grayscale(1) brightness(1);
   transition: all 0.2s ease-in-out;
 }
 
-.target-card:hover img {
-  transform: scale(1.2);
-  filter: blur(0px) saturate(2);
-  outline: 3px solid var(--secondary);
-  animation: card-hover-shake 0.2s infinite;
+/* Remove blur on hover */
+.target-card:hover .target-inner img {
+  height: 125%;
+  filter: blur(0px) grayscale(1) brightness(2);
+  animation: subtleShake 1s infinite;
 }
 
-/* player card */
+/* Player Card */
 .target-card.player {
   outline: 3px solid var(--red);
-  filter: blur(0px) brightness(1);
+  filter: none;
 }
 
-.target-card.player img {
+.target-card.player .target-inner {
+  filter: brightness(1);
+}
+
+.target-card.player .target-inner img {
   filter: blur(0px) brightness(2);
 }
 
-.target-card.player:hover {
-  filter: grayscale(0) blur(0px) brightness(1);
+.target-card.player:hover .target-inner {
+  transform: none;
+  filter: brightness(1);
+  animation: playerSubtleShake 1.5s infinite;
+  padding-top: 0;
 }
 
-.target-card.player:hover img {
-  transform: scale(1);
+.target-card.player:hover .target-inner img {
+  transform: none;
   filter: blur(0px) brightness(2);
-  animation: card-hover-shake 0.2s infinite;
+  animation: none;
+  height: 110%;
 }
 
-@keyframes card-hover-shake {
+@keyframes subtleShake {
   0% {
-    transform: scale(1.1) translate(0, 0);
+    transform: scale(var(--zoom-in-scale)) translate(0px, 0px);
   }
   25% {
-    transform: scale(1.1) translate(0.3px, -0.3px);
+    transform: scale(var(--zoom-in-scale)) translate(0.2px, -0.5px);
   }
   50% {
-    transform: scale(1.1) translate(-0.3px, 0.3px);
+    transform: scale(var(--zoom-in-scale)) translate(-0.2px, 0.2px);
   }
   75% {
-    transform: scale(1.1) translate(0.3px, -0.3px);
+    transform: scale(var(--zoom-in-scale)) translate(0.2px, 0.2px);
   }
   100% {
-    transform: scale(1.1) translate(0, 0);
+    transform: scale(var(--zoom-in-scale)) translate(0px, 0px);
+  }
+}
+
+@keyframes playerSubtleShake {
+  0% {
+    transform: scale(var(--player-zoom-in-scale)) translate(0px, 0px);
+  }
+  25% {
+    transform: scale(var(--player-zoom-in-scale)) translate(0.2px, -0.5px);
+  }
+  50% {
+    transform: scale(var(--player-zoom-in-scale)) translate(-0.2px, 0.2px);
+  }
+  75% {
+    transform: scale(var(--player-oom-in-scale)) translate(0.2px, 0.2px);
+  }
+  100% {
+    transform: scale(var(--player-zoom-in-scale)) translate(0px, 0px);
   }
 }
