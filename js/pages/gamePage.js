@@ -1,6 +1,10 @@
+// logic
 import { logout } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { getTargets } from "../api/getTargets.js";
+
+// elements
+import { navbar } from "../components/navbar.js";
 import { targetCard, playerCard } from "../components/targetCard.js";
 
 
@@ -16,16 +20,31 @@ export async function gamePage(app) {
     // Page Sekeleton ---------------
     app.innerHTML = ''
 
+    // navbar
+    const _navbar = navbar('leaderboard')
+    app.appendChild(_navbar)
+
+    // page
+    const page = document.createElement('div')
+    page.classList.add('page')
+    app.appendChild(page)
+
+    // show page title
+    const title = document.createElement('h1')
+    title.innerText = 'LEADERBOARD'
+    title.classList.add('title')
+    page.appendChild(title)
+
     // leaderboard
     const leaderboard = document.createElement('div')
     leaderboard.id = 'leaderboard'
-    app.appendChild(leaderboard)
+    page.appendChild(leaderboard)
 
     // logout
     const logoutBtn = document.createElement('button')
     logoutBtn.id = 'logout'
     logoutBtn.innerText = 'Logout'
-    app.append(logoutBtn)
+    page.append(logoutBtn)
 
     // get users
     const users = await getTargets()

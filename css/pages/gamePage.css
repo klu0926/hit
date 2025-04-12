@@ -34,25 +34,28 @@
 
 .target-card:hover img {
   transform: scale(1.2);
-  filter: sepia(0.5) contrast(0.85) blur(0px) saturate(5);
+  filter: blur(0px) saturate(2);
   outline: 3px solid var(--secondary);
   animation: card-hover-shake 0.2s infinite;
 }
 
 /* player card */
 .target-card.player {
-  filter: grayscale(0) brightness(2);
   outline: 3px solid var(--red);
+  filter: blur(0px) brightness(1);
 }
 
 .target-card.player img {
-  filter: blur(0px);
+  filter: blur(0px) brightness(2);
+}
+
+.target-card.player:hover {
+  filter: grayscale(0) blur(0px) brightness(1);
 }
 
 .target-card.player:hover img {
   transform: scale(1);
-  filter: sepia(0) contrast(1) blur(0px) saturate(1);
-  outline: 3px solid var(--red);
+  filter: blur(0px) brightness(2);
   animation: card-hover-shake 0.2s infinite;
 }
 

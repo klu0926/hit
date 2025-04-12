@@ -1,7 +1,8 @@
-// where it deal with page change for a SPA
 import { loginPage } from "./pages/loginPage.js";
 import { gamePage } from "./pages/gamePage.js";
-import { createAccountPage } from "./pages/createAccountPage.js";
+import { accountPage } from "./pages/accountPage.js";
+import { shopPage } from "./pages/shopPage.js";
+import { rulesPage } from "./pages/rulesPages.js";
 
 export function router() {
   const app = document.getElementById('app')
@@ -12,11 +13,17 @@ export function router() {
       loginPage(app)
       break
     case '#/create':
-      createAccountPage(app)
+      accountPage(app)
       break
     case '#/game':
       gamePage(app);
       break
+    case '#/shop':
+      shopPage(app);
+      break;
+    case '#/rules':
+      rulesPage(app);
+      break;
     default:
       window.location.hash = '#/login' // default to login
   }

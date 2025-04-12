@@ -1,0 +1,66 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--main);
+  color: var(--secondary);
+  padding: 10px 20px;
+  margin: 20px 25px;
+  font-family: sans-serif;
+  z-index: 20;
+}
+
+.navbar .logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.navbar .burger {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  z-index: 20;
+}
+
+.navbar .nav-links a {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar .nav-links a.active {
+  background-color: var(--red);
+}
+
+.navbar .nav-links a.active:hover {
+  background-color: var(--red);
+}
+
+.navbar .nav-links a:hover {
+  background-color: var(--main-hover);
+}
+
+/* fontawesome icon */
+.navbar .nav-links i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  outline: 1.5px solid white;
+  margin-right: 7px;
+  padding: 0;
+  font-size: 16px;
+}

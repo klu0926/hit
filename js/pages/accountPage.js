@@ -1,7 +1,7 @@
 import { createAccount } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 
-export function createAccountPage(app) {
+export function accountPage(app) {
   // player already login, return to game page
   const player = isAuth()
   if (player) {
