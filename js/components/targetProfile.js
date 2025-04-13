@@ -1,3 +1,7 @@
+import { renderChart } from "../modules/chartHelper.js"
+
+
+
 export function targetProfile(target, isPlayer = false) {
   const _targetProfile = document.createElement('div')
   _targetProfile.id = 'target-profile'
@@ -63,8 +67,18 @@ export function targetProfile(target, isPlayer = false) {
   // stats div (replace with chart.js) : 
   const stats = document.createElement('div')
   stats.id = 'target-profile-stats'
-  stats.innerText = `Lethality: ${target.stats?.lethality || '?'}`
   mainDiv.appendChild(stats)
+
+  // state ------ chart.js 
+  const statsArray = []
+  const entires = Object.entries(target.stats)
+  entires.forEach(e => {
+    statsArray.push({
+      label: e[0],
+      value: e[1]
+    })
+  })
+  renderChart(stats, statsArray)
 
   // button div (Hit / Simulate )
   const buttonDiv = document.createElement('div')
@@ -100,7 +114,6 @@ export function targetProfile(target, isPlayer = false) {
       profile.classList.remove('active')
     }
   })
-
 
   return _targetProfile
 }
@@ -165,8 +178,19 @@ export function updateTargetProfile(target, isPlayer = false) {
 
   const stats = profile.querySelector('#target-profile-stats');
   if (stats) {
-    stats.innerText = `Lethality: ${target.stats?.lethality ?? '?'}`;
+    stats.innerText = `Lethality: ${target.stats?.lethality || '?'}`;
   }
+
+  // state ------ chart.js 
+  const statsArray = []
+  const entires = Object.entries(target.stats)
+  entires.forEach(e => {
+    statsArray.push({
+      label: e[0],
+      value: e[1]
+    })
+  })
+  renderChart(stats, statsArray)
 
   const simulatePercent = profile.querySelector('.simulate-percent');
   if (simulatePercent) {
