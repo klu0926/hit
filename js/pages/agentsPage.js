@@ -16,7 +16,6 @@ export async function agentsPage(app) {
       window.location.hash = '#/login'
     }
 
-
     // Page Sekeleton ---------------
     app.innerHTML = ''
 

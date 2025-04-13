@@ -1,3 +1,5 @@
+import { targetProfile, updateTargetProfile } from "./targetProfile.js";
+
 export function targetCard(target, isPlayer = false) {
   const card = document.createElement('div');
   card.classList.add('target-card');
@@ -33,6 +35,46 @@ export function targetCard(target, isPlayer = false) {
   nameSpan.innerText = target.firstName || target.name || "?"
   nameSpan.classList.add('name')
   innerDiv.appendChild(nameSpan);
+
+  // EVENT ------------------
+
+  // click card to open target profile
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // check if profile exist
+    let profile = document.querySelector('#target-profile')
+
+    // check if is player
+    const isPlayer = card.classList.contains('player')
+
+    // create profile
+    if (!profile) {
+      profile = targetProfile(target, isPlayer)
+      const app = document.querySelector('#app')
+      if (app) {
+        app.appendChild(profile)
+      } else {
+        console.error('[ERROR] No #app to append')
+      }
+      // update profile
+    } else {
+      updateTargetProfile(target, isPlayer)
+    }
+  })
+
+  // click outside the profile to close it
+  document.addEventListener('click', (event) => {
+    const profile = document.getElementById('target-profile');
+    if (!profile) return;
+
+    const isActive = profile.classList.contains('active');
+    const isInside = profile.contains(event.target);
+
+    if (isActive && !isInside) {
+      profile.classList.remove('active');
+    }
+  });
+
 
   return card;
 }
