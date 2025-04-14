@@ -1,8 +1,10 @@
+// H.I.T. – Haunt. Infiltrate. Terminate.
+
 export function navbar(currentPage) {
   const navbar = document.createElement('nav');
   navbar.classList.add('navbar');
   navbar.innerHTML = `
-    <div class="logo">040147</div>
+    <div class="logo">HIT</div>
     <button class="burger" aria-label="Toggle navigation">
       ☰
     </button>

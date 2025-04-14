@@ -13,7 +13,6 @@
   height: 100px;
   overflow: hidden;
   outline: 3px solid transparent;
-  /* transition: outline 0.2s ease-in-out; */
   cursor: pointer;
   z-index: 1;
   --zoom-in-scale: 1.5;
@@ -23,6 +22,46 @@
 .target-card:hover {
   outline: 3px solid var(--secondary);
   z-index: 10;
+}
+
+.target-card:hover::after {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background-image: url('../../assets/images/noise.png');
+  opacity: 0.08;
+  animation: noise 0.2s linear infinite both;
+  pointer-events: none;
+}
+
+/* rank */
+.target-card .rank {
+  visibility: hidden;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  z-index: 11;
+  font-family: monospace;
+  color: var(--secondary);
+}
+
+.target-card:hover .rank {
+  visibility: visible;
+}
+
+/* first name */
+.target-card .name {
+  visibility: hidden;
+  position: absolute;
+  bottom: 20px;
+  left: 5px;
+  z-index: 11;
+  font-family: monospace;
+  color: var(--secondary);
+}
+
+.target-card:hover .name {
+  visibility: visible;
 }
 
 /* inner div */
@@ -60,6 +99,16 @@
 .target-card.player {
   outline: 3px solid var(--red);
   filter: none;
+}
+
+/* rank */
+.target-card.player:hover .rank {
+  color: var(--red);
+}
+
+/* name */
+.target-card.player:hover .name {
+  color: var(--red);
 }
 
 .target-card.player .target-inner {

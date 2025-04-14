@@ -1,37 +1,67 @@
-export function targetCard(target) {
-  const _targetCard = document.createElement('div')
-  _targetCard.classList.add('target-card')
+import { targetProfile, updateTargetProfile } from "./targetProfile.js";
 
-  // set target uuid to dataset
-  _targetCard.dataset.target = target.uuid || target.id
 
-  // inner div
-  const innerDiv = document.createElement('div')
-  innerDiv.classList.add('target-inner')
-  _targetCard.appendChild(innerDiv)
+export function targetCard(target, isPlayer = false) {
 
-  // target photo
-  const image = document.createElement('img')
-  image.src = target.avatar
-  innerDiv.appendChild(image)
+  const card = document.createElement('div');
+  card.classList.add('target-card');
+  if (isPlayer) {
+    card.classList.add('player');
+    card.id = 'player';
+  }
 
-  return _targetCard
-}
+  // Set data attribute (for NPCs only)
+  if (!isPlayer) {
+    card.dataset.target = target.uuid || target.id;
+  }
 
-export function playerCard(player) {
-  const _playerCard = document.createElement('div')
-  _playerCard.classList.add('target-card', 'player')
-  _playerCard.id = 'player'
+  // Inner container
+  const innerDiv = document.createElement('div');
+  innerDiv.classList.add('target-inner');
+  card.appendChild(innerDiv);
 
-  // inner div
-  const innerDiv = document.createElement('div')
-  innerDiv.classList.add('target-inner')
-  _playerCard.appendChild(innerDiv)
+  // Image
+  const image = document.createElement('img');
+  image.src = target.avatar;
+  innerDiv.appendChild(image);
 
-  // player photo
-  const image = document.createElement('img')
-  image.src = player.avatar
-  innerDiv.appendChild(image)
+  // Rank
+  const Rankspan = document.createElement('span');
+  Rankspan.innerText = target.rank || "?"
+  Rankspan.classList.add('rank')
+  innerDiv.appendChild(Rankspan);
 
-  return _playerCard
+
+  // first name
+  const nameSpan = document.createElement('span');
+  nameSpan.innerText = target.firstName || target.name || "?"
+  nameSpan.classList.add('name')
+  innerDiv.appendChild(nameSpan);
+
+  // EVENT ------------------
+
+  // click card to open target profile
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // check if profile exist
+    let profile = document.querySelector('#target-profile')
+
+    // check if is player
+    const isPlayer = card.classList.contains('player')
+
+    // create profile
+    if (!profile) {
+      profile = targetProfile(target, isPlayer)
+      const app = document.querySelector('#app')
+      if (app) {
+        app.appendChild(profile)
+      } else {
+        console.error('[ERROR] No #app to append')
+      }
+      // update profile
+    } else {
+      updateTargetProfile(target, isPlayer)
+    }
+  })
+  return card;
 }

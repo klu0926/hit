@@ -5,25 +5,31 @@ const npcTier = {
   weak: {
     lethality: [80, 120],
     survival: [80, 120],
+    cool: [80, 120],
     growth: {
       lethality: [5, 10],
-      survival: [3, 6]
+      survival: [3, 6],
+      cool: [2, 4],
     }
   },
   mid: {
     lethality: [150, 200],
     survival: [130, 180],
+    cool: [80, 120],
     growth: {
       lethality: [10, 15],
-      survival: [6, 10]
+      survival: [6, 10],
+      cool: [2, 4],
     }
   },
   elite: {
     lethality: [250, 300],
     survival: [200, 250],
+    cool: [80, 120],
     growth: {
       lethality: [15, 25],
-      survival: [10, 15]
+      survival: [10, 15],
+      cool: [2, 4],
     }
   }
 };
@@ -43,11 +49,13 @@ export function generateTargetStats(tier) {
     level: 1,
     stats: {
       lethality: randomInRange(...config.lethality),
-      survival: randomInRange(...config.survival)
+      survival: randomInRange(...config.survival),
+      cool: randomInRange(...config.cool)
     },
     growthRate: {
       lethality: randomInRange(...config.growth.lethality),
-      survival: randomInRange(...config.growth.survival)
+      survival: randomInRange(...config.growth.survival),
+      cool: randomInRange(...config.growth.cool)
     }
   };
 }
