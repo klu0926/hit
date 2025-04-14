@@ -20,6 +20,21 @@
   --player-zoom-in-scale: 1;
 }
 
+.target-card:hover {
+  outline: 3px solid var(--secondary);
+  z-index: 10;
+}
+
+.target-card:hover::after {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background-image: url('../../assets/images/noise.png');
+  opacity: 0.08;
+  animation: noise 0.2s linear infinite both;
+  pointer-events: none;
+}
+
 /* rank */
 .target-card .rank {
   visibility: hidden;
@@ -48,11 +63,6 @@
 
 .target-card:hover .name {
   visibility: visible;
-}
-
-.target-card:hover {
-  outline: 3px solid var(--secondary);
-  z-index: 10;
 }
 
 /* inner div */

@@ -18,6 +18,15 @@ export function renderChart(container, dataArray) {
 
   console.log('dataArray:', dataArray)
 
+  // Assign color based on index
+
+  for (const i in dataArray) {
+    dataArray[i].color = 'red' // default
+    if (i == 0) dataArray[i].color = 'red'
+    if (i == 1) dataArray[i].color = 'orange'
+    if (i == 2) dataArray[i].color = 'yellow'
+  }
+
   // Prepare chart config
   const cfg = {
     type: 'bar',
@@ -25,9 +34,9 @@ export function renderChart(container, dataArray) {
       labels: dataArray.map(d => d.label.toUpperCase()),
       datasets: [{
         data: dataArray.map(d => d.value),
-        // Bar color
-        backgroundColor: 'rgb(246, 26, 66)',
-        barThickness: 24,
+        backgroundColor: dataArray.map(d => d.color), // bar colors
+        barPercentage: 1, // (size of the bar)
+        categoryPercentage: 0.8, // (less = more space between bars)
       }]
     },
     options: {
@@ -36,18 +45,24 @@ export function renderChart(container, dataArray) {
         padding: 0
       },
       scales: {
-        x: {
+        x: { // number below
+          display: false, // hide it
           beginAtZero: true,
-          ticks: {
-            color: '#fff', // X-axis text color
-            font: {
-              size: 16
-            }
-          }
+          max: 800, // max value
+          // ticks: {
+          //   color: '#fff',
+          //   font: {
+          //     size: 16
+          //   }
+          // }
         },
-        y: {
+        y: { // text on the left
           ticks: {
-            color: '#fff', // Y-axis text color
+            // return color
+            color: function (context) {
+              console.log('context:', context);
+              return dataArray[context.index]?.color || '#fff';
+            },
             font: {
               size: 16
             }
