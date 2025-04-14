@@ -16,10 +16,7 @@ export function renderChart(container, dataArray) {
   const canvas = document.createElement('canvas');
   container.appendChild(canvas);
 
-  console.log('dataArray:', dataArray)
-
   // Assign color based on index
-
   for (const i in dataArray) {
     dataArray[i].color = 'red' // default
     if (i == 0) dataArray[i].color = 'red'
@@ -60,7 +57,6 @@ export function renderChart(container, dataArray) {
           ticks: {
             // return color
             color: function (context) {
-              console.log('context:', context);
               return dataArray[context.index]?.color || '#fff';
             },
             font: {

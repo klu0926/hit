@@ -1,6 +1,8 @@
 import { targetProfile, updateTargetProfile } from "./targetProfile.js";
 
+
 export function targetCard(target, isPlayer = false) {
+
   const card = document.createElement('div');
   card.classList.add('target-card');
   if (isPlayer) {

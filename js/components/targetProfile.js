@@ -1,15 +1,34 @@
 import { renderChart } from "../modules/chartHelper.js"
+import { getPercentage } from "../modules/gameCalculation.js"
+import { animateNumber } from "../modules/animateNumber.js";
+
+
+// player
+import { getLocalTokenPlayer } from "../modules/storage.js";
+const player = getLocalTokenPlayer()
+
 
 // Cached elements for easy update
 let profile
+let mainDiv
+let topDiv
 let avatar
 let picture
+let infoDiv
 let rank
 let name
 let gender
 let uuid
 let stats
+let buttonDiv
 let simulatePercent
+let simulateBtn
+let hitBtn
+let close
+
+// target
+let currentTarget
+
 
 export function targetProfile(target, isPlayer = false) {
   profile = document.createElement('div')
@@ -17,12 +36,14 @@ export function targetProfile(target, isPlayer = false) {
   profile.classList.add('active')
   if (isPlayer) profile.classList.add('player')
 
-  const mainDiv = document.createElement('div')
+  currentTarget = target
+
+  mainDiv = document.createElement('div')
   mainDiv.className = 'target-profile-main'
   profile.appendChild(mainDiv)
 
   // Top section
-  const topDiv = document.createElement('div')
+  topDiv = document.createElement('div')
   topDiv.className = 'target-profile-top'
   mainDiv.appendChild(topDiv)
 
@@ -39,7 +60,7 @@ export function targetProfile(target, isPlayer = false) {
   }
 
   // Info section
-  const infoDiv = document.createElement('div')
+  infoDiv = document.createElement('div')
   infoDiv.className = 'target-profile-info'
   mainDiv.appendChild(infoDiv)
 
@@ -65,27 +86,27 @@ export function targetProfile(target, isPlayer = false) {
   renderChart(stats, statsArray)
 
   // Buttons
-  const buttonDiv = document.createElement('div')
+  buttonDiv = document.createElement('div')
   buttonDiv.classList.add('target-profile-buttons')
   mainDiv.appendChild(buttonDiv)
 
-  const hitBtn = document.createElement('button')
+  hitBtn = document.createElement('button')
   hitBtn.type = 'button'
   hitBtn.innerText = 'Hit'
   hitBtn.disabled = true
   buttonDiv.appendChild(hitBtn)
 
-  const simulateBtn = document.createElement('button')
+  simulateBtn = document.createElement('button')
   simulateBtn.type = 'button'
   simulateBtn.innerText = 'Simulate'
   buttonDiv.appendChild(simulateBtn)
 
   simulatePercent = document.createElement('div')
   simulatePercent.classList.add('simulate-percent')
-  simulatePercent.innerText = '100%'
+  simulatePercent.innerText = '???'
   buttonDiv.appendChild(simulatePercent)
 
-  const close = document.createElement('button')
+  close = document.createElement('button')
   close.innerText = 'x'
   close.classList.add('close')
   profile.appendChild(close)
@@ -96,11 +117,25 @@ export function targetProfile(target, isPlayer = false) {
 
   updateTargetProfile(target, isPlayer)
 
+  // EVENT
+  // calculate win chance based on lethality
+  simulateBtn.addEventListener('click', () => {
+    const playerLeth = player.stats.lethality
+    const targetLeth = currentTarget.stats.lethality
+    const percentage = getPercentage(playerLeth, targetLeth)
+    // animated percentage
+    animateNumber(simulatePercent, percentage, () => {
+      // unlock hit button when complete
+      hitBtn.disabled = false
+    })
+  })
+
   return profile
 }
 
 export function updateTargetProfile(target, isPlayer = false) {
   if (!profile) return
+  currentTarget = target
 
   profile.classList.add('active')
   if (isPlayer) profile.classList.add('player')
@@ -121,5 +156,7 @@ export function updateTargetProfile(target, isPlayer = false) {
   const statsArray = Object.entries(target.stats).map(([label, value]) => ({ label, value }))
   renderChart(stats, statsArray)
 
-  if (simulatePercent) simulatePercent.innerText = '100%'
+  if (hitBtn) hitBtn.disabled = true
+
+  if (simulatePercent) simulatePercent.innerText = '???'
 }
