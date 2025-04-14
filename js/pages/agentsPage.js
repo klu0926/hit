@@ -2,11 +2,11 @@
 import { logout } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { getTargets } from "../api/getTargets.js";
+import { setLocalTargets, setTokenPlayer } from "../modules/storage.js";
 
 // elements
 import { navbar } from "../components/navbar.js";
 import { targetCard } from "../components/targetCard.js";
-
 
 export async function agentsPage(app) {
   try {
@@ -52,12 +52,35 @@ export async function agentsPage(app) {
     targets.push(player)
 
     // sort agents ranking
-    const sortedTargets = targets.sort((a, b) => b.stats.lethality - a.stats.lethality)
+
+    // !-- check if this is first time
+    // [first time] sort with lethality, and store rank
+    let sortedTargets = []
+    if (!targets[0].rank) {
+      sortedTargets = targets.sort((a, b) => b.stats.lethality - a.stats.lethality)
+
+      // Assign ranks based on sorted order
+      sortedTargets.forEach((t, i) => {
+        t.rank = i + 1;
+      });
+
+      // remove player from the array
+      const index = sortedTargets.findIndex(t => Number(t.id) === Number(player.id))
+      const removePlayerInTargets = [...sortedTargets]
+      removePlayerInTargets.splice(index, 1)
+
+      // store player
+      setTokenPlayer(player)
+
+      // store targets
+      setLocalTargets(removePlayerInTargets)
+    } else {
+      sortedTargets = targets.sort((a, b) => a.rank - b.rank)
+    }
 
     // Fill leaderboard and assign "rank" (rank is not save in storage)
     for (let i = 0; i < sortedTargets.length; i++) {
       const target = sortedTargets[i];
-      target.rank = i + 1; // rank starts at 1
 
       if (target === player) {
         const _playerCard = targetCard(target, true);

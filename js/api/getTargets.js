@@ -22,7 +22,7 @@ export async function getTargets(count = 87) {
     setLocalTargets(targets)
 
     console.log('Successfully get targets:', res.results);
-    return people;
+    return targets;
   } catch (err) {
     console.error('[ERROR] getTargets:', err.message)
   }

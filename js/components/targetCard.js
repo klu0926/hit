@@ -1,5 +1,5 @@
 import { renderTargetProfile } from "./targetProfile.js";
-
+import { setCurrentTarget } from "../modules/game.js";
 
 export function targetCard(target, isPlayer = false) {
 
@@ -46,6 +46,9 @@ export function targetCard(target, isPlayer = false) {
     const app = document.querySelector('#app')
     const isPlayer = card.classList.contains('player')
     renderTargetProfile(app, target, isPlayer)
+
+    // set current target
+    setCurrentTarget(target)
   })
 
   // return

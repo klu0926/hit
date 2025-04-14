@@ -1,8 +1,7 @@
 import { playCombatLog } from "../modules/playCombatLog.js"
-// player
-import { getLocalTokenPlayer } from "../modules/storage.js";
-const player = getLocalTokenPlayer()
-
+import { getCombatResult } from "../modules/game.js"
+import { animateNumber } from "../modules/animateNumber.js"
+import { sleep } from "../modules/sleep.js"
 
 let _combatDisplay
 let upperDiv
@@ -10,24 +9,20 @@ let title
 let combatLog
 let buttonsDiv
 let close
+let goldDiv
+let multiplier
 
-
-export function renderCombatDisplay(container, target) {
+export function renderCombatDisplay(container) {
   if (_combatDisplay) {
     _combatDisplay.remove()
   }
-  container.appendChild(combatDisplay(target))
+  container.appendChild(combatDisplay())
 }
 
-function combatDisplay(target) {
-  console.log('combat taget:', target)
+function combatDisplay() {
 
-  // singleton 
-  if (_combatDisplay) {
-    console.log('active old display')
-    _combatDisplay.classList.add('active');
-    return _combatDisplay;
-  }
+  const result = getCombatResult()
+  console.log(result)
 
   // create new 
   _combatDisplay = document.createElement('div')
@@ -47,10 +42,20 @@ function combatDisplay(target) {
   combatLog.classList.add('combat-log')
   _combatDisplay.appendChild(combatLog)
 
+
   buttonsDiv = document.createElement('div')
   buttonsDiv.classList.add('combat-buttons-div')
   _combatDisplay.appendChild(buttonsDiv)
 
+  goldDiv = document.createElement('div')
+  goldDiv.classList.add('combat-gold-div')
+  goldDiv.innerText = '----'
+  buttonsDiv.appendChild(goldDiv)
+
+  multiplier = document.createElement('span')
+  multiplier.classList.add('combat-gold-multiplier')
+  multiplier.innerText = ''
+  buttonsDiv.appendChild(multiplier)
 
   close = document.createElement('button')
   close.id = 'combat-close'
@@ -58,17 +63,37 @@ function combatDisplay(target) {
   close.disabled = true
   buttonsDiv.appendChild(close)
 
-  function afterCombatLog() {
+
+  async function afterCombatLog() {
     // highlight last sentence
     const ps = document.querySelectorAll('.combat-log p')
     const last = ps[ps.length - 1]
     if (last) last.classList.add('endline')
 
+    // display gold gain
+    if (result.isWon) {
+      // display based gold
+      await animateNumber(goldDiv, result.basedGold, null, '$', 500, 10)
+
+      await sleep(300)
+
+      // display multiplier
+      multiplier.innerText = `x ${result.multiplier}`
+
+      await sleep(200)
+
+      // display multiplier gold
+      await animateNumber(goldDiv, result.gold, null, '$', 500, 10, result.basedGold)
+
+    } else {
+      goldDiv.innerText = '0$'
+    }
+
     // enable close
     close.disabled = false
   }
 
-  playCombatLog(combatLog, afterCombatLog, true)
+  playCombatLog(combatLog, afterCombatLog, result)
 
 
   // EVENT

@@ -1,25 +1,21 @@
 // deal with all local storage data
 const TARGET_KEY = 'HIT_TARGET'
 const PLAYER_KEY = 'HIT_PLAYER'
-const GAME_KEY = 'HIT_GAME'
 const TOKEN_KEY = 'HIT_TOKEN' // current player id
 
 export function getLocalTargets() {
   try {
-    const targets = localStorage.getItem(TARGET_KEY)
-    if (targets) {
-      return JSON.parse(targets)
-    } else {
-      return null
-    }
+    const player = getLocalTokenPlayer()
+    return player.targets
   } catch (err) {
     console.error('[ERROR] getLocalTargets:', err.message)
   }
 }
-
-export function setLocalTargets(targetsArray) {
+export function setLocalTargets(targets) {
   try {
-    localStorage.setItem(TARGET_KEY, JSON.stringify(targetsArray))
+    const player = getLocalTokenPlayer()
+    player.targets = targets
+    setTokenPlayer(player)
   } catch (err) {
     console.error('[ERROR] targetsArray:', err.message)
   }
@@ -43,27 +39,6 @@ export function setLocalPlayers(playerArray) {
     localStorage.setItem(PLAYER_KEY, JSON.stringify(playerArray))
   } catch (err) {
     console.error('[ERROR] setLocalPlayers:', err.message)
-  }
-}
-
-export function getLocalGame() {
-  try {
-    const gameString = localStorage.getItem(GAME_KEY)
-    if (gameString) {
-      return JSON.parse(gameString)
-    } else {
-      return null
-    }
-  } catch (err) {
-    console.error('[ERROR] getLocalGame:', err.message)
-  }
-}
-
-export function setLocalGame(gameObject) {
-  try {
-    localStorage.setItem(GAME_KEY, JSON.stringify(gameObject))
-  } catch (err) {
-    console.error('[ERROR] setLocalGame:', err.message)
   }
 }
 
@@ -103,6 +78,36 @@ export function getLocalTokenPlayer() {
   }
 }
 
+export function setTokenPlayer(player) {
+  try {
+    console.log('Updating player data with token...');
+    const token = getLocalToken();
+    if (!token) {
+      console.warn('No saved token');
+      return;
+    }
+
+    const [name, id, timestamp] = token.split('&');
+    const players = getLocalPlayers();
+
+    const index = players.findIndex(p => Number(p.id) === Number(id));
+    if (index === -1) {
+      console.warn('Cannot find player in local storage to update');
+      return;
+    }
+
+    // Replace with new player data
+    players[index] = player;
+
+    // Save updated players array
+    setLocalPlayers(players);
+    console.log('Player data updated.');
+
+  } catch (err) {
+    console.error('[ERROR] setTokenPlayer:', err.message);
+  }
+}
+
 export function setLocalToken(player) {
   try {
     const token = `${player.name}&${player.id}&${new Date().toISOString()}`
@@ -124,7 +129,6 @@ export function removeAllLocal() {
   try {
     localStorage.removeItem(TARGET_KEY)
     localStorage.removeItem(PLAYER_KEY)
-    localStorage.removeItem(GAME_KEY)
     localStorage.removeItem(TOKEN_KEY)
   } catch (err) {
     console.error('[ERROR] clearLocal:', err.message)

@@ -51,10 +51,52 @@
 }
 
 .combat-buttons-div {
+  position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 15px;
   padding: 10px 0px;
   border-top: 1px solid var(--border);
+}
+
+.combat-buttons-div button {
+  height: 45px;
+}
+
+.combat-gold-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 1.6rem;
+  color: var(--red);
+  width: 200px;
+  max-width: 200px;
+  height: 40px;
+  padding: 10px;
+  font-family: monospace;
+  margin-bottom: 20px;
+  border-bottom: 2px solid red;
+  cursor: default;
+}
+.combat-gold-div::after {
+  content: 'GOLD GAINED';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  text-align: center;
+  font-size: 12px;
+  width: 100%;
+  color: var(--red);
+}
+
+.combat-gold-multiplier {
+  position: absolute;
+  top: 25px;
+  right: 115px;
+  text-align: center;
+  font-size: 14px;
 }
 
 @keyframes log-slide-in {

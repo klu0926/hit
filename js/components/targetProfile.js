@@ -1,14 +1,10 @@
 // logic
 import { renderChart } from "../modules/chartHelper.js"
-import { getPercentage } from "../modules/game.js"
+import { getWinPercentage } from "../modules/game.js"
 import { animateNumber } from "../modules/animateNumber.js";
 
 // element
 import { renderCombatDisplay } from "./combatDisplay.js";
-
-// player
-import { getLocalTokenPlayer } from "../modules/storage.js";
-const player = getLocalTokenPlayer()
 
 
 // Cached elements for easy update
@@ -21,7 +17,7 @@ let infoDiv
 let rank
 let name
 let gender
-let uuid
+let idSpan
 let stats
 let buttonDiv
 let simulatePercent
@@ -87,9 +83,9 @@ function targetProfile(target, isPlayer = false) {
   gender.innerText = 'GENDER : ' + (target.gender || '?')
   infoDiv.appendChild(gender)
 
-  uuid = document.createElement('span')
-  uuid.innerText = 'UUID : ' + (target.uuid || '?').slice(0, 5)
-  infoDiv.appendChild(uuid)
+  idSpan = document.createElement('span')
+  idSpan.innerText = 'ID : ' + (target.id || '?').slice(0, 5)
+  infoDiv.appendChild(idSpan)
 
   // Stats section
   stats = document.createElement('div')
@@ -133,12 +129,10 @@ function targetProfile(target, isPlayer = false) {
     if (_targetProfile) _targetProfile.classList.remove('active')
   })
   // calculate win chance based on lethality
-  simulateBtn.addEventListener('click', () => {
-    const playerLeth = player.stats.lethality
-    const targetLeth = currentTarget.stats.lethality
-    const percentage = getPercentage(playerLeth, targetLeth)
+  simulateBtn.addEventListener('click', async () => {
+    const percentage = getWinPercentage()
     // animated percentage
-    animateNumber(simulatePercent, percentage, () => {
+    await animateNumber(simulatePercent, percentage, () => {
       // unlock hit button when complete
       hitBtn.disabled = false
     })
@@ -148,7 +142,7 @@ function targetProfile(target, isPlayer = false) {
   hitBtn.addEventListener('click', () => {
     const app = document.querySelector('#app')
     _targetProfile.classList.remove('active')
-    renderCombatDisplay(app, target)
+    renderCombatDisplay(app)
   })
 
   return _targetProfile
