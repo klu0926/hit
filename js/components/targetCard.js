@@ -63,20 +63,5 @@ export function targetCard(target, isPlayer = false) {
       updateTargetProfile(target, isPlayer)
     }
   })
-
-  // click outside the profile to close it
-  document.addEventListener('click', (event) => {
-    const profile = document.getElementById('target-profile');
-    if (!profile) return;
-
-    const isActive = profile.classList.contains('active');
-    const isInside = profile.contains(event.target);
-
-    if (isActive && !isInside) {
-      profile.classList.remove('active');
-    }
-  });
-
-
   return card;
 }

@@ -13,7 +13,6 @@
   height: 100px;
   overflow: hidden;
   outline: 3px solid transparent;
-  /* transition: outline 0.2s ease-in-out; */
   cursor: pointer;
   z-index: 1;
   --zoom-in-scale: 1.5;

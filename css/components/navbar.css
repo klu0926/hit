@@ -8,7 +8,7 @@
   align-items: center;
   background: var(--main);
   color: var(--secondary);
-  padding: 15px 20px;
+  padding: 0px 50px 1px 50px;
   font-family: sans-serif;
   z-index: 20;
 }
@@ -27,6 +27,7 @@
 .navbar .logo {
   font-weight: bold;
   font-size: 2rem;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .navbar .burger {

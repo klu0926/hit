@@ -91,9 +91,9 @@ export function targetProfile(target, isPlayer = false) {
   mainDiv.appendChild(buttonDiv)
 
   hitBtn = document.createElement('button')
+  hitBtn.disabled = true
   hitBtn.type = 'button'
   hitBtn.innerText = 'Hit'
-  hitBtn.disabled = true
   buttonDiv.appendChild(hitBtn)
 
   simulateBtn = document.createElement('button')
@@ -103,7 +103,7 @@ export function targetProfile(target, isPlayer = false) {
 
   simulatePercent = document.createElement('div')
   simulatePercent.classList.add('simulate-percent')
-  simulatePercent.innerText = '???'
+  simulatePercent.innerText = '---'
   buttonDiv.appendChild(simulatePercent)
 
   close = document.createElement('button')
@@ -158,5 +158,5 @@ export function updateTargetProfile(target, isPlayer = false) {
 
   if (hitBtn) hitBtn.disabled = true
 
-  if (simulatePercent) simulatePercent.innerText = '???'
+  if (simulatePercent) simulatePercent.innerText = '---'
 }

@@ -4,10 +4,12 @@
   top: 50%;
   left: 50%;
   width: 345px;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translate(-50%, -50%);
   z-index: 20;
   background-color: var(--main);
-  border: 3px solid var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  overflow: hidden;
   box-shadow: 2px 2px 15px 10px rgba(0, 0, 0, 0.7);
   --profile-translate-x: -20%;
   --profile-scale: 1.45;
@@ -15,12 +17,14 @@
 
 #target-profile.active {
   display: block;
+  animation: profile-dealIn 0.3s ease-in-out forwards;
 }
 
 .target-profile-top {
   position: relative;
   width: 100%;
   height: 200px;
+  border-bottom: 1px solid var(--border);
   overflow: hidden;
 }
 
@@ -89,20 +93,35 @@
   display: flex;
   justify-content: start;
   gap: 15px;
-  padding: 8px;
-  padding-bottom: 20px;
+  padding: 8px 12px;
+  padding-bottom: 10px;
 }
 
 .target-profile-buttons button {
   min-width: 80px;
+  height: 40px;
 }
 
 .simulate-percent {
+  position: relative;
   flex-grow: 1;
   text-align: center;
   font-size: 1.6rem;
-  border-bottom: 2px solid var(--secondary);
+  color: var(--red);
+  border-bottom: 2px solid var(--red);
+  margin-bottom: 20px;
+  font-family: monospace;
   cursor: default;
+}
+.simulate-percent::after {
+  content: 'Success Rate';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  font-size: 12px;
+  width: 100%;
+  color: var(--red);
+  transform: translateX(-50%);
 }
 
 /* player */
@@ -129,9 +148,11 @@
   opacity: 0.3;
   border: none;
   outline: none;
+  color: var(--secondary);
 }
 #target-profile .close:hover {
   opacity: 0.8;
+  transform: scale(0.9);
   background-color: var(--main);
 }
 
@@ -159,5 +180,16 @@
   100% {
     transform: translateX(var(--profile-translate-x))
       scale(var(--profile-scale)) translate(0px, 0px) rotate(0deg);
+  }
+}
+
+@keyframes profile-dealIn {
+  0% {
+    transform: translate(-48%, -50%) rotate(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
   }
 }

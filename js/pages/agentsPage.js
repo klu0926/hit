@@ -69,6 +69,20 @@ export async function agentsPage(app) {
     }
 
     // EVENTS
+    // click outside the profile to close profile
+    document.addEventListener('click', (event) => {
+      const profile = document.getElementById('target-profile');
+      if (!profile) return;
+
+      const isActive = profile.classList.contains('active');
+      const isInside = profile.contains(event.target);
+
+      if (isActive && !isInside) {
+        profile.classList.remove('active');
+      }
+    });
+
+    // logout button
     logoutBtn.addEventListener('click', (e) => {
       try {
         const res = logout()

@@ -4,7 +4,7 @@ export function navbar(currentPage) {
   const navbar = document.createElement('nav');
   navbar.classList.add('navbar');
   navbar.innerHTML = `
-    <div class="logo">H.I.T.</div>
+    <div class="logo">HIT</div>
     <button class="burger" aria-label="Toggle navigation">
       ☰
     </button>

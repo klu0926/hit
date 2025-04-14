@@ -16,6 +16,7 @@
   --main-hover: rgb(70, 70, 70);
   --secondary: white;
   --red: rgb(246, 26, 66);
+  --border: rgb(77, 77, 77);
 }
 
 body {
@@ -45,13 +46,20 @@ body {
 button {
   padding: 8px;
   background-color: var(--main);
-  color: var(--secondary);
-  border: 2px solid var(--secondary);
+  color: var(--red);
+  border: 2px solid var(--red);
   outline: none;
   font-size: 0.9rem;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--red);
+  border: 2px solid var(--red);
+  color: var(--main);
+  transform: scale(0.96);
 }
 
 button:disabled {
@@ -68,12 +76,6 @@ button:disabled:hover {
   border-color: rgb(80, 80, 80);
   transform: scale(1);
   opacity: 0.6;
-}
-
-button:hover {
-  background-color: var(--red);
-  border: 2px solid var(--red);
-  transform: scale(0.96);
 }
 
 @keyframes noise {
