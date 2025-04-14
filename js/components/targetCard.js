@@ -1,4 +1,4 @@
-import { targetProfile, updateTargetProfile } from "./targetProfile.js";
+import { renderTargetProfile } from "./targetProfile.js";
 
 
 export function targetCard(target, isPlayer = false) {
@@ -43,25 +43,11 @@ export function targetCard(target, isPlayer = false) {
   // click card to open target profile
   card.addEventListener('click', (e) => {
     e.stopPropagation();
-    // check if profile exist
-    let profile = document.querySelector('#target-profile')
-
-    // check if is player
+    const app = document.querySelector('#app')
     const isPlayer = card.classList.contains('player')
-
-    // create profile
-    if (!profile) {
-      profile = targetProfile(target, isPlayer)
-      const app = document.querySelector('#app')
-      if (app) {
-        app.appendChild(profile)
-      } else {
-        console.error('[ERROR] No #app to append')
-      }
-      // update profile
-    } else {
-      updateTargetProfile(target, isPlayer)
-    }
+    renderTargetProfile(app, target, isPlayer)
   })
+
+  // return
   return card;
 }

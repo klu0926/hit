@@ -35,9 +35,9 @@ export async function agentsPage(app) {
     page.appendChild(title)
 
     // agents leaderboard
-    const leaderboard = document.createElement('div')
-    leaderboard.id = 'leaderboard'
-    page.appendChild(leaderboard)
+    const agentsDiv = document.createElement('div')
+    agentsDiv.id = 'agents-div'
+    page.appendChild(agentsDiv)
 
     // logout
     const logoutBtn = document.createElement('button')
@@ -61,14 +61,15 @@ export async function agentsPage(app) {
 
       if (target === player) {
         const _playerCard = targetCard(target, true);
-        leaderboard.appendChild(_playerCard);
+        agentsDiv.appendChild(_playerCard);
       } else {
         const _targetCard = targetCard(target);
-        leaderboard.appendChild(_targetCard);
+        agentsDiv.appendChild(_targetCard);
       }
     }
 
     // EVENTS
+    // Profile
     // click outside the profile to close profile
     document.addEventListener('click', (event) => {
       const profile = document.getElementById('target-profile');

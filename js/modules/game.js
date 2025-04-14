@@ -14,5 +14,3 @@ export function getPercentage(playerStat, targetStat) {
   const chance = getChance(playerStat, targetStat)
   return (chance * 100).toFixed(0)
 }
-
-
