@@ -8,6 +8,8 @@ import { sortTargets } from "../modules/sortTargets.js";
 import { navbar, updateProgressbar } from "../components/navbar.js";
 import { targetCard } from "../components/targetCard.js";
 
+let targetsDiv
+
 export async function agentsPage(app) {
   try {
     // player is not login
@@ -35,10 +37,10 @@ export async function agentsPage(app) {
     title.classList.add('title')
     page.appendChild(title)
 
-    // agents leaderboard
-    const agentsDiv = document.createElement('div')
-    agentsDiv.id = 'agents-div'
-    page.appendChild(agentsDiv)
+    // targets div
+    targetsDiv = document.createElement('div')
+    targetsDiv.id = 'targets-div'
+    page.appendChild(targetsDiv)
 
     // logout
     const logoutBtn = document.createElement('button')
@@ -52,18 +54,8 @@ export async function agentsPage(app) {
     // sort targets with players (update rank attributes)
     let sortedTargets = sortTargets()
 
-    // Fill leaderboard and assign "rank" (rank is not save in storage)
-    for (let i = 0; i < sortedTargets.length; i++) {
-      const target = sortedTargets[i];
-
-      if (target.id === player.id) {
-        const _playerCard = targetCard(target, true);
-        agentsDiv.appendChild(_playerCard);
-      } else {
-        const _targetCard = targetCard(target);
-        agentsDiv.appendChild(_targetCard);
-      }
-    }
+    // Fill leaderboard 
+    renderTargetsDiv(player, sortedTargets)
 
     // EVENTS
     // Profile
@@ -97,5 +89,18 @@ export async function agentsPage(app) {
   } catch (err) {
     console.error("[ERROR] agentsPage", err)
   }
+}
 
+export function renderTargetsDiv(player, targets) {
+  for (let i = 0; i < targets.length; i++) {
+    const target = targets[i];
+
+    if (target.id === player.id) {
+      const _playerCard = targetCard(target, true);
+      targetsDiv.appendChild(_playerCard);
+    } else {
+      const _targetCard = targetCard(target);
+      targetsDiv.appendChild(_targetCard);
+    }
+  }
 }

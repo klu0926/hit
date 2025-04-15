@@ -1,5 +1,6 @@
 import { getLocalTokenPlayer } from "../modules/storage.js"
 import { renderTargetProfile } from "./targetProfile.js"
+import { EVENTS, attachEvent } from "../events.js"
 
 let _progressbar
 let dayDiv
@@ -90,7 +91,6 @@ export function navbar(currentPage) {
 }
 
 // [Custome Event Listener]
-document.addEventListener('TokenPlayerSet', (e) => {
-  // update progressbar wit new player data
+attachEvent(EVENTS.SET_PLAYER, () => {
   updateProgressbar()
-});
+})
