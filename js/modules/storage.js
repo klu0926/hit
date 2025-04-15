@@ -1,3 +1,5 @@
+import { getCurrentTarget } from "./game.js"
+
 // deal with all local storage data
 const TARGET_KEY = 'HIT_TARGET'
 const PLAYER_KEY = 'HIT_PLAYER'
@@ -103,11 +105,38 @@ export function setTokenPlayer(player) {
     setLocalPlayers(players);
     console.log('Player data updated.');
 
+    // [Custome Event Dispatch]
+    const event = new CustomEvent('TokenPlayerSet', {});
+    document.dispatchEvent(event);
+    console.log('[EVENT Dispatch] TokenPlayerSet')
   } catch (err) {
     console.error('[ERROR] setTokenPlayer:', err.message);
   }
 }
 
+export function afterCombatTokenPlayerSave(result) {
+  const player = getLocalTokenPlayer()
+  const target = getCurrentTarget()
+  // win, gain rank (if target is higher rank)
+  if (result.isWon && player.rank < target.rank) {
+    player.rank = target.rank
+    // push target to the end
+
+
+  }
+
+
+  // set gold
+  player.gold += result.gold
+
+  // set day
+  player.day++
+
+  setTokenPlayer(player)
+}
+
+
+// TOKEN
 export function setLocalToken(player) {
   try {
     const token = `${player.name}&${player.id}&${new Date().toISOString()}`

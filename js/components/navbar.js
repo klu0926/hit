@@ -11,7 +11,9 @@ let PlayerGold
 let playerRank
 
 export function updateProgressbar() {
+  console.log('updateProgressbar...')
   const wrapper = document.querySelector('#progressbar-wrapper')
+  wrapper.innerHTML = ''
   wrapper.appendChild(progressbar())
 }
 
@@ -61,7 +63,6 @@ function progressbar() {
     const app = document.querySelector('#app')
     renderTargetProfile(app, getLocalTokenPlayer(), true)
   })
-
   return _progressbar;
 }
 
@@ -87,3 +88,9 @@ export function navbar(currentPage) {
   `;
   return navbar;
 }
+
+// [Custome Event Listener]
+document.addEventListener('TokenPlayerSet', (e) => {
+  // update progressbar wit new player data
+  updateProgressbar()
+});

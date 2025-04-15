@@ -1,13 +1,12 @@
 // logic
 import { logout } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
-import { getTargets } from "../api/getTargets.js";
-import { setLocalTargets, setTokenPlayer } from "../modules/storage.js";
+import { fetchTargets } from "../api/fetchTargets.js";
+import { sortTargets } from "../modules/sortTargets.js";
 
 // elements
-import { navbar, updateProgressbar} from "../components/navbar.js";
+import { navbar, updateProgressbar } from "../components/navbar.js";
 import { targetCard } from "../components/targetCard.js";
-
 
 export async function agentsPage(app) {
   try {
@@ -47,44 +46,17 @@ export async function agentsPage(app) {
     logoutBtn.innerText = 'Logout'
     page.append(logoutBtn)
 
-    // get targets
-    const targets = await getTargets()
+    // fetch targets
+    await fetchTargets()
 
-    // put player to the targets array
-    targets.push(player)
-
-    // sort agents ranking
-
-    // !-- check if this is first time
-    // [first time] sort with lethality, and store rank
-    let sortedTargets = []
-    if (!targets[0].rank) {
-      sortedTargets = targets.sort((a, b) => b.stats.lethality - a.stats.lethality)
-
-      // Assign ranks based on sorted order
-      sortedTargets.forEach((t, i) => {
-        t.rank = i + 1;
-      });
-
-      // remove player from the array
-      const index = sortedTargets.findIndex(t => Number(t.id) === Number(player.id))
-      const removePlayerInTargets = [...sortedTargets]
-      removePlayerInTargets.splice(index, 1)
-
-      // store player
-      setTokenPlayer(player)
-
-      // store targets
-      setLocalTargets(removePlayerInTargets)
-    } else {
-      sortedTargets = targets.sort((a, b) => a.rank - b.rank)
-    }
+    // sort targets with players (update rank attributes)
+    let sortedTargets = sortTargets()
 
     // Fill leaderboard and assign "rank" (rank is not save in storage)
     for (let i = 0; i < sortedTargets.length; i++) {
       const target = sortedTargets[i];
 
-      if (target === player) {
+      if (target.id === player.id) {
         const _playerCard = targetCard(target, true);
         agentsDiv.appendChild(_playerCard);
       } else {

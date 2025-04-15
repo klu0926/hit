@@ -1,7 +1,7 @@
 import { getLocalTargets, setLocalTargets } from "../modules/storage.js";
 import { bulkTargetsCreate } from "../modules/characterCreate.js";
 
-export async function getTargets(count = 87) {
+export async function fetchTargets(count = 87) {
   try {
     const oldTargets = getLocalTargets()
     if (oldTargets) {

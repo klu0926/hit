@@ -2,6 +2,7 @@ import { playCombatLog } from "../modules/playCombatLog.js"
 import { getCombatResult } from "../modules/game.js"
 import { animateNumber } from "../modules/animateNumber.js"
 import { sleep } from "../modules/sleep.js"
+import { afterCombatTokenPlayerSave } from "../modules/storage.js"
 
 let _combatDisplay
 let upperDiv
@@ -85,7 +86,11 @@ function combatDisplay() {
       // display multiplier gold
       await animateNumber(goldDiv, result.gold, null, '$', 500, 10, result.basedGold)
 
+      // save money to player data
+      afterCombatTokenPlayerSave(result)
+
     } else {
+      // lose, die
       goldDiv.innerText = '0$'
     }
 
