@@ -71,6 +71,8 @@ export function playerCreate(player) {
     avatar: "./assets/images/avatar/player-avatar.png",
     gold: 0,
     gears: [],
+    rank: 0, // set up when game run
+    day: 1,  // each player progression
     ...playerStats
   };
 }
@@ -84,7 +86,6 @@ export function bulkTargetsCreate(userArray) {
   const total = targets.length;
   const eliteCount = Math.floor(total * 0.1);
   const midCount = Math.floor(total * 0.3);
-  const weakCount = total - eliteCount - midCount;
 
   // Assign tiers and stats
   for (let i = 0; i < targets.length; i++) {
@@ -110,6 +111,9 @@ export function bulkTargetsCreate(userArray) {
       ];
       targets[i].avatar = femaleAvatars[Math.floor(Math.random() * femaleAvatars.length)];
     }
+
+    // set up isTerminated boolean
+    targets[i].isTerminated = false
   }
   return targets
 }

@@ -1,15 +1,14 @@
+// logic
 import { renderChart } from "../modules/chartHelper.js"
-import { getPercentage } from "../modules/gameCalculation.js"
+import { getWinPercentage } from "../modules/game.js"
 import { animateNumber } from "../modules/animateNumber.js";
 
-
-// player
-import { getLocalTokenPlayer } from "../modules/storage.js";
-const player = getLocalTokenPlayer()
+// element
+import { renderCombatDisplay } from "./combatDisplay.js";
 
 
 // Cached elements for easy update
-let profile
+let _targetProfile
 let mainDiv
 let topDiv
 let avatar
@@ -18,7 +17,7 @@ let infoDiv
 let rank
 let name
 let gender
-let uuid
+let idSpan
 let stats
 let buttonDiv
 let simulatePercent
@@ -29,18 +28,25 @@ let close
 // target
 let currentTarget
 
+export function renderTargetProfile(container, target, isPlayer = false) {
+  if (_targetProfile) {
+    _targetProfile.remove()
+  }
+  container.appendChild(targetProfile(target, isPlayer))
+}
 
-export function targetProfile(target, isPlayer = false) {
-  profile = document.createElement('div')
-  profile.id = 'target-profile'
-  profile.classList.add('active')
-  if (isPlayer) profile.classList.add('player')
+
+function targetProfile(target, isPlayer = false) {
+  _targetProfile = document.createElement('div')
+  _targetProfile.id = 'target-profile'
+  _targetProfile.classList.add('active')
+  if (isPlayer) _targetProfile.classList.add('player')
 
   currentTarget = target
 
   mainDiv = document.createElement('div')
   mainDiv.className = 'target-profile-main'
-  profile.appendChild(mainDiv)
+  _targetProfile.appendChild(mainDiv)
 
   // Top section
   topDiv = document.createElement('div')
@@ -66,16 +72,20 @@ export function targetProfile(target, isPlayer = false) {
 
   rank = document.createElement('span')
   rank.className = 'target-profile-rank'
+  rank.innerHTML = `<i class="fa-brands fa-web-awesome"></i><span>RANK : ${target.rank || '?'}</span>`
   infoDiv.appendChild(rank)
 
   name = document.createElement('span')
+  name.innerText = 'NAME : ' + (target.name || target.firstName || '?')
   infoDiv.appendChild(name)
 
   gender = document.createElement('span')
+  gender.innerText = 'GENDER : ' + (target.gender || '?')
   infoDiv.appendChild(gender)
 
-  uuid = document.createElement('span')
-  infoDiv.appendChild(uuid)
+  idSpan = document.createElement('span')
+  idSpan.innerText = 'ID : ' + (target.id || '?').slice(0, 5)
+  infoDiv.appendChild(idSpan)
 
   // Stats section
   stats = document.createElement('div')
@@ -94,6 +104,7 @@ export function targetProfile(target, isPlayer = false) {
   hitBtn.disabled = true
   hitBtn.type = 'button'
   hitBtn.innerText = 'Hit'
+  hitBtn.disabled = true
   buttonDiv.appendChild(hitBtn)
 
   simulateBtn = document.createElement('button')
@@ -109,54 +120,30 @@ export function targetProfile(target, isPlayer = false) {
   close = document.createElement('button')
   close.innerText = 'x'
   close.classList.add('close')
-  profile.appendChild(close)
+  _targetProfile.appendChild(close)
 
-  close.addEventListener('click', () => {
-    if (profile) profile.classList.remove('active')
-  })
-
-  updateTargetProfile(target, isPlayer)
 
   // EVENT
+  // close button
+  close.addEventListener('click', () => {
+    if (_targetProfile) _targetProfile.classList.remove('active')
+  })
   // calculate win chance based on lethality
-  simulateBtn.addEventListener('click', () => {
-    const playerLeth = player.stats.lethality
-    const targetLeth = currentTarget.stats.lethality
-    const percentage = getPercentage(playerLeth, targetLeth)
+  simulateBtn.addEventListener('click', async () => {
+    const percentage = getWinPercentage()
     // animated percentage
-    animateNumber(simulatePercent, percentage, () => {
+    await animateNumber(simulatePercent, percentage, () => {
       // unlock hit button when complete
       hitBtn.disabled = false
     })
   })
 
-  return profile
-}
+  // (on Hit btn press) combat display
+  hitBtn.addEventListener('click', () => {
+    const app = document.querySelector('#app')
+    _targetProfile.classList.remove('active')
+    renderCombatDisplay(app)
+  })
 
-export function updateTargetProfile(target, isPlayer = false) {
-  if (!profile) return
-  currentTarget = target
-
-  profile.classList.add('active')
-  if (isPlayer) profile.classList.add('player')
-  else profile.classList.remove('player')
-
-  if (avatar) avatar.src = target.avatar || ''
-  if (target.picture && picture) picture.src = target.picture
-  else if (!target.picture && picture) picture.remove()
-
-  if (rank) rank.innerHTML = `<i class="fa-brands fa-web-awesome"></i><span>RANK : ${target.rank || '?'}</span>`
-
-  if (name) name.innerText = 'NAME : ' + (target.name || target.firstName || '?')
-
-  if (gender) gender.innerText = 'GENDER : ' + (target.gender || '?')
-
-  if (uuid) uuid.innerText = 'UUID : ' + (target.uuid || '?').slice(0, 5)
-
-  const statsArray = Object.entries(target.stats).map(([label, value]) => ({ label, value }))
-  renderChart(stats, statsArray)
-
-  if (hitBtn) hitBtn.disabled = true
-
-  if (simulatePercent) simulatePercent.innerText = '---'
+  return _targetProfile
 }

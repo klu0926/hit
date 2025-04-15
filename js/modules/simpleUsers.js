@@ -5,7 +5,7 @@ export function simplifyUsers(users) {
     title: user.name.title,
     firstName: user.name.first,
     lastName: user.name.last,
-    uuid: user.login.uuid,
+    id: user.login.uuid,
     gender: user.gender,
     address: `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state}, ${user.location.country}`,
     picture: user.picture.large,

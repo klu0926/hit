@@ -1,0 +1,111 @@
+#combat-display {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 345px;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  background-color: var(--main);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 2px 2px 15px 10px rgba(0, 0, 0, 0.7);
+}
+
+#combat-display.active {
+  display: block;
+  animation: profile-dealIn 0.3s ease-in-out forwards;
+}
+
+.combat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.combat-display-title {
+  text-align: center;
+  padding: 10px 0px;
+  border-bottom: 1px solid var(--border);
+}
+
+.combat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 10px;
+  height: 300px;
+  height: 300px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  overflow-x: scroll;
+}
+
+.combat-log p {
+  animation: log-slide-in 0.25s linear;
+}
+
+.combat-log p.endline {
+  color: var(--red);
+  font-weight: bold;
+}
+
+.combat-buttons-div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0px;
+  border-top: 1px solid var(--border);
+}
+
+.combat-buttons-div button {
+  height: 45px;
+}
+
+.combat-gold-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 1.6rem;
+  color: var(--red);
+  width: 200px;
+  max-width: 200px;
+  height: 40px;
+  padding: 10px;
+  font-family: monospace;
+  margin-bottom: 20px;
+  border-bottom: 2px solid red;
+  cursor: default;
+}
+.combat-gold-div::after {
+  content: 'GOLD GAINED';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  text-align: center;
+  font-size: 12px;
+  width: 100%;
+  color: var(--red);
+}
+
+.combat-gold-multiplier {
+  position: absolute;
+  top: 25px;
+  right: 115px;
+  text-align: center;
+  font-size: 14px;
+}
+
+@keyframes log-slide-in {
+  0% {
+    transform: translateX(-15px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
