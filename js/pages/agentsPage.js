@@ -5,8 +5,9 @@ import { getTargets } from "../api/getTargets.js";
 import { setLocalTargets, setTokenPlayer } from "../modules/storage.js";
 
 // elements
-import { navbar } from "../components/navbar.js";
+import { navbar, updateProgressbar} from "../components/navbar.js";
 import { targetCard } from "../components/targetCard.js";
+
 
 export async function agentsPage(app) {
   try {
@@ -22,6 +23,7 @@ export async function agentsPage(app) {
     // navbar
     const _navbar = navbar('agents')
     app.appendChild(_navbar)
+    updateProgressbar()
 
     // page
     const page = document.createElement('div')
@@ -121,7 +123,7 @@ export async function agentsPage(app) {
     })
 
   } catch (err) {
-    console.error("[ERROR] agentsPage", err.message)
+    console.error("[ERROR] agentsPage", err)
   }
 
 }

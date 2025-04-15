@@ -8,7 +8,7 @@
   align-items: center;
   background: var(--main);
   color: var(--secondary);
-  padding: 0px 50px 1px 50px;
+  padding: 0px 5% 1px 5%;
   font-family: sans-serif;
   z-index: 20;
 }
@@ -24,13 +24,10 @@
   background-color: var(--secondary);
 }
 
-.navbar .logo {
-  font-weight: bold;
-  font-size: 2rem;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.navigation {
 }
 
-.navbar .burger {
+.navigation .burger {
   display: none;
   font-size: 26px;
   background: none;
@@ -39,36 +36,36 @@
   cursor: pointer;
 }
 
-.navbar .nav-links {
+.navigation .nav-links {
   display: flex;
   list-style: none;
   z-index: 20;
 }
 
-.navbar .nav-links a {
+.navigation .nav-links a {
   display: flex;
   align-items: center;
   color: white;
   text-decoration: none;
   font-weight: bold;
-  padding: 10px 20px;
+  padding: 10px 10px;
   transition: all 0.2s ease-in-out;
 }
 
-.navbar .nav-links a.active {
+.navigation .nav-links a.active {
   background-color: var(--red);
 }
 
-.navbar .nav-links a.active:hover {
+.navigation .nav-links a.active:hover {
   background-color: var(--red);
 }
 
-.navbar .nav-links a:hover {
+.navigation .nav-links a:hover {
   background-color: var(--main-hover);
 }
 
 /* fontawesome icon */
-.navbar .nav-links i {
+.navigation .nav-links i {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,4 +75,87 @@
   margin-right: 7px;
   padding: 0;
   font-size: 16px;
+}
+
+/* progressbar */
+#progressbar-wrapper {
+}
+
+#progressbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.progressbar-player-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#progressbar-player-avatar-div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  gap: 5px;
+  cursor: pointer;
+}
+
+#progressbar-player-avatar-div:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  height: 6px;
+  width: 100%;
+  background-color: var(--red);
+}
+
+.progressbar-player-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.progressbar-player-name {
+}
+
+.progressbar-day-div {
+  font-weight: bold;
+  cursor: default;
+}
+
+.progressbar-player-gold {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  cursor: default;
+}
+
+.progressbar-player-gold i {
+  text-align: center;
+  font-size: 0.9rem;
+  border: 1px solid var(--secondary);
+  padding: 5px 6px;
+}
+
+.progressbar-player-rank {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  cursor: default;
+}
+
+.progressbar-player-rank i {
+  text-align: center;
+  font-size: 0.9rem;
+  border: 1px solid var(--secondary);
+  padding: 5px 4px;
 }

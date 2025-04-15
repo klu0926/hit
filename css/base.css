@@ -4,7 +4,6 @@
 @import url('./components/targetProfile.css');
 @import url('./components//combatDisplay.css');
 
-/* basic css and root varaibles */
 *,
 *::before,
 *::after {
