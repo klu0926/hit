@@ -1,3 +1,5 @@
+import { getCurrentTarget, setCurrentTarget } from "./game.js"
+import { EVENTS, dispatchEvent } from "../events.js"
 // deal with all local storage data
 const TARGET_KEY = 'HIT_TARGET'
 const PLAYER_KEY = 'HIT_PLAYER'
@@ -103,11 +105,61 @@ export function setTokenPlayer(player) {
     setLocalPlayers(players);
     console.log('Player data updated.');
 
+    // [Custome Event Dispatch]
+    dispatchEvent(EVENTS.SET_PLAYER)
   } catch (err) {
-    console.error('[ERROR] setTokenPlayer:', err.message);
+    console.error('[ERROR] setTokenPlayer:', err);
   }
 }
 
+export function afterCombatTokenPlayerSave(result) {
+  const player = getLocalTokenPlayer()
+  const currentTarget = result.currentTarget
+  const targets = getLocalTargets()
+
+  // Win Combat
+  if (result.isWon) {
+    if (Number(player.rank) > Number(currentTarget.rank)) {
+      player.rank = currentTarget.rank
+    }
+
+    // push target to the end
+    currentTarget.isDead = true
+    const index = targets.findIndex(t => t.id === currentTarget.id)
+    targets.splice(index, 1)
+
+    // sort targets on rank
+    targets.sort((a, b) => a.rank - b.rank);
+
+    // update rank
+    for (let i = 0; i < targets.length; i++) {
+      const rank = targets[i].rank = i + 1
+      if (rank === player.rank) continue
+      if (targets[i].isDead) continue
+      targets[i].rank = i + 1
+    }
+    // push dead target to the end
+    currentTarget.rank = targets.length
+    targets.push(currentTarget)
+
+    // update player targets
+    player.targets = targets
+
+    // empty current target
+    setCurrentTarget(null)
+  }
+  // set gold
+  player.gold += result.gold
+
+  // set day
+  player.day++
+
+  // save
+  setTokenPlayer(player)
+}
+
+
+// TOKEN
 export function setLocalToken(player) {
   try {
     const token = `${player.name}&${player.id}&${new Date().toISOString()}`

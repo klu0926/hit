@@ -2,7 +2,7 @@
 import { isAuth } from "../modules/authentication.js";
 
 // element
-import { navbar } from "../components/navbar.js";
+import { navbar, updateProgressbar } from "../components/navbar.js";
 
 
 export async function shopPage(app) {
@@ -16,8 +16,9 @@ export async function shopPage(app) {
     app.innerHTML = ''
 
     // navbar
-    const _navbar = navbar('shop')
+    const _navbar = navbar('agents')
     app.appendChild(_navbar)
+    updateProgressbar()
 
     // page
     const page = document.createElement('div')
@@ -31,6 +32,6 @@ export async function shopPage(app) {
     page.appendChild(title)
   }
   catch (err) {
-    console.error("[ERROR] shopPage", err.message)
+    console.error("[ERROR] shopPage", err)
   }
 }

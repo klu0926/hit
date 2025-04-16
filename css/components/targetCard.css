@@ -25,6 +25,39 @@
   pointer-events: none;
 }
 
+/* dead target */
+.target-card.dead {
+}
+
+.target-card.dead:hover .target-inner img {
+  height: 125%;
+  filter: blur(0px) grayscale(1) brightness(2.5);
+  animation: subtleShake 1s infinite;
+}
+
+.target-card.dead::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: red !important;
+  background-image: none;
+  opacity: 0.1;
+  color: var(--border);
+}
+
+.target-card.dead .target-inner img {
+  filter: blur(2px) grayscale(1) brightness(1) hue-rotate(200deg);
+}
+
+.target-card.dead:hover .name {
+  bottom: 5px;
+  left: 5px;
+}
+
+.target-card.dead:hover .rank {
+  display: none;
+}
+
 /* rank */
 .target-card .rank {
   visibility: hidden;
@@ -59,13 +92,11 @@
 .target-inner {
   width: 100%;
   height: 100%;
-  filter: grayscale(1) brightness(0.8);
-  /* transition: all 0.2s ease-in-out; */
+  filter: brightness(0.8);
 }
 
 /* Apply animation only to inner on hover */
 .target-card:hover .target-inner {
-  filter: grayscale(0) brightness(1);
   padding-top: 20px;
 }
 
@@ -75,14 +106,14 @@
   height: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
-  filter: blur(2px) grayscale(1) brightness(1);
+  filter: blur(2px) grayscale(1) brightness(1.5);
   transition: all 0.2s ease-in-out;
 }
 
 /* Remove blur on hover */
 .target-card:hover .target-inner img {
   height: 125%;
-  filter: blur(0px) grayscale(1) brightness(2);
+  filter: blur(0px) grayscale(1) brightness(2.5);
   animation: subtleShake 1s infinite;
 }
 

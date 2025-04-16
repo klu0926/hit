@@ -1,12 +1,19 @@
 // logic
 import { logout } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
-import { getTargets } from "../api/getTargets.js";
-import { setLocalTargets, setTokenPlayer } from "../modules/storage.js";
+import { fetchTargets } from "../api/fetchTargets.js";
+import { sortTargets } from "../modules/sortTargets.js";
+import { getLocalTokenPlayer, getLocalTargets } from "../modules/storage.js";
 
 // elements
-import { navbar } from "../components/navbar.js";
+import { navbar, updateProgressbar } from "../components/navbar.js";
 import { targetCard } from "../components/targetCard.js";
+
+// events
+import { EVENTS, attachEvent } from "../events.js"
+
+
+let targetsDiv
 
 export async function agentsPage(app) {
   try {
@@ -22,6 +29,7 @@ export async function agentsPage(app) {
     // navbar
     const _navbar = navbar('agents')
     app.appendChild(_navbar)
+    updateProgressbar()
 
     // page
     const page = document.createElement('div')
@@ -34,10 +42,10 @@ export async function agentsPage(app) {
     title.classList.add('title')
     page.appendChild(title)
 
-    // agents leaderboard
-    const agentsDiv = document.createElement('div')
-    agentsDiv.id = 'agents-div'
-    page.appendChild(agentsDiv)
+    // targets div
+    targetsDiv = document.createElement('div')
+    targetsDiv.id = 'targets-div'
+    page.appendChild(targetsDiv)
 
     // logout
     const logoutBtn = document.createElement('button')
@@ -45,51 +53,11 @@ export async function agentsPage(app) {
     logoutBtn.innerText = 'Logout'
     page.append(logoutBtn)
 
-    // get targets
-    const targets = await getTargets()
+    // fetch targets
+    await fetchTargets()
 
-    // put player to the targets array
-    targets.push(player)
-
-    // sort agents ranking
-
-    // !-- check if this is first time
-    // [first time] sort with lethality, and store rank
-    let sortedTargets = []
-    if (!targets[0].rank) {
-      sortedTargets = targets.sort((a, b) => b.stats.lethality - a.stats.lethality)
-
-      // Assign ranks based on sorted order
-      sortedTargets.forEach((t, i) => {
-        t.rank = i + 1;
-      });
-
-      // remove player from the array
-      const index = sortedTargets.findIndex(t => Number(t.id) === Number(player.id))
-      const removePlayerInTargets = [...sortedTargets]
-      removePlayerInTargets.splice(index, 1)
-
-      // store player
-      setTokenPlayer(player)
-
-      // store targets
-      setLocalTargets(removePlayerInTargets)
-    } else {
-      sortedTargets = targets.sort((a, b) => a.rank - b.rank)
-    }
-
-    // Fill leaderboard and assign "rank" (rank is not save in storage)
-    for (let i = 0; i < sortedTargets.length; i++) {
-      const target = sortedTargets[i];
-
-      if (target === player) {
-        const _playerCard = targetCard(target, true);
-        agentsDiv.appendChild(_playerCard);
-      } else {
-        const _targetCard = targetCard(target);
-        agentsDiv.appendChild(_targetCard);
-      }
-    }
+    //Sort and Fill leaderboard 
+    sortAndRenderTagets()
 
     // EVENTS
     // Profile
@@ -121,7 +89,35 @@ export async function agentsPage(app) {
     })
 
   } catch (err) {
-    console.error("[ERROR] agentsPage", err.message)
+    console.error("[ERROR] agentsPage", err)
   }
-
 }
+
+export function sortAndRenderTagets() {
+  const player = getLocalTokenPlayer()
+  let sortedTargets = sortTargets()
+
+  targetsDiv.innerHTML = ''
+
+  for (let i = 0; i < sortedTargets.length; i++) {
+    const target = sortedTargets[i];
+
+    if (target.id === player.id) {
+      // player
+      const _playerCard = targetCard(target, true);
+      targetsDiv.appendChild(_playerCard);
+    } else {
+      // target
+      const _targetCard = targetCard(target);
+      if (target.isDead) {
+        _targetCard.classList.add('dead')
+      }
+      targetsDiv.appendChild(_targetCard);
+    }
+  }
+}
+
+// [Custome Event Listener]
+attachEvent(EVENTS.SET_PLAYER, () => {
+  sortAndRenderTagets()
+})

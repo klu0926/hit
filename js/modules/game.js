@@ -77,7 +77,8 @@ export function getCombatResult() {
     isSurvived,
     basedGold,
     multiplier,
-    gold
+    gold,
+    currentTarget,
   }
   return result
 }
