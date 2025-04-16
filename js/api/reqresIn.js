@@ -50,8 +50,8 @@ export async function createAccount(name, password) {
 
     return resMessage(true, player, 'Account created');
   } catch (err) {
-    console.error('[ERROR] createAccount:', err.message);
-    return resMessage(false, null, err.message);
+    console.error('[ERROR] createAccount:', err);
+    return resMessage(false, null, err);
   }
 }
 

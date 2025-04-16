@@ -1,6 +1,7 @@
 import { createAccount } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { notification } from "../modules/notification.js";
+import { login } from "../api/reqresIn.js";
 
 let _createPage;
 let form
@@ -85,7 +86,13 @@ export function createPage(app) {
 
       const res = await createAccount(name, password);
       if (res.ok) {
-        window.location.hash = '#/login';
+        // login
+        const res = await login(name, password)
+        if (res.ok) {
+          window.location.hash = '#/game'
+        } else {
+          throw new Error(res.message)
+        }
       } else {
         throw new Error(res.message);
       }
