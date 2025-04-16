@@ -3,10 +3,15 @@ import { logout } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { fetchTargets } from "../api/fetchTargets.js";
 import { sortTargets } from "../modules/sortTargets.js";
+import { getLocalTokenPlayer, getLocalTargets } from "../modules/storage.js";
 
 // elements
 import { navbar, updateProgressbar } from "../components/navbar.js";
 import { targetCard } from "../components/targetCard.js";
+
+// events
+import { EVENTS, attachEvent } from "../events.js"
+
 
 let targetsDiv
 
@@ -51,11 +56,8 @@ export async function agentsPage(app) {
     // fetch targets
     await fetchTargets()
 
-    // sort targets with players (update rank attributes)
-    let sortedTargets = sortTargets()
-
-    // Fill leaderboard 
-    renderTargetsDiv(player, sortedTargets)
+    //Sort and Fill leaderboard 
+    sortAndRenderTagets()
 
     // EVENTS
     // Profile
@@ -91,16 +93,31 @@ export async function agentsPage(app) {
   }
 }
 
-export function renderTargetsDiv(player, targets) {
-  for (let i = 0; i < targets.length; i++) {
-    const target = targets[i];
+export function sortAndRenderTagets() {
+  const player = getLocalTokenPlayer()
+  let sortedTargets = sortTargets()
+
+  targetsDiv.innerHTML = ''
+
+  for (let i = 0; i < sortedTargets.length; i++) {
+    const target = sortedTargets[i];
 
     if (target.id === player.id) {
+      // player
       const _playerCard = targetCard(target, true);
       targetsDiv.appendChild(_playerCard);
     } else {
+      // target
       const _targetCard = targetCard(target);
+      if (target.isDead) {
+        _targetCard.classList.add('dead')
+      }
       targetsDiv.appendChild(_targetCard);
     }
   }
 }
+
+// [Custome Event Listener]
+attachEvent(EVENTS.SET_PLAYER, () => {
+  sortAndRenderTagets()
+})

@@ -86,7 +86,7 @@ function combatDisplay() {
       // display multiplier gold
       await animateNumber(goldDiv, result.gold, null, '$', 500, 10, result.basedGold)
 
-      // save money to player data
+      // update player data and save
       afterCombatTokenPlayerSave(result)
 
     } else {

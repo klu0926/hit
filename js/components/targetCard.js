@@ -31,15 +31,14 @@ export function targetCard(target, isPlayer = false) {
   Rankspan.classList.add('rank')
   innerDiv.appendChild(Rankspan);
 
-
   // first name
   const nameSpan = document.createElement('span');
   nameSpan.innerText = target.firstName || target.name || "?"
   nameSpan.classList.add('name')
   innerDiv.appendChild(nameSpan);
 
-  // EVENT ------------------
 
+  // EVENT ------------------
   // click card to open target profile
   card.addEventListener('click', (e) => {
     e.stopPropagation();

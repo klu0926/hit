@@ -1,5 +1,7 @@
 import { getLocalTokenPlayer } from "../modules/storage.js"
 import { renderTargetProfile } from "./targetProfile.js"
+
+// events
 import { EVENTS, attachEvent } from "../events.js"
 
 let _progressbar
