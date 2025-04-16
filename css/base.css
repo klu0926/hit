@@ -2,8 +2,11 @@
 @import url('./components/targetCard.css');
 @import url('./components/navbar.css');
 @import url('./components/targetProfile.css');
-@import url('./components//combatDisplay.css');
-
+@import url('./components/combatDisplay.css');
+@import url('./pages/loginPage.css');
+@import url('./pages/createPage.css');
+@import url('./background-cover.css');
+@import url('./components/notification.css');
 *,
 *::before,
 *::after {
@@ -17,13 +20,17 @@
   --main-hover: rgb(70, 70, 70);
   --secondary: white;
   --red: rgb(246, 26, 66);
+  --red-hover: rgb(244, 67, 99);
   --border: rgb(77, 77, 77);
 }
 
 body {
   background-color: var(--main);
-  height: 100vh;
   color: var(--secondary);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 90vh;
 }
 
 #app {
@@ -32,9 +39,12 @@ body {
 }
 
 .page {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
   max-width: 814px;
-  margin: 30px auto;
-  padding-top: 76px;
+  margin: 100px auto;
   padding-bottom: 20px;
 }
 
@@ -46,8 +56,8 @@ body {
 
 button {
   padding: 8px;
-  background-color: var(--main);
-  color: var(--red);
+  background-color: var(--red);
+  color: var(--secondary);
   border: 2px solid var(--red);
   outline: none;
   font-size: 0.9rem;
@@ -59,8 +69,8 @@ button {
 button:hover {
   background-color: var(--red);
   border: 2px solid var(--red);
-  color: var(--main);
-  transform: scale(0.96);
+  color: var(--secondary);
+  transform: scale(0.97);
 }
 
 button:disabled {
@@ -77,6 +87,24 @@ button:disabled:hover {
   border-color: rgb(80, 80, 80);
   transform: scale(1);
   opacity: 0.6;
+}
+
+button.close{
+  background-color: var(--main);
+}
+
+a {
+  color: var(--red);
+}
+
+a:hover {
+  color: var(--red-hover);
+  scale: 0.97;
+}
+
+input {
+  padding: 5px 10px;
+  font-size: 1rem;
 }
 
 @keyframes noise {

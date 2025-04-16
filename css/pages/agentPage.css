@@ -1,8 +1,12 @@
+.agents-page {
+}
+
 #targets-div {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   max-width: 651px;
+  height: 100%;
   margin: 30px auto;
   gap: 7px;
 }

@@ -12,17 +12,22 @@ export async function shopPage(app) {
     if (!plalyer) {
       window.location.hash = '#/login'
     }
-    // Page Sekeleton ---------------
+    // clear
     app.innerHTML = ''
 
+    // Background Cover
+    const backgroundCover = document.createElement('div');
+    backgroundCover.classList.add('background-cover', 'shop-page-cover');
+    app.appendChild(backgroundCover);
+
     // navbar
-    const _navbar = navbar('agents')
+    const _navbar = navbar('shop')
     app.appendChild(_navbar)
     updateProgressbar()
 
     // page
     const page = document.createElement('div')
-    page.classList.add('page')
+    page.classList.add('page', 'shop-page')
     app.appendChild(page)
 
     // show page title

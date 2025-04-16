@@ -12,7 +12,7 @@ import { targetCard } from "../components/targetCard.js";
 // events
 import { EVENTS, attachEvent } from "../events.js"
 
-
+let _agentsPage
 let targetsDiv
 
 export async function agentsPage(app) {
@@ -23,8 +23,13 @@ export async function agentsPage(app) {
       window.location.hash = '#/login'
     }
 
-    // Page Sekeleton ---------------
+    // clear 
     app.innerHTML = ''
+
+    // Background Cover
+    const backgroundCover = document.createElement('div');
+    backgroundCover.classList.add('background-cover', 'agents-page-cover');
+    app.appendChild(backgroundCover);
 
     // navbar
     const _navbar = navbar('agents')
@@ -32,26 +37,27 @@ export async function agentsPage(app) {
     updateProgressbar()
 
     // page
-    const page = document.createElement('div')
-    page.classList.add('page')
-    app.appendChild(page)
+    const _agentsPage = document.createElement('div')
+    _agentsPage.classList.add('page', 'agents-page')
+    _agentsPage.id = 'agents-page'
+    app.appendChild(_agentsPage)
 
     // show page title
     const title = document.createElement('h1')
     title.innerText = 'AGENTS'
     title.classList.add('title')
-    page.appendChild(title)
+    _agentsPage.appendChild(title)
 
     // targets div
     targetsDiv = document.createElement('div')
     targetsDiv.id = 'targets-div'
-    page.appendChild(targetsDiv)
+    _agentsPage.appendChild(targetsDiv)
 
     // logout
     const logoutBtn = document.createElement('button')
     logoutBtn.id = 'logout'
     logoutBtn.innerText = 'Logout'
-    page.append(logoutBtn)
+    _agentsPage.append(logoutBtn)
 
     // fetch targets
     await fetchTargets()

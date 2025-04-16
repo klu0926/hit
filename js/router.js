@@ -1,6 +1,6 @@
 import { loginPage } from "./pages/loginPage.js";
 import { agentsPage } from "./pages/agentsPage.js";
-import { accountPage } from "./pages/accountPage.js";
+import { createPage } from "./pages/createPage.js";
 import { shopPage } from "./pages/shopPage.js";
 import { rulesPage } from "./pages/rulesPages.js";
 
@@ -13,7 +13,7 @@ export function router() {
       loginPage(app)
       break
     case '#/create':
-      accountPage(app)
+      createPage(app)
       break
     case '#/agents':
       agentsPage(app);

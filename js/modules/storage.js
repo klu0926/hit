@@ -29,7 +29,7 @@ export function getLocalPlayers() {
     if (playerString) {
       return JSON.parse(playerString)
     } else {
-      return null
+      return []
     }
   } catch (err) {
     console.error('[ERROR] getLocalPlayers:', err.message)
