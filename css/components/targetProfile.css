@@ -10,8 +10,10 @@
   border: 1px solid var(--border);
   overflow: hidden;
   box-shadow: 2px 2px 15px 10px rgba(0, 0, 0, 0.7);
-  --profile-translate-x: -20%;
-  --profile-scale: 1.45;
+  --avatar-translate-x: -20%;
+  --avatar-scale: 1.45;
+  --picture-translate-x: 0%;
+  --picture-scale: 1.05;
 }
 
 #target-profile.active {
@@ -33,7 +35,7 @@
   height: 100%;
   object-fit: cover;
   object-position: 50% -5%;
-  animation: profile-subtleShake 2.5s infinite ease-in-out;
+  animation: avatar-subtleShake 2.5s infinite ease-in-out;
   overflow: hidden;
 }
 
@@ -45,17 +47,6 @@
   opacity: 0.08;
   animation: noise 0.2s linear infinite both;
   pointer-events: none;
-}
-
-/* real picture */
-.target-profile-picture {
-  display: none;
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  right: 10px;
-  top: 10px;
-  border: 2px solid var(--secondary);
 }
 
 .target-profile-info {
@@ -81,6 +72,11 @@
   font-size: 0.9rem;
   border: 2px solid var(--secondary);
   padding: 5px 3px;
+}
+
+#target-profile .status-string {
+  font-weight: bold;
+  font-family: monospace;
 }
 
 #target-profile-stats {
@@ -155,30 +151,88 @@
   background-color: var(--main);
 }
 
-@keyframes profile-subtleShake {
+/* dead target */
+#target-profile.dead .target-profile-avatar {
+  display: none;
+}
+
+#target-profile.dead .target-profile-top::after {
+  opacity: 0.3;
+}
+
+/* real picture only show when dead */
+.target-profile-picture {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: -50% 40%;
+  filter: grayscale(1) brightness(0.7) contrast(1.4);
+  animation: picture-subtleShake 2.5s infinite ease-in-out;
+  overflow: hidden;
+}
+
+#target-profile.dead .status-string {
+  color: var(--red);
+}
+
+/* real picture */
+#target-profile.dead .target-profile-picture {
+  display: block;
+}
+
+@keyframes avatar-subtleShake {
   0% {
-    transform: translateX(var(--profile-translate-x))
-      scale(var(--profile-scale)) translate(0px, 0px) rotate(0deg);
+    transform: translateX(var(--avatar-translate-x)) scale(var(--avatar-scale))
+      translate(0px, 0px) rotate(0deg);
   }
   20% {
-    transform: translateX(var(--profile-translate-x))
-      scale(var(--profile-scale)) translate(0.1px, -0.6px) rotate(0.03deg);
+    transform: translateX(var(--avatar-translate-x)) scale(var(--avatar-scale))
+      translate(0.1px, -0.6px) rotate(0.03deg);
   }
   40% {
-    transform: translateX(var(--profile-translate-x))
-      scale(var(--profile-scale)) translate(-0.1px, 0.5px) rotate(-0.02deg);
+    transform: translateX(var(--avatar-translate-x)) scale(var(--avatar-scale))
+      translate(-0.1px, 0.5px) rotate(-0.02deg);
   }
   60% {
-    transform: translateX(var(--profile-translate-x))
-      scale(var(--profile-scale)) translate(0.05px, -0.7px) rotate(0.02deg);
+    transform: translateX(var(--avatar-translate-x)) scale(var(--avatar-scale))
+      translate(0.05px, -0.7px) rotate(0.02deg);
   }
   80% {
-    transform: translateX(var(--profile-translate-x))
-      scale(var(--profile-scale)) translate(-0.1px, 0.6px) rotate(-0.01deg);
+    transform: translateX(var(--avatar-translate-x)) scale(var(--avatar-scale))
+      translate(-0.1px, 0.6px) rotate(-0.01deg);
   }
   100% {
-    transform: translateX(var(--profile-translate-x))
-      scale(var(--profile-scale)) translate(0px, 0px) rotate(0deg);
+    transform: translateX(var(--avatar-translate-x)) scale(var(--avatar-scale))
+      translate(0px, 0px) rotate(0deg);
+  }
+}
+
+@keyframes picture-subtleShake {
+  0% {
+    transform: translateX(var(--picture-translate-x))
+      scale(var(--picture-scale)) translate(0px, 0px) rotate(0deg);
+  }
+  20% {
+    transform: translateX(var(--picture-translate-x))
+      scale(var(--picture-scale)) translate(0.1px, -0.6px) rotate(0.03deg);
+  }
+  40% {
+    transform: translateX(var(--picture-translate-x))
+      scale(var(--picture-scale)) translate(-0.1px, 0.5px) rotate(-0.02deg);
+  }
+  60% {
+    transform: translateX(var(--picture-translate-x))
+      scale(var(--picture-scale)) translate(0.05px, -0.7px) rotate(0.02deg);
+  }
+  80% {
+    transform: translateX(var(--picture-translate-x))
+      scale(var(--picture-scale)) translate(-0.1px, 0.6px) rotate(-0.01deg);
+  }
+  100% {
+    transform: translateX(var(--picture-translate-x))
+      scale(var(--picture-scale)) translate(0px, 0px) rotate(0deg);
   }
 }
 

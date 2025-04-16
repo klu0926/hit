@@ -18,6 +18,7 @@ let rank
 let name
 let gender
 let idSpan
+let status
 let stats
 let buttonDiv
 let simulatePercent
@@ -37,10 +38,13 @@ export function renderTargetProfile(container, target, isPlayer = false) {
 
 
 function targetProfile(target, isPlayer = false) {
+  console.log('targetProfile:', target)
+
   _targetProfile = document.createElement('div')
   _targetProfile.id = 'target-profile'
   _targetProfile.classList.add('active')
   if (isPlayer) _targetProfile.classList.add('player')
+  if (target.isDead) _targetProfile.classList.add('dead')
 
   currentTarget = target
 
@@ -76,16 +80,21 @@ function targetProfile(target, isPlayer = false) {
   infoDiv.appendChild(rank)
 
   name = document.createElement('span')
-  name.innerText = 'NAME : ' + (target.name || target.firstName || '?')
+  name.innerText = 'Name : ' + (target.name || target.firstName || '?')
   infoDiv.appendChild(name)
 
   gender = document.createElement('span')
-  gender.innerText = 'GENDER : ' + (target.gender || '?')
+  gender.innerText = 'Gender : ' + (target.gender || '?')
   infoDiv.appendChild(gender)
 
   idSpan = document.createElement('span')
-  idSpan.innerText = 'ID : ' + (target.id || '?').slice(0, 5)
+  idSpan.innerText = 'ID : ' + (target.id || '?').slice(0, 10)
   infoDiv.appendChild(idSpan)
+
+  status = document.createElement('span')
+  const statusString = target.isDead ? 'Terminated' : 'Active'
+  status.innerHTML = `Status : <span class='status-string'>${statusString}</span>`
+  infoDiv.appendChild(status)
 
   // Stats section
   stats = document.createElement('div')
@@ -111,6 +120,7 @@ function targetProfile(target, isPlayer = false) {
   simulateBtn.type = 'button'
   simulateBtn.innerText = 'Simulate'
   buttonDiv.appendChild(simulateBtn)
+  if (target.isDead) simulateBtn.disabled = true
 
   simulatePercent = document.createElement('div')
   simulatePercent.classList.add('simulate-percent')
