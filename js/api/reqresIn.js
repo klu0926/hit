@@ -14,6 +14,13 @@ export async function createAccount(name, password) {
     if (password.trim() === '') throw new Error('Missing password');
     console.log('Creating new account...');
 
+    // check if user name exist
+    const existingPlayers = getLocalPlayers() || [];
+    const oldPlayer = existingPlayers.find(p => p.name === name)
+    if (oldPlayer) {
+      throw new Error('username already exists')
+    }
+
     // Using bcrypt CDN from index.html
     const salt = dcodeIO.bcrypt.genSaltSync(10);
     const hash = dcodeIO.bcrypt.hashSync(password, salt);
@@ -38,7 +45,6 @@ export async function createAccount(name, password) {
     })
 
     // Append player to local players array
-    const existingPlayers = getLocalPlayers() || [];
     existingPlayers.push(player);
     setLocalPlayers(existingPlayers);
 
