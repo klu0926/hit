@@ -1,5 +1,9 @@
 import { login } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
+import { notification } from "../modules/notification.js";
+
+let _loginPage
+let form
 
 export function loginPage(app) {
   // player already login, return to game page
@@ -11,19 +15,57 @@ export function loginPage(app) {
   // Page Render
   app.innerHTML = ''
 
-  const loginForm = document.createElement('div');
-  loginForm.innerHTML = `
-    <h2>Login</h2>
-    <input type="text" id="name" placeholder="Enter your alias" required />
-    <input type="password" id="password" placeholder="Enter your password" required />
-    <button id="loginBtn">Login</button>
-    <a href='/#/create'><button>Create Account</button></a>
+  // background-cover
+  const backgroundCover = document.createElement('div')
+  backgroundCover.classList.add('background-cover', 'login-page-cover')
+  app.appendChild(backgroundCover)
 
-  `;
+  // Page
+  _loginPage = document.createElement('div')
+  _loginPage.classList.add('page', 'login-page')
+  app.appendChild(_loginPage)
 
-  app.appendChild(loginForm);
+  // Title
+  const title = document.createElement('h1');
+  title.innerText = 'LOGIN';
+  title.classList.add('title')
+  _loginPage.appendChild(title);
 
+  // Form
+  form = document.createElement('form');
+  form.classList.add('login-form')
+  form.noValidate = true;
+  _loginPage.appendChild(form);
 
+  // Name input
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.id = 'name';
+  nameInput.placeholder = 'username';
+  nameInput.required = true;
+  form.appendChild(nameInput);
+
+  // Password input
+  const passwordInput = document.createElement('input');
+  passwordInput.type = 'password';
+  passwordInput.id = 'password';
+  passwordInput.placeholder = 'password';
+  passwordInput.required = true;
+  form.appendChild(passwordInput);
+
+  // Login button
+  const loginBtn = document.createElement('button');
+  loginBtn.id = 'loginBtn';
+  loginBtn.innerText = 'Login';
+  form.appendChild(loginBtn);
+
+  // Create account link + button
+  const createLink = document.createElement('a');
+  createLink.href = '/#/create';
+  createLink.innerText = 'Create Account'
+  _loginPage.appendChild(createLink)
+
+  // Event
   // on login button pressed
   document.getElementById('loginBtn').addEventListener('click', async (e) => {
     try {
@@ -43,7 +85,8 @@ export function loginPage(app) {
         throw new Error(res.message)
       }
     } catch (err) {
-      alert(err.message)
+      console.error(err)
+      notification(`[LOGIN ERROR] : ${err.message}`)
     }
 
   });
