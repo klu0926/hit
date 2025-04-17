@@ -142,10 +142,13 @@ function targetProfile(target, isPlayer = false) {
   simulateBtn.addEventListener('click', async () => {
     const percentage = getWinPercentage()
     // animated percentage
-    await animateNumber(simulatePercent, percentage, () => {
-      // unlock hit button when complete
-      hitBtn.disabled = false
+    await animateNumber(simulatePercent, percentage, {
+      callback: () => {
+        hitBtn.disabled = false
+      },
+      endString: '%'
     })
+
   })
 
   // (on Hit btn press) combat display

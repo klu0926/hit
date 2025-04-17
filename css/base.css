@@ -5,6 +5,7 @@
 @import url('./components/combatDisplay.css');
 @import url('./pages/loginPage.css');
 @import url('./pages/createPage.css');
+@import url('./pages/shopPage.css');
 @import url('./background-cover.css');
 @import url('./components/notification.css');
 *,
@@ -89,7 +90,7 @@ button:disabled:hover {
   opacity: 0.6;
 }
 
-button.close{
+button.close {
   background-color: var(--main);
 }
 

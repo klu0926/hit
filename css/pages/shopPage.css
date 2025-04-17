@@ -1,0 +1,87 @@
+.shop-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 525px;
+  gap: 10px;
+}
+
+#items-div {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.item-div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid white;
+  width: 250px;
+  padding: 5px;
+}
+
+.item-div:hover {
+  size: 0.97;
+}
+
+/* hold icon and upper-right div */
+.item-upper-div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.item-icon {
+  font-size: 1.4rem;
+  border: 1px solid white;
+  padding: 0px 5px;
+}
+
+/* hold type and name */
+.item-upper-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-type {
+  font-family: monospace;
+  margin-right: 10px;
+  font-size: 0.6;
+  text-transform: uppercase;
+}
+
+.item-name {
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.stats-div {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.stats-lethality {
+  color: red;
+}
+
+.stats-survival {
+  color: orange;
+}
+
+.stats-cool {
+  color: yellow;
+}
+
+.item-price {
+  font-weight: bold;
+  font-size: 1.2rem;
+  font-family: monospace;
+}
