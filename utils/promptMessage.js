@@ -1,57 +1,71 @@
+let _overlay
 let _promptMessage
 
 function promptMessage(messageText = "Prompt Message", hideYes = false) {
   if (_promptMessage) {
-    _promptMessage.remove()
-    _promptMessage = null
+    _promptMessage.remove();
+    _promptMessage = null;
+  }
+  if (_overlay) {
+    _overlay.remove();
+    _overlay = null
   }
 
-  // main container
+  // overlay
+  _overlay = document.createElement('div');
+  _overlay.className = 'prompt-overlay';
+  document.body.appendChild(_overlay);
+
+  // container
   _promptMessage = document.createElement('div');
   _promptMessage.className = 'prompt-message';
 
-  // message string
+  // string
   const messageStringDiv = document.createElement('div');
-  messageStringDiv.textContent = messageText;
-  messageStringDiv.classList.add('prompt-message-string')
+  messageStringDiv.innerHTML = messageText.replace(/\n/g, '<br>');
+  messageStringDiv.classList.add('prompt-message-string');
   _promptMessage.appendChild(messageStringDiv);
 
-  // buttons 
+  // Buttons
   const buttonDiv = document.createElement('div');
-  buttonDiv.classList.add('prompt-buttons')
+  buttonDiv.classList.add('prompt-buttons');
   _promptMessage.appendChild(buttonDiv);
 
-  // Close 
+  // Close
   const closeButton = document.createElement('button');
-  closeButton.classList.add('prompt-close')
+  closeButton.classList.add('prompt-close');
   closeButton.textContent = 'Close';
   buttonDiv.appendChild(closeButton);
 
-  let yesButton = null
+  // Yes
+  let yesButton = null;
   if (!hideYes) {
-    // Yes 
     yesButton = document.createElement('button');
-    yesButton.classList.add('prompt-yes')
+    yesButton.classList.add('prompt-yes');
     yesButton.textContent = 'Agreed';
     buttonDiv.appendChild(yesButton);
   }
+
   // Append to app
   const app = document.querySelector('#app');
   if (app) {
     app.appendChild(_promptMessage);
   }
 
-  return [yesButton, closeButton]
+  return [yesButton, closeButton];
 }
-
 
 function removePromptMessage() {
   if (_promptMessage) {
-    _promptMessage.remove()
-    _promptMessage = null
+    _promptMessage.remove();
+    _promptMessage = null;
+  }
+
+  const overlay = document.querySelector('.prompt-overlay');
+  if (overlay) {
+    overlay.remove();
   }
 }
-
 
 export function callPromptMessage(message = '', hideYes = false) {
   return new Promise((resolve) => {
@@ -59,15 +73,15 @@ export function callPromptMessage(message = '', hideYes = false) {
 
     if (yesButton) {
       yesButton.addEventListener('click', () => {
-        resolve({ result: 'yes' });
-        removePromptMessage()
+        resolve(true); // return true for "yes"
+        removePromptMessage();
       });
     }
 
     if (closeButton) {
       closeButton.addEventListener('click', () => {
-        resolve({ result: 'close' });
-        removePromptMessage()
+        resolve(false); // return false for "close"
+        removePromptMessage();
       });
     }
   });

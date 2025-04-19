@@ -117,6 +117,15 @@ input::placeholder {
 }
 
 /* prompt message */
+.prompt-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  /* blocking all events behind it */
+  pointer-events: all;
+}
+
 .prompt-message {
   position: fixed;
   top: 50%;
@@ -144,7 +153,8 @@ input::placeholder {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  text-transform: capitalize;
+  text-transform: none;
+  text-align: center;
 }
 
 .prompt-buttons {

@@ -3,7 +3,6 @@ import { EVENTS, dispatchEvent } from "../events.js"
 import { generateItems } from "../pages/shopPageItems.js";
 
 // deal with all local storage data
-const TARGET_KEY = 'HIT_TARGET'
 const PLAYER_KEY = 'HIT_PLAYER'
 const TOKEN_KEY = 'HIT_TOKEN' // current player id
 
@@ -162,8 +161,6 @@ export function afterCombatTokenPlayerSave(result) {
   // save
   setTokenPlayer(player)
 }
-
-
 // TOKEN
 export function setLocalToken(player) {
   try {
@@ -182,9 +179,30 @@ export function removeLocalToken() {
   }
 }
 
-export function removeAllLocal() {
+// remove current player
+export function removeCurrentPlayer() {
   try {
-    localStorage.removeItem(TARGET_KEY)
+    const players = getLocalPlayers()
+    const currentPlayer = getLocalTokenPlayer()
+
+    // Remove the current player by name
+    const updatedPlayers = players.filter(p => p.name !== currentPlayer.name)
+
+    if (!updatedPlayers) {
+      throw new Error('Cannot find current player')
+    }
+
+    // Update players array
+    setLocalPlayers(players)
+
+  } catch (err) {
+    console.error('Error removing player:', err)
+  }
+}
+
+// Remove all players data
+export function removeAllLocalData() {
+  try {
     localStorage.removeItem(PLAYER_KEY)
     localStorage.removeItem(TOKEN_KEY)
   } catch (err) {

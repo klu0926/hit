@@ -5,6 +5,8 @@ import { logout } from "../api/reqresIn.js";
 // Elements
 import { musicToggleButton } from "../../utils/music.js";
 
+import { callPromptMessage } from '../../utils/promptMessage.js'
+
 let _footer
 
 export function footer() {
@@ -35,8 +37,12 @@ export function footer() {
   return _footer
 }
 
-function onLogoutClick() {
+async function onLogoutClick() {
   try {
+    // prompt to logout
+    const result = await callPromptMessage("Confirm system disconnect?")
+    if (!result) return
+
     const res = logout()
     if (res.ok) {
       window.location.hash = '#/login'
