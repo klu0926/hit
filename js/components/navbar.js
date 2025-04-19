@@ -64,7 +64,6 @@ export function navbar(currentPage) {
   // append progress bar
   _navbar.appendChild(progressbar())
 
-
   // check if the navLink was open before
   if (!_isNavLinkHidden) {
     showNavLink()
@@ -89,6 +88,13 @@ export function navbar(currentPage) {
     toggleNavLink()
   })
 
+  // scroll to top when change page
+  const links = [shopLink, agentLink, rulesLink]
+  links.forEach(l => {
+    l.addEventListener('click', scrollToTop)
+  })
+
+
   return _navbar;
 }
 
@@ -110,4 +116,9 @@ function hideNavLink() {
   _navLinks.classList.remove('show')
   _burger.classList.remove('show')
   _isNavLinkHidden = true
+}
+
+
+function scrollToTop() {
+  window.scrollTo(0, 0)
 }
