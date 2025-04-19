@@ -1,6 +1,6 @@
-import { getCurrentTarget, setCurrentTarget } from "./game.js"
+import { setCurrentTarget } from "./game.js"
 import { EVENTS, dispatchEvent } from "../events.js"
-import { generateItems } from "../pages/shopPageItems.js";
+import { playerDayPassed } from "./day.js";
 
 // deal with all local storage data
 const PLAYER_KEY = 'HIT_PLAYER'
@@ -133,11 +133,12 @@ export function afterCombatTokenPlayerSave(result) {
     targets.sort((a, b) => a.rank - b.rank);
 
     // update rank
+    let nextRank = 1;
     for (let i = 0; i < targets.length; i++) {
-      const rank = targets[i].rank = i + 1
-      if (rank === player.rank) continue
-      if (targets[i].isDead) continue
-      targets[i].rank = i + 1
+      if (targets[i].isDead) continue;
+      if (nextRank === player.rank) nextRank++;
+      targets[i].rank = nextRank;
+      nextRank++;
     }
     // push dead target to the end
     currentTarget.rank = targets.length
@@ -152,14 +153,11 @@ export function afterCombatTokenPlayerSave(result) {
   // set gold
   player.gold += result.gold
 
-  // set day
-  player.day++
-
-  // update shop items
-  player.shop = generateItems()
+  // update everything else as day passed
+  const updatedPlayer = playerDayPassed(player)
 
   // save
-  setTokenPlayer(player)
+  setTokenPlayer(updatedPlayer)
 }
 // TOKEN
 export function setLocalToken(player) {

@@ -6,12 +6,8 @@
   width: 345px;
   transform: translate(-50%, -50%);
   z-index: 20;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 1),
-    rgba(29, 29, 29, 1)
-  );
-    border: 1px solid var(--border);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(29, 29, 29, 1));
+  border: 1px solid var(--border);
   overflow: hidden;
   box-shadow: 2px 2px 15px 10px rgba(0, 0, 0, 0.7);
   --avatar-translate-x: -20%;
@@ -162,6 +158,10 @@
 
 #target-profile.dead .target-profile-top::after {
   opacity: 0.3;
+}
+
+#target-profile.dead .target-profile-rank {
+  display: none;
 }
 
 /* real picture only show when dead */
