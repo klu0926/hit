@@ -143,9 +143,9 @@ export function afterCombatTokenPlayerSave(result) {
     // update rank
     let nextRank = 1;
     for (let i = 0; i < aliveTargets.length; i++) {
-      if (targets[i].isDead) continue;
+      if (aliveTargets[i].isDead) continue;
       if (nextRank === player.rank) nextRank++;
-      targets[i].rank = nextRank;
+      aliveTargets[i].rank = nextRank;
       nextRank++;
     }
 
@@ -158,6 +158,7 @@ export function afterCombatTokenPlayerSave(result) {
     // empty current target
     setCurrentTarget(null)
   }
+
   // set gold
   player.gold += result.gold
 
@@ -167,6 +168,8 @@ export function afterCombatTokenPlayerSave(result) {
   // save
   setTokenPlayer(updatedPlayer)
 }
+
+
 // TOKEN
 export function setLocalToken(player) {
   try {

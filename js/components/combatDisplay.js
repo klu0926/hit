@@ -64,7 +64,6 @@ function combatDisplay() {
   close.disabled = true
   buttonsDiv.appendChild(close)
 
-
   async function afterCombatLog() {
     // highlight last sentence
     const ps = document.querySelectorAll('.combat-log p')
@@ -95,14 +94,13 @@ function combatDisplay() {
         startString: '$',
         endString: ''
       })
-
-      // update player data and save
-      afterCombatTokenPlayerSave(result)
-
     } else {
       // lose, die
       goldDiv.innerText = '$0'
     }
+
+    // update player data and save (win or lose)
+    afterCombatTokenPlayerSave(result)
 
     // enable close
     close.disabled = false
