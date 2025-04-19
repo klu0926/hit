@@ -25,6 +25,8 @@ export function getPlayerStatsWithGears() {
   const statsWithGear = {
     lethality, survival, cool
   }
+  
+
   console.log('using gear + stats:', statsWithGear)
 
   return statsWithGear

@@ -64,7 +64,7 @@ export function getCombatResult() {
   // if win, gain gold
   if (isWon) {
     basedGold = payoutFromChance(winChance)
-    multiplier = Math.round((1 + statsWithGear.cool * 0.001) * 10) / 10; // run to one decimal
+    multiplier = Math.round((statsWithGear.cool / 100) * 100) / 100; // 2 decimal
     gold = Math.round(basedGold * multiplier)
   }
 
