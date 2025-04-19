@@ -1,7 +1,10 @@
 // logic 
 import { logout } from "../api/reqresIn.js";
 
+
 // Elements
+import { musicToggleButton } from "../../utils/music.js";
+
 let _footer
 
 export function footer() {
@@ -12,19 +15,25 @@ export function footer() {
     <p>&copy; 2025 H.I.T. — Hunt • Infiltrate • Terminate. All rights reserved.</p>
 `
 
-  // logout
-  const logout = document.createElement('span')
-  logout.id = 'logout'
-  logout.innerText = 'Logout'
-  _footer.append(logout)
+  // buttonsDivs 
+  const buttonsDiv = document.createElement('div')
+  buttonsDiv.classList.add('footer-buttons')
+  _footer.appendChild(buttonsDiv)
 
+  // logout
+  const logout = document.createElement('button')
+  logout.id = 'logout'
+  logout.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i>'
+  buttonsDiv.append(logout)
+
+  // music toggle
+  const _musicToggleButton = musicToggleButton()
+  buttonsDiv.append(_musicToggleButton)
 
   // Event
   logout.addEventListener('click', onLogoutClick)
-
   return _footer
 }
-
 
 function onLogoutClick() {
   try {

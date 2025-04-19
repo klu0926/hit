@@ -11,7 +11,6 @@ import { footer } from "../components/footer.js";
 import { targetCard } from "../components/targetCard.js";
 import { backgroundCover } from "../components/backgroundCover.js"
 
-
 // events
 import { EVENTS, attachEvent } from "../events.js"
 

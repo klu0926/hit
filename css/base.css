@@ -108,8 +108,14 @@ a:hover {
 
 input {
   padding: 5px 10px;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
+
+input::placeholder {
+  color: rgb(180, 180, 180);
+}
+
+
 
 @keyframes noise {
   0% {
