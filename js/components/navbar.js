@@ -3,9 +3,10 @@ import { progressbar } from './progressbar.js'
 let _navbar
 let _navLinks // all pages
 
+
 // for mobile 
 // hide NavLink by default
-let isNavLinkHidden = true
+let _isNavLinkHidden = true
 let _burger
 
 export function navbar(currentPage) {
@@ -63,13 +64,21 @@ export function navbar(currentPage) {
   // append progress bar
   _navbar.appendChild(progressbar())
 
+
+  // check if the navLink was open before
+  if (!_isNavLinkHidden) {
+    showNavLink()
+  } else {
+    hideNavLink()
+  }
+
   // Event
-  _burger.addEventListener('click', onBurgerClick)
+  _burger.addEventListener('click', toggleNavLink)
 
   // check click out side while menu open 
   document.addEventListener('click', (e) => {
     // menu is hidden
-    if (isNavLinkHidden) return
+    if (_isNavLinkHidden) return
 
     // check click inside
     const clickedInsideBurger = _burger.contains(e.target);
@@ -77,22 +86,28 @@ export function navbar(currentPage) {
     if (clickedInsideBurger || clickedInsideNav) return;
 
     // click outside : hide menu
-    onBurgerClick()
+    toggleNavLink()
   })
 
   return _navbar;
 }
 
-function onBurgerClick() {
-  if (!_navLinks || !_burger) return
-
-  if (isNavLinkHidden) {
-    _navLinks.classList.add('show')
-    _burger.classList.add('show')
-    isNavLinkHidden = false
+function toggleNavLink() {
+  if (_isNavLinkHidden) {
+    showNavLink()
   } else {
-    _navLinks.classList.remove('show')
-    _burger.classList.remove('show')
-    isNavLinkHidden = true
+    hideNavLink()
   }
+}
+
+function showNavLink() {
+  _navLinks.classList.add('show')
+  _burger.classList.add('show')
+  _isNavLinkHidden = false
+}
+
+function hideNavLink() {
+  _navLinks.classList.remove('show')
+  _burger.classList.remove('show')
+  _isNavLinkHidden = true
 }

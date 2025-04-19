@@ -28,8 +28,8 @@ export function loginPage(app) {
   app.appendChild(_loginPage)
 
   // Title
-  const title = document.createElement('h1');
-  title.innerText = 'Access Network';
+  const title = document.createElement('h2');
+  title.innerText = 'Access Connection';
   title.classList.add('title')
   _loginPage.appendChild(title);
 
@@ -58,7 +58,7 @@ export function loginPage(app) {
   // Login button
   const loginBtn = document.createElement('button');
   loginBtn.id = 'loginBtn';
-  loginBtn.innerText = 'Access';
+  loginBtn.innerText = 'Authentication';
   form.appendChild(loginBtn);
 
   // Create account link + button

@@ -14,7 +14,7 @@ export function footer() {
   _footer.classList.add('footer')
 
   _footer.innerHTML = `
-    <p>&copy; 2025 H.I.T. — Hunt • Infiltrate • Terminate. All rights reserved.</p>
+    <p>Hunt • Infiltrate • Terminate</p><p>&copy; 2025 H.I.T. — All rights reserved</p>
 `
 
   // buttonsDivs 

@@ -33,7 +33,7 @@ export function createPage(app) {
 
   // Title
   const title = document.createElement('h2');
-  title.textContent = 'Register Credential';
+  title.textContent = 'New Credential';
   title.classList.add('title')
   _createPage.appendChild(title);
 

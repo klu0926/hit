@@ -1,8 +1,15 @@
-.login-page {
+.page.login-page {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  max-width: 450px;
   gap: 10px;
+  padding-top: 200px;
+}
+
+.page.login-page .title {
+  font-size: 4rem;
+  text-align: start;
+  line-height: 4.2rem;
 }
 
 .login-form {
