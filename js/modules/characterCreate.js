@@ -69,7 +69,7 @@ export function playerCreate(player) {
     name: player.name,
     password: player.password,
     avatar: "./assets/images/avatar/player-avatar.png",
-    gold: 0,
+    gold: 10000, // [TEST] add money to spend
     gears: [],
     rank: 0, // set up when game run
     day: 1,  // each player progression

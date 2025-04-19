@@ -4,6 +4,7 @@ import { isAuth } from "../modules/authentication.js";
 import { fetchTargets } from "../api/fetchTargets.js";
 import { sortTargets } from "../modules/sortTargets.js";
 import { getLocalTokenPlayer, getLocalTargets } from "../modules/storage.js";
+import { getCurrentPage } from "../router.js";
 
 // elements
 import { navbar, updateProgressbar } from "../components/navbar.js";
@@ -125,5 +126,6 @@ export function sortAndRenderTagets() {
 
 // [Custome Event Listener]
 attachEvent(EVENTS.SET_PLAYER, () => {
+  if (getCurrentPage() !== 'agents') return
   sortAndRenderTagets()
 })

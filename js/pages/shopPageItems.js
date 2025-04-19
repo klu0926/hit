@@ -81,7 +81,8 @@ export function generateItems(amount = 12) {
       stats = {
         lethality: getRandomInt(...rule.lethality),
         survival: getRandomInt(...rule.survival),
-        cool: Math.random() < rule.coolChance ? getRandomInt(...rule.cool) : 0
+        cool: Math.random() < rule.coolChance ? getRandomInt(...rule.cool) : 0,
+        sold: false
       };
       price = calculatePrice(stats);
       // make sure is within price range
@@ -94,9 +95,14 @@ export function generateItems(amount = 12) {
     // icons
     const icon = typeIcons[type]
 
+    // id
+    const id = Math.floor(Math.random() * Date.now());
+
     // push to array
-    result.push({ name, type, stats, price, icon });
+    result.push({ id, name, type, stats, price, icon });
   }
+  // sort it
+  result.sort((a, b) => b.price - a.price)
 
   return result;
 }
