@@ -230,6 +230,7 @@ function buyItem(item) {
 // force shop to change new items
 export function getNewItems() {
   items = generateItems()
+  const player = getLocalTokenPlayer()
   player.shop = items
   setTokenPlayer(player)
 
