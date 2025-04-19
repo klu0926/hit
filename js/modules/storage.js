@@ -188,13 +188,11 @@ export function removeCurrentPlayer() {
     // Remove the current player by name
     const updatedPlayers = players.filter(p => p.name !== currentPlayer.name)
 
-    if (!updatedPlayers) {
-      throw new Error('Cannot find current player')
-    }
-
     // Update players array
-    setLocalPlayers(players)
+    setLocalPlayers(updatedPlayers)
 
+    // remove token
+    removeLocalToken()
   } catch (err) {
     console.error('Error removing player:', err)
   }

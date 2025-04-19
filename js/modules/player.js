@@ -31,14 +31,16 @@ export function getPlayerStatsWithGears() {
   return statsWithGear
 }
 
-
-
 export async function playerDie() {
-  // [TEST] removeCurrnetPlayer 
-  // removeCurrentPlayer()
+
+  // removeCurrnetPlayer 
+  removeCurrentPlayer()
 
   // display promptMessage
-  await callPromptMessage('AGENT TERMINATED\nYou have been TERMINATED. All your credentials and traces have been purged from the system', true);
+  await callPromptMessage(
+    'AGENT TERMINATED\nYou were neutralized in combat. All your credentials have been purged. Thank you for your service.',
+    true
+  );
 
   // change to create page
   window.location.href = '#/create'

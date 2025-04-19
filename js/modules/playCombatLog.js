@@ -116,13 +116,16 @@ export function playCombatLog(element, callback, result) {
     if (index >= fullLog.length) {
       clearInterval(interval);
 
-      // lose and die
-      if (!isWon && !isSurvived) {
-        playerDie();
-      }
-
       // win or lose but survived
       if (typeof callback === 'function') callback();
+
+      // lose and die
+      if (!isWon && !isSurvived) {
+        setTimeout(() => {
+          playerDie();
+        }, 500)
+        return
+      }
     }
   }, logInterval);
 }

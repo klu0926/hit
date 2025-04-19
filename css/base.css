@@ -72,10 +72,8 @@ button {
 }
 
 button:hover {
-  background-color: var(--red-hover);
-  border: 2px solid var(--red);
-  color: var(--secondary);
   transform: scale(0.97);
+  opacity: 0.9;
 }
 
 button:disabled {
