@@ -33,7 +33,11 @@ export function targetCard(target, isPlayer = false) {
 
   // first name
   const nameSpan = document.createElement('span');
-  nameSpan.innerText = target.firstName || target.name || "?"
+  let nameString = target.firstName || target.name || "?"
+  if (nameString.length > 8) {
+    nameString = nameString.slice(0, 8) + '..'
+  }
+  nameSpan.innerText = nameString
   nameSpan.classList.add('name')
   innerDiv.appendChild(nameSpan);
 
