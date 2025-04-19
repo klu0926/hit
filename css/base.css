@@ -9,6 +9,7 @@
 @import url('./background-cover.css');
 @import url('./components/notification.css');
 @import url('./components/footer.css');
+@import url('./pages/rulesPage.css');
 
 *,
 *::before,
@@ -49,6 +50,7 @@ body {
   max-width: 814px;
   min-height: 100%;
   margin: 0px auto;
+  padding: 10px;
   padding-top: 80px;
 }
 
