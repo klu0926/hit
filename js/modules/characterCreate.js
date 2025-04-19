@@ -1,42 +1,39 @@
 import { simplifyUsers } from "./simpleUsers.js";
+import { randomInRange } from "../../utils/randomInRange.js";
 
 // Create base character on game start 
 const npcTier = {
   weak: {
-    lethality: [80, 120],
-    survival: [80, 120],
-    cool: [80, 120],
+    lethality: [50, 150],
+    survival: [50, 120],
+    cool: [20, 60],
     growth: {
       lethality: [5, 10],
-      survival: [3, 6],
-      cool: [2, 4],
+      survival: [1, 3],
+      cool: [1, 3],
     }
   },
   mid: {
-    lethality: [150, 200],
+    lethality: [200, 300],
     survival: [130, 180],
-    cool: [80, 120],
+    cool: [50, 100],
     growth: {
-      lethality: [10, 15],
-      survival: [6, 10],
-      cool: [2, 4],
+      lethality: [5, 15],
+      survival: [1, 6],
+      cool: [1, 6],
     }
   },
   elite: {
-    lethality: [250, 300],
-    survival: [200, 250],
+    lethality: [350, 400],
+    survival: [300, 350],
     cool: [80, 120],
     growth: {
       lethality: [15, 25],
-      survival: [10, 15],
-      cool: [2, 4],
+      survival: [1, 10],
+      cool: [1, 10],
     }
   }
 };
-
-function randomInRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 export function generateTargetStats(tier) {
   const config = npcTier[tier];
@@ -48,28 +45,34 @@ export function generateTargetStats(tier) {
     tier,
     level: 1,
     stats: {
-      lethality: randomInRange(...config.lethality),
-      survival: randomInRange(...config.survival),
-      cool: randomInRange(...config.cool)
+      lethality: randomInRange(config.lethality),
+      survival: randomInRange(config.survival),
+      cool: randomInRange(config.cool)
     },
-    growthRate: {
-      lethality: randomInRange(...config.growth.lethality),
-      survival: randomInRange(...config.growth.survival),
-      cool: randomInRange(...config.growth.cool)
+    // growth is [min, max]
+    growth: {
+      lethality: config.growth.lethality,
+      survival: config.growth.survival,
+      cool: config.growth.cool
     }
   };
 }
 
 // for player
 export function playerCreate(player) {
+
   const playerStats = generateTargetStats('weak');
+  // Player bonus stats
+  playerStats.stats.lethality += 0;
+  playerStats.stats.survival += 100;
+  playerStats.stats.cool += 100
 
   return {
     id: player.id,
     name: player.name,
     password: player.password,
     avatar: "./assets/images/avatar/player-avatar.png",
-    gold: 10000, // [TEST] add money to spend
+    gold: 5000, // start gold
     gears: [],
     rank: 0, // set up when game run
     day: 1,  // each player progression

@@ -1,3 +1,6 @@
+import { playerDie } from "./player.js"
+
+
 const combatLog = [
   "You — fire and miss",
   "Target — dodges sideways",
@@ -112,7 +115,17 @@ export function playCombatLog(element, callback, result) {
 
     if (index >= fullLog.length) {
       clearInterval(interval);
+
+      // win or lose but survived
       if (typeof callback === 'function') callback();
+
+      // lose and die
+      if (!isWon && !isSurvived) {
+        setTimeout(() => {
+          playerDie();
+        }, 500)
+        return
+      }
     }
   }, logInterval);
 }

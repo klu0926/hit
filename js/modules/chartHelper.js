@@ -80,7 +80,7 @@ export function renderChart(container, dataArray) {
             const index = context.dataIndex;
             // index 2 is states.cool
             if (index === 2) {
-              const percent = Math.max(1, parseFloat(((value / 100) * 100).toFixed(2)));
+              const percent = Math.max(100, parseFloat(((value / 100) * 100).toFixed(2)));
               return `${value}  (${percent}%)`;
             }
             return value;

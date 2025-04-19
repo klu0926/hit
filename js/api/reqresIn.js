@@ -10,15 +10,15 @@ import { playerCreate } from "../modules/characterCreate.js";
 // Simulate POST to create an account and store hashed user locally
 export async function createAccount(name, password) {
   try {
-    if (name.trim() === '') throw new Error('Missing name');
-    if (password.trim() === '') throw new Error('Missing password');
+    if (name.trim() === '') throw new Error('Missing codename');
+    if (password.trim() === '') throw new Error('Missing access key');
     console.log('Creating new account...');
 
     // check if user name exist
     const existingPlayers = getLocalPlayers() || [];
     const oldPlayer = existingPlayers.find(p => p.name === name)
     if (oldPlayer) {
-      throw new Error('username already exists')
+      throw new Error('Codename already exists')
     }
 
     // Using bcrypt CDN from index.html
@@ -59,21 +59,21 @@ export async function createAccount(name, password) {
 export async function login(name, password) {
   try {
     console.log('login...')
-    if (name.trim() === '') throw new Error('Missing name');
-    if (password.trim() === '') throw new Error('Missing password');
+    if (name.trim() === '') throw new Error('Missing codename');
+    if (password.trim() === '') throw new Error('Missing access key');
 
     const players = getLocalPlayers();
     if (!players || players.length === 0) {
-      throw new Error('No saved player data');
+      throw new Error('No codename in network');
     }
 
     // Find player with matching name
     const player = players.find(p => p.name === name);
-    if (!player) throw new Error('User not found');
+    if (!player) throw new Error('Codename not found');
 
     // Check password
     const isMatch = dcodeIO.bcrypt.compareSync(password, player.password);
-    if (!isMatch) throw new Error('Incorrect password');
+    if (!isMatch) throw new Error('Incorrect codeman or access key');
 
     // Simulate login with dummy request
     await fetch('https://reqres.in/api/login', {

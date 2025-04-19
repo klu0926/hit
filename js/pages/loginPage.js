@@ -28,8 +28,8 @@ export function loginPage(app) {
   app.appendChild(_loginPage)
 
   // Title
-  const title = document.createElement('h1');
-  title.innerText = 'LOGIN';
+  const title = document.createElement('h2');
+  title.innerText = 'Access Connection';
   title.classList.add('title')
   _loginPage.appendChild(title);
 
@@ -43,7 +43,7 @@ export function loginPage(app) {
   const nameInput = document.createElement('input');
   nameInput.type = 'text';
   nameInput.id = 'name';
-  nameInput.placeholder = 'username';
+  nameInput.placeholder = 'Codename';
   nameInput.required = true;
   form.appendChild(nameInput);
 
@@ -51,21 +51,22 @@ export function loginPage(app) {
   const passwordInput = document.createElement('input');
   passwordInput.type = 'password';
   passwordInput.id = 'password';
-  passwordInput.placeholder = 'password';
+  passwordInput.placeholder = 'Access Key';
   passwordInput.required = true;
   form.appendChild(passwordInput);
 
   // Login button
   const loginBtn = document.createElement('button');
   loginBtn.id = 'loginBtn';
-  loginBtn.innerText = 'Login';
+  loginBtn.innerText = 'Authentication';
   form.appendChild(loginBtn);
 
   // Create account link + button
   const createLink = document.createElement('a');
   createLink.href = '/#/create';
-  createLink.innerText = 'Create Account'
+  createLink.innerText = 'Register Credential'
   _loginPage.appendChild(createLink)
+
 
   // Event
   // on login button pressed
@@ -76,7 +77,7 @@ export function loginPage(app) {
       const password = document.querySelector('#password').value
 
       if (name.trim() === '' || password.trim() === '') {
-        throw new Error('Missing name or password')
+        throw new Error('Missing codename or access key')
       }
 
       // login
@@ -88,8 +89,7 @@ export function loginPage(app) {
       }
     } catch (err) {
       console.error(err)
-      notification(`[LOGIN ERROR] : ${err.message}`)
+      notification(err.message)
     }
-
   });
 }

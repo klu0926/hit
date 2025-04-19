@@ -1,5 +1,9 @@
 import { getPlayerStatsWithGears } from "./player.js"
 
+// [TEST] God Mode
+let _godMode = false
+
+// Target
 let currentTarget = null
 
 export function setCurrentTarget(target) {
@@ -12,7 +16,11 @@ export function getCurrentTarget() {
 }
 
 export function roll(chance, min = 0) {
-  console.log('rool chance:', chance)
+  if (_godMode) {
+    console.log('God Mode Roll')
+    return true
+  }
+  console.log('Ro;l chance:', chance)
   return Math.random() < (chance + min)
 }
 
@@ -33,10 +41,19 @@ export function getWinPercentage() {
 }
 
 function payoutFromChance(chance) {
-  const percent = Math.floor(chance * 100)
-  if (percent >= 50) return 2000;
-  return Math.round(10000 - percent * 150);
+  const BASE_PAYMENT = 2500
+  const GOLD_PER_PERCENT = 300
+  const MIN_PERCENT = 47;
+
+  // math
+  const difficulty = 1 - chance
+  const percent = Math.floor(difficulty * 100);
+  const diff = percent - MIN_PERCENT;
+
+  if (diff <= 0) return BASE_PAYMENT;
+  return BASE_PAYMENT + diff * GOLD_PER_PERCENT;
 }
+
 
 export function getCombatResult() {
   const statsWithGear = getPlayerStatsWithGears()
@@ -57,8 +74,8 @@ export function getCombatResult() {
 
   // if lose, survived?
   if (!isWon) {
-    // add 0.1 (10%) extra chance to player survive
-    isSurvived = roll(getChance(playerSurvival, targetLeth), 0.1)
+    // add 0.2(20%) extra chance to player survive
+    isSurvived = roll(getChance(playerSurvival, targetLeth), 0.2)
   }
 
   // if win, gain gold
@@ -77,4 +94,8 @@ export function getCombatResult() {
     currentTarget,
   }
   return result
+}
+
+export function setGodMode(isOn = false) {
+  _godMode = isOn
 }

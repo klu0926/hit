@@ -36,7 +36,7 @@ function combatDisplay() {
 
   title = document.createElement('p')
   title.classList.add('combat-display-title')
-  title.innerText = 'COMBAT'
+  title.innerText = 'HIT'
   upperDiv.appendChild(title)
 
   combatLog = document.createElement('div')

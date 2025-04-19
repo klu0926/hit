@@ -1,7 +1,12 @@
 // logic 
 import { logout } from "../api/reqresIn.js";
 
+
 // Elements
+import { musicToggleButton } from "../../utils/music.js";
+
+import { callPromptMessage } from '../../utils/promptMessage.js'
+
 let _footer
 
 export function footer() {
@@ -9,25 +14,35 @@ export function footer() {
   _footer.classList.add('footer')
 
   _footer.innerHTML = `
-    <p>&copy; 2025 H.I.T. — Hunt • Infiltrate • Terminate. All rights reserved.</p>
+    <p>Hunt • Infiltrate • Terminate</p><p>&copy; 2025 H.I.T. — All rights reserved</p>
 `
 
-  // logout
-  const logout = document.createElement('span')
-  logout.id = 'logout'
-  logout.innerText = 'Logout'
-  _footer.append(logout)
+  // buttonsDivs 
+  const buttonsDiv = document.createElement('div')
+  buttonsDiv.classList.add('footer-buttons')
+  _footer.appendChild(buttonsDiv)
 
+  // logout
+  const logout = document.createElement('button')
+  logout.id = 'logout'
+  logout.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i>'
+  buttonsDiv.append(logout)
+
+  // music toggle
+  const _musicToggleButton = musicToggleButton()
+  buttonsDiv.append(_musicToggleButton)
 
   // Event
   logout.addEventListener('click', onLogoutClick)
-
   return _footer
 }
 
-
-function onLogoutClick() {
+async function onLogoutClick() {
   try {
+    // prompt to logout
+    const result = await callPromptMessage("Confirm system disconnect?")
+    if (!result) return
+
     const res = logout()
     if (res.ok) {
       window.location.hash = '#/login'

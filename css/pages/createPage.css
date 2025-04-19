@@ -1,8 +1,15 @@
-.create-page {
+.page.create-page {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  max-width: 450px;
   gap: 10px;
+  padding-top: 200px;
+}
+
+.page.create-page .title {
+  font-size: 4.2rem;
+  text-align: start;
+  line-height: 4.2rem;
 }
 
 .create-form {

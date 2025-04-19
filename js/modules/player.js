@@ -1,5 +1,5 @@
-import { getLocalTokenPlayer } from "./storage.js"
-
+import { getLocalTokenPlayer, removeCurrentPlayer } from "./storage.js"
+import { callPromptMessage } from "../../utils/promptMessage.js"
 
 export function getPlayerStatsWithGears() {
   const player = getLocalTokenPlayer()
@@ -25,9 +25,23 @@ export function getPlayerStatsWithGears() {
   const statsWithGear = {
     lethality, survival, cool
   }
-  
+
 
   console.log('using gear + stats:', statsWithGear)
-
   return statsWithGear
+}
+
+export async function playerDie() {
+
+  // removeCurrnetPlayer 
+  removeCurrentPlayer()
+
+  // display promptMessage
+  await callPromptMessage(
+    'AGENT TERMINATED\nYou were neutralized in combat. All your credentials have been purged. Thank you for your service.',
+    true
+  );
+
+  // change to create page
+  window.location.href = '#/create'
 }

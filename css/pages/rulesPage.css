@@ -1,0 +1,54 @@
+
+
+.rules-content {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  color: rgb(220, 220, 220);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 20px;
+  gap: 5px;
+  font-size: 1rem;
+  line-height: 1.45rem;
+  cursor: default;
+}
+
+.rules-content .keyword {
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.rules-content section {
+  margin-bottom: 20px;
+}
+
+.rules-content .rule-title {
+  display: inline-block;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--secondary);
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+.rules-content .stat {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.rules-content .stat.stat-leth {
+  color: var(--red);
+}
+
+.rules-content .stat.stat-sur {
+  color: orange;
+}
+
+.rules-content .stat.stat-cool {
+  color: yellow;
+}

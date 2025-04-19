@@ -2,7 +2,7 @@ import { loginPage } from "./pages/loginPage.js";
 import { agentsPage } from "./pages/agentsPage.js";
 import { createPage } from "./pages/createPage.js";
 import { shopPage } from "./pages/shopPage.js";
-import { rulesPage } from "./pages/rulesPages.js";
+import { rulesPage } from "./pages/rulesPage.js";
 
 let currentPage = ''
 

@@ -3,13 +3,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 525px;
+  width: 555px;
   gap: 10px;
 }
 
 #items-div {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
@@ -194,4 +194,12 @@
 
 .buy-menu-buy {
   width: 90%;
+}
+
+
+/* mobile */
+@media (max-width: 768px) {
+  .item-div {
+    width: 89%;
+  }
 }
