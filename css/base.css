@@ -47,7 +47,8 @@ body {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  max-width: 814px;
+  width: 814px;
+  max-width: 100%;
   min-height: 100%;
   margin: 0px auto;
   padding: 10px;

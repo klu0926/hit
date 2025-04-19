@@ -6,7 +6,8 @@ import { getLocalTokenPlayer, getLocalTargets } from "../modules/storage.js";
 import { getCurrentPage } from "../router.js";
 
 // elements
-import { navbar, updateProgressbar } from "../components/navbar.js";
+import { navbar } from "../components/navbar.js";
+import { updateProgressbar } from "../components/progressbar.js";
 import { footer } from "../components/footer.js";
 import { targetCard } from "../components/targetCard.js";
 import { backgroundCover } from "../components/backgroundCover.js"

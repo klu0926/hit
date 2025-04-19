@@ -1,98 +1,98 @@
-import { getLocalTokenPlayer } from "../modules/storage.js"
-import { renderTargetProfile } from "./targetProfile.js"
+import { progressbar } from './progressbar.js'
 
-// events
-import { EVENTS, attachEvent } from "../events.js"
+let _navbar
+let _navLinks // all pages
 
-let _progressbar
-let dayDiv
-let playerDiv
-let playerAvatarDiv
-let playerAvatar
-let PlayerName
-let PlayerGold
-let playerRank
-
-export function updateProgressbar() {
-  console.log('updateProgressbar...')
-  const wrapper = document.querySelector('#progressbar-wrapper')
-  wrapper.innerHTML = ''
-  wrapper.appendChild(progressbar())
-}
-
-function progressbar() {
-  const player = getLocalTokenPlayer()
-  _progressbar = document.createElement('div');
-  _progressbar.id = ('progressbar');
-
-  playerDiv = document.createElement('div')
-  playerDiv.classList.add('progressbar-player-div')
-  _progressbar.appendChild(playerDiv)
-
-  playerAvatarDiv = document.createElement('div')
-  playerAvatarDiv.id = 'progressbar-player-avatar-div'
-  playerDiv.appendChild(playerAvatarDiv)
-
-  playerAvatar = document.createElement('img')
-  playerAvatar.src = player.avatar
-  playerAvatar.classList.add('progressbar-player-avatar')
-  playerAvatarDiv.appendChild(playerAvatar)
-
-  PlayerName = document.createElement('span')
-  PlayerName.classList.add('progressbar-player-name')
-  PlayerName.innerText = player.name
-  playerAvatarDiv.appendChild(PlayerName)
-
-  dayDiv = document.createElement('div')
-  dayDiv.classList.add('progressbar-day-div')
-  dayDiv.innerText = `DAY ${player.day}`
-  playerDiv.appendChild(dayDiv)
-
-  playerRank = document.createElement('div')
-  playerRank.classList.add('progressbar-player-rank')
-  playerRank.innerHTML = `<i class="fa-brands fa-web-awesome"></i><span>${player.rank || ''}</span>`
-  playerDiv.appendChild(playerRank)
-
-  PlayerGold = document.createElement('div')
-  PlayerGold.classList.add('progressbar-player-gold')
-  PlayerGold.innerHTML = `<i class="fa-solid fa-coins"></i><span>${player.gold || '0'}</span>`
-  playerDiv.appendChild(PlayerGold)
-
-
-  // EVENT
-  // open player profile
-  playerAvatarDiv.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const app = document.querySelector('#app')
-    renderTargetProfile(app, getLocalTokenPlayer(), true)
-  })
-  return _progressbar;
-}
-
+// for mobile 
+// hide NavLink by default
+let isNavLinkHidden = true
+let _burger
 
 export function navbar(currentPage) {
-  const navbar = document.createElement('nav');
-  navbar.classList.add('navbar');
-  navbar.innerHTML = `
-    <div class='navigation'>
-    <ul class="nav-links">
-      <li><a href="#/agents" class="${currentPage === 'agents' ? 'active' : ''}">
-      <i class="fa-solid fa-earth-asia"></i>
-      AGENTS</a></li>
-      <li><a href="#/shop" class="${currentPage === 'shop' ? 'active' : ''}">
-<i class="fa-regular fa-credit-card"></i>
-      SHOP</a></li>
-      <li><a href="#/rules" class="${currentPage === 'rules' ? 'active' : ''}">
-       <i class="fa-solid fa-book"></i>
-      RULES</a></li>
-    </ul>
-    </div>
-    <div id='progressbar-wrapper'></div>
-  `;
-  return navbar;
+  if (_navbar) {
+    _navbar.remove()
+    _navbar = null
+  }
+
+  // Create new
+  _navbar = document.createElement('nav');
+  _navbar.classList.add('navbar');
+
+  // Burger
+  _burger = document.createElement('div');
+  _burger.classList.add('burger');
+  _burger.innerHTML = `
+  <span></span>
+  <span></span>
+  <span></span>
+`;
+  _navbar.appendChild(_burger);
+
+  // Nav Links (holds all pages)
+  _navLinks = document.createElement('ul');
+  _navLinks.classList.add('nav-links');
+  _navbar.appendChild(_navLinks)
+
+  // Agents page
+  const agentList = document.createElement('li');
+  const agentLink = document.createElement('a');
+  agentLink.href = '#/agents';
+  if (currentPage === 'agents') agentLink.classList.add('active');
+  agentLink.innerHTML = `<i class="fa-solid fa-earth-asia"></i> AGENTS`;
+  agentList.appendChild(agentLink);
+  _navLinks.appendChild(agentList);
+
+  // Shop page
+  const shopList = document.createElement('li');
+  const shopLink = document.createElement('a');
+  shopLink.href = '#/shop';
+  if (currentPage === 'shop') shopLink.classList.add('active');
+  shopLink.innerHTML = `<i class="fa-regular fa-credit-card"></i> SHOP`;
+  shopList.appendChild(shopLink);
+  _navLinks.appendChild(shopList);
+
+  // Rules page
+  const rulesList = document.createElement('li');
+  const rulesLink = document.createElement('a');
+  rulesLink.href = '#/rules';
+  if (currentPage === 'rules') rulesLink.classList.add('active');
+  rulesLink.innerHTML = `<i class="fa-solid fa-book"></i> RULES`;
+  rulesList.appendChild(rulesLink);
+  _navLinks.appendChild(rulesList);
+
+  // append progress bar
+  _navbar.appendChild(progressbar())
+
+  // Event
+  _burger.addEventListener('click', onBurgerClick)
+
+  // check click out side while menu open 
+  document.addEventListener('click', (e) => {
+    // menu is hidden
+    if (isNavLinkHidden) return
+
+    // check click inside
+    const clickedInsideBurger = _burger.contains(e.target);
+    const clickedInsideNav = _navLinks.contains(e.target);
+    if (clickedInsideBurger || clickedInsideNav) return;
+
+    // click outside : hide menu
+    onBurgerClick()
+  })
+
+  return _navbar;
 }
 
-// [Custome Event Listener]
-attachEvent(EVENTS.SET_PLAYER, () => {
-  updateProgressbar()
-})
+function onBurgerClick() {
+  if (!_navLinks || !_burger) return
+
+  if (isNavLinkHidden) {
+    _navLinks.classList.add('show')
+    _burger.classList.add('show')
+    isNavLinkHidden = false
+  } else {
+    _navLinks.classList.remove('show')
+    _burger.classList.remove('show')
+    isNavLinkHidden = true
+  }
+}

@@ -3,7 +3,8 @@ import { isAuth } from "../modules/authentication.js";
 import { generateItems } from "./shopPageItems.js";
 
 // element
-import { navbar, updateProgressbar } from "../components/navbar.js";
+import { navbar } from "../components/navbar.js";
+import { updateProgressbar } from "../components/progressbar.js";
 import { notification } from "../modules/notification.js"
 import { backgroundCover } from "../components/backgroundCover.js"
 import { footer } from "../components/footer.js";

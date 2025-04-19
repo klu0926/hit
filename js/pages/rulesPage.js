@@ -2,7 +2,8 @@
 import { isAuth } from "../modules/authentication.js";
 
 // element
-import { navbar, updateProgressbar } from "../components/navbar.js";
+import { navbar } from "../components/navbar.js";
+import { updateProgressbar } from "../components/progressbar.js";
 import { backgroundCover } from "../components/backgroundCover.js";
 import { footer } from "../components/footer.js";
 
