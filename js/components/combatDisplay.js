@@ -80,8 +80,6 @@ function combatDisplay() {
         startString: '$',
         endString: ''
       })
-
-
       await sleep(300)
 
       // display multiplier
@@ -97,7 +95,6 @@ function combatDisplay() {
         startString: '$',
         endString: ''
       })
-
 
       // update player data and save
       afterCombatTokenPlayerSave(result)
