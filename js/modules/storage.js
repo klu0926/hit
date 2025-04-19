@@ -1,5 +1,7 @@
 import { getCurrentTarget, setCurrentTarget } from "./game.js"
 import { EVENTS, dispatchEvent } from "../events.js"
+import { generateItems } from "../pages/shopPageItems.js";
+
 // deal with all local storage data
 const TARGET_KEY = 'HIT_TARGET'
 const PLAYER_KEY = 'HIT_PLAYER'
@@ -153,6 +155,9 @@ export function afterCombatTokenPlayerSave(result) {
 
   // set day
   player.day++
+
+  // update shop items
+  player.shop = generateItems()
 
   // save
   setTokenPlayer(player)

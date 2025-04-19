@@ -15,7 +15,6 @@ let items = []// fetched
 let itemsDiv
 let buyMenu
 
-
 export async function shopPage(app) {
   try {
     // player is not login
@@ -79,10 +78,7 @@ function renderShopItems(renew = false) {
     // use old items
     items = player.shop
   } else {
-    // get new items and store it
-    items = generateItems()
-    player.shop = items
-    setTokenPlayer(player)
+    getNewItems()
   }
   console.log('items', items)
 
@@ -201,7 +197,7 @@ function buyItem(item) {
   // check if player has money
   const player = getLocalTokenPlayer()
   if (player.gold < item.price) {
-    notification("Not enough gold.")
+    notification("Insufficient funds")
     return
   }
   // set the item to be sold = true
@@ -228,6 +224,13 @@ function buyItem(item) {
   removeBuyMenu()
 
   // notification
-  notification("Purchase Completed.", false)
+  notification("Purchase Complete", false)
 }
 
+// force shop to change new items
+export function getNewItems() {
+  items = generateItems()
+  player.shop = items
+  setTokenPlayer(player)
+
+}
