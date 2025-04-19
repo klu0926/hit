@@ -116,7 +116,7 @@ export function bulkTargetsCreate(userArray) {
     }
 
     // set up isTerminated boolean
-    targets[i].isTerminated = false
+    targets[i].isDead = false
   }
   return targets
 }

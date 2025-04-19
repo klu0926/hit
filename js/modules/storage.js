@@ -124,28 +124,36 @@ export function afterCombatTokenPlayerSave(result) {
       player.rank = currentTarget.rank
     }
 
-    // push target to the end
-    currentTarget.isDead = true
-    const index = targets.findIndex(t => t.id === currentTarget.id)
-    targets.splice(index, 1)
+    // update current target
+    const targetToUpdate = targets.find(t => t.id === currentTarget.id);
+    console.log('targetToUpdate', targetToUpdate)
+    if (targetToUpdate) {
+      targetToUpdate.isDead = true;
+    }
 
-    // sort targets on rank
-    targets.sort((a, b) => a.rank - b.rank);
+    // living and dead targets
+    const aliveTargets = targets.filter(t => !t.isDead);
+    const deadTargets = targets.filter(t => t.isDead);
+    // rank dead targets to last (+1 to include player later)
+    deadTargets.forEach(t => { t.rank = targets.length + 1 })
+
+    // sort alive targets on rank
+    aliveTargets.sort((a, b) => a.rank - b.rank);
 
     // update rank
     let nextRank = 1;
-    for (let i = 0; i < targets.length; i++) {
+    for (let i = 0; i < aliveTargets.length; i++) {
       if (targets[i].isDead) continue;
       if (nextRank === player.rank) nextRank++;
       targets[i].rank = nextRank;
       nextRank++;
     }
-    // push dead target to the end
-    currentTarget.rank = targets.length
-    targets.push(currentTarget)
+
+    // combine alive and dead targets
+    const combineTargets = [...aliveTargets, ...deadTargets]
 
     // update player targets
-    player.targets = targets
+    player.targets = combineTargets
 
     // empty current target
     setCurrentTarget(null)
