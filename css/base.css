@@ -8,6 +8,8 @@
 @import url('./pages/shopPage.css');
 @import url('./background-cover.css');
 @import url('./components/notification.css');
+@import url('./components/footer.css');
+
 *,
 *::before,
 *::after {
@@ -31,7 +33,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  height: 90vh;
+  height: 100vh;
 }
 
 #app {
@@ -45,8 +47,9 @@ body {
   justify-content: start;
   align-items: center;
   max-width: 814px;
-  margin: 100px auto;
-  padding-bottom: 50px;
+  min-height: 100%;
+  margin: 0px auto;
+  padding-top: 80px;
 }
 
 .title {
@@ -106,25 +109,6 @@ a:hover {
 input {
   padding: 5px 10px;
   font-size: 1rem;
-}
-
-.background-noise {
-  position: fixed;
-  inset: -100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.background-noise::after {
-  content: '';
-  position: absolute;
-  inset: -100%;
-  background-image: url('../../assets/images/noise.png');
-  opacity: 0.08;
-  animation: noise 0.2s linear infinite both;
-  pointer-events: none;
-  overflow: hidden;
-  scale: 1.5;
 }
 
 @keyframes noise {

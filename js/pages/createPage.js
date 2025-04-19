@@ -1,7 +1,12 @@
+// logic
 import { createAccount } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { notification } from "../modules/notification.js";
 import { login } from "../api/reqresIn.js";
+
+// element
+import { backgroundCover } from "../components/backgroundCover.js"
+
 
 let _createPage;
 let form
@@ -18,9 +23,8 @@ export function createPage(app) {
   app.innerHTML = '';
 
   // Background Cover
-  const backgroundCover = document.createElement('div');
-  backgroundCover.classList.add('background-cover', 'create-page-cover');
-  app.appendChild(backgroundCover);
+  const _backgroundCover = backgroundCover('create')
+  app.appendChild(_backgroundCover);
 
   // Page
   _createPage = document.createElement('div');

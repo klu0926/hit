@@ -3,6 +3,8 @@ import { isAuth } from "../modules/authentication.js";
 
 // element
 import { navbar, updateProgressbar } from "../components/navbar.js";
+import { backgroundCover } from "../components/backgroundCover.js";
+import { footer } from "../components/footer.js";
 
 
 export async function rulesPage(app) {
@@ -16,9 +18,8 @@ export async function rulesPage(app) {
     app.innerHTML = ''
 
     // Background Cover
-    const backgroundCover = document.createElement('div');
-    backgroundCover.classList.add('background-cover', 'rules-page-cover');
-    app.appendChild(backgroundCover);
+    const _backgroundCover = backgroundCover('rules')
+    app.appendChild(_backgroundCover);
 
     // navbar
     const _navbar = navbar('rules')
@@ -27,7 +28,7 @@ export async function rulesPage(app) {
 
     // page
     const page = document.createElement('div')
-    page.classList.add('page','rules-page')
+    page.classList.add('page', 'rules-page')
     app.appendChild(page)
 
     // show page title
@@ -35,6 +36,10 @@ export async function rulesPage(app) {
     title.innerText = 'RULES'
     title.classList.add('title')
     page.appendChild(title)
+
+    // footer 
+    const _footer = footer()
+    app.appendChild(_footer)
   }
   catch (err) {
     console.error("[ERROR] rulesPage", err)

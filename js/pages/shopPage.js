@@ -5,6 +5,8 @@ import { generateItems } from "./shopPageItems.js";
 // element
 import { navbar, updateProgressbar } from "../components/navbar.js";
 import { notification } from "../modules/notification.js"
+import { backgroundCover } from "../components/backgroundCover.js"
+import { footer } from "../components/footer.js";
 
 // player
 import { getLocalTokenPlayer, setTokenPlayer } from "../modules/storage.js";
@@ -25,9 +27,8 @@ export async function shopPage(app) {
     app.innerHTML = ''
 
     // Background Cover
-    const backgroundCover = document.createElement('div');
-    backgroundCover.classList.add('background-cover', 'shop-page-cover');
-    app.appendChild(backgroundCover);
+    const _backgroundCover = backgroundCover('shop')
+    app.appendChild(_backgroundCover);
 
     // navbar
     const _navbar = navbar('shop')
@@ -49,6 +50,10 @@ export async function shopPage(app) {
     itemsDiv = document.createElement('div')
     itemsDiv.id = 'items-div'
     page.appendChild(itemsDiv)
+
+    // footer 
+    const _footer = footer()
+    app.appendChild(_footer)
 
     // render
     renderShopItems()

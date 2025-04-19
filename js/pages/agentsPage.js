@@ -1,5 +1,4 @@
 // logic
-import { logout } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { fetchTargets } from "../api/fetchTargets.js";
 import { sortTargets } from "../modules/sortTargets.js";
@@ -8,7 +7,10 @@ import { getCurrentPage } from "../router.js";
 
 // elements
 import { navbar, updateProgressbar } from "../components/navbar.js";
+import { footer } from "../components/footer.js";
 import { targetCard } from "../components/targetCard.js";
+import { backgroundCover } from "../components/backgroundCover.js"
+
 
 // events
 import { EVENTS, attachEvent } from "../events.js"
@@ -28,9 +30,8 @@ export async function agentsPage(app) {
     app.innerHTML = ''
 
     // Background Cover
-    const backgroundCover = document.createElement('div');
-    backgroundCover.classList.add('background-cover', 'agents-page-cover');
-    app.appendChild(backgroundCover);
+    const _backgroundCover = backgroundCover('agents')
+    app.appendChild(_backgroundCover);
 
     // navbar
     const _navbar = navbar('agents')
@@ -54,11 +55,9 @@ export async function agentsPage(app) {
     targetsDiv.id = 'targets-div'
     _agentsPage.appendChild(targetsDiv)
 
-    // logout
-    const logoutBtn = document.createElement('button')
-    logoutBtn.id = 'logout'
-    logoutBtn.innerText = 'Logout'
-    _agentsPage.append(logoutBtn)
+    // footer 
+    const _footer = footer()
+    app.appendChild(_footer)
 
     // fetch targets
     await fetchTargets()
@@ -80,21 +79,6 @@ export async function agentsPage(app) {
         profile.classList.remove('active');
       }
     });
-
-    // logout button
-    logoutBtn.addEventListener('click', (e) => {
-      try {
-        const res = logout()
-        if (res.ok) {
-          window.location.hash = '#/login'
-        } else {
-          throw new Error(res.message)
-        }
-      } catch (err) {
-        alert(err.message)
-      }
-    })
-
   } catch (err) {
     console.error("[ERROR] agentsPage", err)
   }
