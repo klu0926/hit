@@ -2,10 +2,10 @@
 import { renderChart } from "../modules/chartHelper.js"
 import { getWinPercentage } from "../modules/game.js"
 import { animateNumber } from "../modules/animateNumber.js";
+import { getPlayerStatsWithGears } from "../modules/player.js"
 
 // element
 import { renderCombatDisplay } from "./combatDisplay.js";
-
 
 // Cached elements for easy update
 let _targetProfile
@@ -101,7 +101,11 @@ function targetProfile(target, isPlayer = false) {
   stats.id = 'target-profile-stats'
   mainDiv.appendChild(stats)
 
-  const statsArray = Object.entries(target.stats).map(([label, value]) => ({ label, value }))
+  let statsObject = target.stats
+  if (isPlayer) {
+    statsObject = getPlayerStatsWithGears()
+  }
+  const statsArray = Object.entries(statsObject).map(([label, value]) => ({ label, value }))
   renderChart(stats, statsArray)
 
   // Buttons
@@ -142,10 +146,13 @@ function targetProfile(target, isPlayer = false) {
   simulateBtn.addEventListener('click', async () => {
     const percentage = getWinPercentage()
     // animated percentage
-    await animateNumber(simulatePercent, percentage, () => {
-      // unlock hit button when complete
-      hitBtn.disabled = false
+    await animateNumber(simulatePercent, percentage, {
+      callback: () => {
+        hitBtn.disabled = false
+      },
+      endString: '%'
     })
+
   })
 
   // (on Hit btn press) combat display

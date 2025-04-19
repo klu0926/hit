@@ -1,10 +1,5 @@
-import { getLocalTokenPlayer } from "./storage.js"
+import { getPlayerStatsWithGears } from "./player.js"
 
-// const playerTemp = {
-//   lethality: 0,
-//   survival : 0,
-//   cool, 
-// }
 let currentTarget = null
 
 export function setCurrentTarget(target) {
@@ -17,6 +12,7 @@ export function getCurrentTarget() {
 }
 
 export function roll(chance, min = 0) {
+  console.log('rool chance:', chance)
   return Math.random() < (chance + min)
 }
 
@@ -29,8 +25,8 @@ export function getChance(playerStat, targetStat) {
 // Return in percentage number (no '%')
 // This is for display only
 export function getWinPercentage() {
-  const player = getLocalTokenPlayer()
-  const playerLeth = player.stats.lethality
+  const statsWithGear = getPlayerStatsWithGears()
+  const playerLeth = statsWithGear.lethality
   const targetLeth = currentTarget.stats.lethality
   const chance = getChance(playerLeth, targetLeth)
   return (chance * 100).toFixed(0)
@@ -43,9 +39,9 @@ function payoutFromChance(chance) {
 }
 
 export function getCombatResult() {
-  const player = getLocalTokenPlayer()
-  const playerLeth = player.stats.lethality
-  const playerSurvival = player.stats.survival
+  const statsWithGear = getPlayerStatsWithGears()
+  const playerLeth = statsWithGear.lethality
+  const playerSurvival = statsWithGear.survival
   const targetLeth = currentTarget.stats.lethality
 
   let isWon = false
@@ -68,7 +64,7 @@ export function getCombatResult() {
   // if win, gain gold
   if (isWon) {
     basedGold = payoutFromChance(winChance)
-    multiplier = Math.round((1 + player.stats.cool * 0.001) * 10) / 10; // run to one decimal
+    multiplier = Math.max(1, Math.round((statsWithGear.cool / 100) * 100) / 100); // 2 decimal
     gold = Math.round(basedGold * multiplier)
   }
 

@@ -2,6 +2,9 @@ import { login } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { notification } from "../modules/notification.js";
 
+// element
+import { backgroundCover } from "../components/backgroundCover.js";
+
 let _loginPage
 let form
 
@@ -15,10 +18,9 @@ export function loginPage(app) {
   // Page Render
   app.innerHTML = ''
 
-  // background-cover
-  const backgroundCover = document.createElement('div')
-  backgroundCover.classList.add('background-cover', 'login-page-cover')
-  app.appendChild(backgroundCover)
+  // Background Cover
+  const _backgroundCover = backgroundCover('login')
+  app.appendChild(_backgroundCover);
 
   // Page
   _loginPage = document.createElement('div')

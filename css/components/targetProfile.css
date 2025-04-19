@@ -6,8 +6,12 @@
   width: 345px;
   transform: translate(-50%, -50%);
   z-index: 20;
-  background-color: var(--main);
-  border: 1px solid var(--border);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    rgba(29, 29, 29, 1)
+  );
+    border: 1px solid var(--border);
   overflow: hidden;
   box-shadow: 2px 2px 15px 10px rgba(0, 0, 0, 0.7);
   --avatar-translate-x: -20%;

@@ -5,8 +5,11 @@
 @import url('./components/combatDisplay.css');
 @import url('./pages/loginPage.css');
 @import url('./pages/createPage.css');
+@import url('./pages/shopPage.css');
 @import url('./background-cover.css');
 @import url('./components/notification.css');
+@import url('./components/footer.css');
+
 *,
 *::before,
 *::after {
@@ -30,7 +33,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  height: 90vh;
+  height: 100vh;
 }
 
 #app {
@@ -44,8 +47,9 @@ body {
   justify-content: start;
   align-items: center;
   max-width: 814px;
-  margin: 100px auto;
-  padding-bottom: 20px;
+  min-height: 100%;
+  margin: 0px auto;
+  padding-top: 80px;
 }
 
 .title {
@@ -89,7 +93,7 @@ button:disabled:hover {
   opacity: 0.6;
 }
 
-button.close{
+button.close {
   background-color: var(--main);
 }
 

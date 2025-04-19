@@ -1,5 +1,7 @@
 import { getCurrentTarget, setCurrentTarget } from "./game.js"
 import { EVENTS, dispatchEvent } from "../events.js"
+import { generateItems } from "../pages/shopPageItems.js";
+
 // deal with all local storage data
 const TARGET_KEY = 'HIT_TARGET'
 const PLAYER_KEY = 'HIT_PLAYER'
@@ -39,6 +41,7 @@ export function getLocalPlayers() {
 export function setLocalPlayers(playerArray) {
   try {
     localStorage.setItem(PLAYER_KEY, JSON.stringify(playerArray))
+    console.log('setLocalPlayer:', playerArray)
   } catch (err) {
     console.error('[ERROR] setLocalPlayers:', err.message)
   }
@@ -103,7 +106,6 @@ export function setTokenPlayer(player) {
 
     // Save updated players array
     setLocalPlayers(players);
-    console.log('Player data updated.');
 
     // [Custome Event Dispatch]
     dispatchEvent(EVENTS.SET_PLAYER)
@@ -153,6 +155,9 @@ export function afterCombatTokenPlayerSave(result) {
 
   // set day
   player.day++
+
+  // update shop items
+  player.shop = generateItems()
 
   // save
   setTokenPlayer(player)

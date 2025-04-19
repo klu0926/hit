@@ -1,6 +1,12 @@
-export function animateNumber(el, number, callback = null, endString = '%', duration = 500, numberIncrement = 1, startNumber = 0) {
+export function animateNumber(el, number, {
+  startNumber = 0,
+  numberIncrement = 1,
+  duration = 500,
+  startString = '',
+  endString = '',
+  callback = null
+} = {}) {
   return new Promise((resolve) => {
-    console.log('calling promise')
     let currentNumber = startNumber;
     const steps = Math.ceil((number - startNumber) / numberIncrement);
     const stepTime = Math.floor(duration / steps);
@@ -9,12 +15,12 @@ export function animateNumber(el, number, callback = null, endString = '%', dura
       currentNumber += numberIncrement;
       if (currentNumber >= number) {
         clearInterval(timer);
-        el.innerText = `${number}${endString}`;
+        el.innerText = `${startString}${number}${endString}`;
         if (callback) callback();
         resolve();
       } else {
-        el.innerText = `${currentNumber}${endString}`;
+        el.innerText = `${startString}${currentNumber}${endString}`;
       }
-    }, Math.max(stepTime, 1)); // avoid 0ms
+    }, Math.max(stepTime, 1));
   });
 }

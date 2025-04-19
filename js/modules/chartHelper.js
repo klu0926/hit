@@ -76,7 +76,15 @@ export function renderChart(container, dataArray) {
             size: 14,
             weight: 'bold'
           },
-          formatter: (val) => val
+          formatter: function (value, context) {
+            const index = context.dataIndex;
+            // index 2 is states.cool
+            if (index === 2) {
+              const percent = Math.max(1, parseFloat(((value / 100) * 100).toFixed(2)));
+              return `${value}  (${percent}%)`;
+            }
+            return value;
+          }
         }
       }
     },

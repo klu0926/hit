@@ -1,0 +1,23 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  padding: 50px 20px;
+  height: 150px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.footer #logout {
+  display: block;
+  color: var(--secondary);
+  cursor: pointer;
+}
+
+.footer #logout:hover {
+  color: var(--red);
+  text-decoration: underline;
+}

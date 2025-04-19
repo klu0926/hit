@@ -74,8 +74,12 @@ function combatDisplay() {
     // display gold gain
     if (result.isWon) {
       // display based gold
-      await animateNumber(goldDiv, result.basedGold, null, '$', 500, 10)
-
+      await animateNumber(goldDiv, result.basedGold, {
+        numberIncrement: 10,
+        duration: 500,
+        startString: '$',
+        endString: ''
+      })
       await sleep(300)
 
       // display multiplier
@@ -84,14 +88,20 @@ function combatDisplay() {
       await sleep(200)
 
       // display multiplier gold
-      await animateNumber(goldDiv, result.gold, null, '$', 500, 10, result.basedGold)
+      await animateNumber(goldDiv, result.gold, {
+        startNumber: result.basedGold,
+        numberIncrement: 10,
+        duration: 500,
+        startString: '$',
+        endString: ''
+      })
 
       // update player data and save
       afterCombatTokenPlayerSave(result)
 
     } else {
       // lose, die
-      goldDiv.innerText = '0$'
+      goldDiv.innerText = '$0'
     }
 
     // enable close
