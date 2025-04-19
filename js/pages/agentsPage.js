@@ -10,6 +10,7 @@ import { navbar, updateProgressbar } from "../components/navbar.js";
 import { footer } from "../components/footer.js";
 import { targetCard } from "../components/targetCard.js";
 import { backgroundCover } from "../components/backgroundCover.js"
+import { callPromptMessage } from "../../utils/promptMessage.js"
 
 // events
 import { EVENTS, attachEvent } from "../events.js"
@@ -112,3 +113,5 @@ attachEvent(EVENTS.SET_PLAYER, () => {
   if (getCurrentPage() !== 'agents') return
   sortAndRenderTagets()
 })
+
+

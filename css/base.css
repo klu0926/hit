@@ -67,11 +67,12 @@ button {
   font-size: 0.9rem;
   text-transform: uppercase;
   cursor: pointer;
+  border-radius: 2px;
   transition: all 0.2s ease-in-out;
 }
 
 button:hover {
-  background-color: var(--red);
+  background-color: var(--red-hover);
   border: 2px solid var(--red);
   color: var(--secondary);
   transform: scale(0.97);
@@ -115,7 +116,54 @@ input::placeholder {
   color: rgb(180, 180, 180);
 }
 
+/* prompt message */
+.prompt-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  min-height: 150px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgb(50, 50, 50));
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+  z-index: 1000;
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.8);
+}
 
+.prompt-message-string {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  text-transform: capitalize;
+}
+
+.prompt-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: auto;
+}
+
+.prompt-buttons button {
+  width: 80px;
+}
+
+.prompt-buttons .prompt-close {
+  /* display: none; */
+  background-color: gray;
+  border: 1px solid gray;
+}
 
 @keyframes noise {
   0% {
