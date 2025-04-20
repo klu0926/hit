@@ -32,13 +32,13 @@
   justify-items: start;
   align-items: center;
   gap: 9px;
-  transform: translate(-30%, -62%);
+  transform: translate(-40%, -52%);
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1),
     rgba(28, 28, 28, 0.9)
   );
-  height: 550px;
+  height: 450px;
   width: 300px;
   max-width: 100%;
   padding: 12px;
