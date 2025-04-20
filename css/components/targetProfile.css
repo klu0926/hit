@@ -32,13 +32,13 @@
   justify-items: start;
   align-items: center;
   gap: 9px;
-  transform: translate(-35%, -57%);
+  transform: translate(-30%, -62%);
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1),
     rgba(28, 28, 28, 0.9)
   );
-  height: 520px;
+  height: 550px;
   width: 300px;
   max-width: 100%;
   padding: 12px;
@@ -46,11 +46,12 @@
   border-radius: 3px;
   z-index: 20;
   overflow-y: scroll;
-  pointer-events: none;
+  scrollbar-color: var(--red) transparent;
   cursor: default;
 }
 .items-display .item-div {
   width: 100%;
+  pointer-events: none;
 }
 
 .items-display .item-div:hover {
@@ -71,8 +72,14 @@
   transition: all 0s;
 }
 
+#target-profile .items-btn:hover {
+  background-color: rgba(255, 255, 255, 0.119);
+  border: 1px solid var(--border);
+}
+
 #target-profile .items-btn.active {
   background-color: var(--red);
+  border: 1px solid var(--red);
 }
 
 #target-profile .items-btn i {
