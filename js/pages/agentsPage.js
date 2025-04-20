@@ -67,19 +67,6 @@ export async function agentsPage(app) {
     sortAndRenderTagets()
 
     // EVENTS
-    // Profile
-    // click outside the profile to close profile
-    document.addEventListener('click', (event) => {
-      const profile = document.getElementById('target-profile');
-      if (!profile) return;
-
-      const isActive = profile.classList.contains('active');
-      const isInside = profile.contains(event.target);
-
-      if (isActive && !isInside) {
-        profile.classList.remove('active');
-      }
-    });
   } catch (err) {
     console.error("[ERROR] agentsPage", err)
   }
