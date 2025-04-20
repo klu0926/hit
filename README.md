@@ -4,13 +4,12 @@
 
 ### Hunt • Infiltrate • Terminate
 
-**HIT** is a dark, stylish browser-based strategy game inspired by *Hitman* and *John Wick*.  
+**HIT** is a dark, stylish browser-based strategy game inspired by _Hitman_ and _John Wick_.  
 You play as an elite assassin in a deadly world of rivals. Eliminate enemies, earn gold, and climb the ranks — or die trying.
 
 ## Live Demo
 
-[https://klu0926.github.io/hit/](https://klu0926.github.io/hit/)
-
+[https://klu0926.github.io/hit/](https://klu0926.github.io/hit/#/create)
 
 ## Table of Contents
 
@@ -22,8 +21,6 @@ You play as an elite assassin in a deadly world of rivals. Eliminate enemies, ea
 - [Libraries Used](#libraries-used)
 - [APIs Used](#apis-used)
 - [Credits](#credits)
-- [Future Development](#future-development)
-- [License](#license)
 
 ## Overview
 
@@ -35,10 +32,10 @@ In HIT, players:
 - Upgrade gear and stats in the black market
 - Try to survive as long as possible while enemies grow stronger
 
-
 ## Setup Instructions
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/your-username/hit.git
    cd hit
@@ -48,7 +45,6 @@ In HIT, players:
    (for example, the Live Server extension in VS Code)
 
 3. Play the game in your browser
-
 
 ## Features
 
@@ -61,14 +57,12 @@ Supports multiple saved accounts.
 ![login](./assets/screenshot/login.png)  
 ![create](./assets/screenshot/create.png)
 
-
 ### Randomly Generated Enemy Targets
 
 Enemies are created using Random User Generator and AI-generated avatars.  
 Each target is unique and randomized.
 
 ![agent](./assets/screenshot/agents.png)
-
 
 ### Target Stats & Profile
 
@@ -78,16 +72,15 @@ You see their real identity and photo only after defeating them.
 
 ![profile](./assets/screenshot/profile.png)
 
-
 ### Combat System
 
-Combat is automatic and based on Lethality stats.  
-- Win: Earn gold and move up in rank  
-- Lose + Survive: You live, but gain nothing  
+Combat is automatic and based on Lethality stats.
+
+- Win: Earn gold and move up in rank
+- Lose + Survive: You live, but gain nothing
 - Lose + Die: Your profile is permanently deleted
 
 ![combat](./assets/screenshot/combat.png)
-
 
 ### Shop
 
@@ -96,18 +89,15 @@ Boost your stats and improve survival.
 
 ![shop](./assets/screenshot/shop.png)
 
-
 ### Day Progression & Scaling
 
 Each fight advances one in-game day.  
 Enemies grow stronger, and the shop restocks with new gear.
 
-
 ### Permadeath
 
 If you die in combat, your profile is erased.  
 There’s no restart — just legacy.
-
 
 ## Game Rules
 
@@ -161,25 +151,24 @@ Making it work smoothly with GitHub Pages took extra tweaking.
 Chart.js setup was confusing at first.  
 I used trial and error to make the charts update correctly with each game change.
 
-
 ## Libraries Used
 
-- **Font Awesome** – Icons  
-- **Google Fonts** – Typography  
-- **Chart.js** – Stat visualizations  
+- **Font Awesome** – Icons
+- **Google Fonts** – Typography
+- **Chart.js** – Stat visualizations
 - **bcrypt** – Password hashing
 
 ## APIs Used
 
-- **[RandomUser](https://randomuser.me/)** – For generating enemy agents  
+- **[RandomUser](https://randomuser.me/)** – For generating enemy agents
 - **[Reqres.in](https://reqres.in/)** – For mock login and authentication
 
 ## Credits
 
 **Background Music**
 
-- Music: Bensound  
-- Artist: Theatre Of Delays  
+- Music: Bensound
+- Artist: Theatre Of Delays
 - License Code: 4QWQNLT5VPH4OT3L
 
 All rights belong to their original creators.  
