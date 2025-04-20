@@ -1,6 +1,6 @@
 # HIT
 
-![cover](./assets/images/background/background-6.png)
+![cover](./assets/screenshot/cover.png)
 
 ### Hunt • Infiltrate • Terminate
 
