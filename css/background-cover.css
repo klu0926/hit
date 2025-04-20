@@ -30,7 +30,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(2);
+  filter: brightness(2.5);
   z-index: -1;
   overflow: hidden;
   animation: subtleMove 3.5s ease-in-out infinite;
@@ -75,18 +75,18 @@
   0%,
   100% {
     transform: translate(0px, 0px) skew(0deg, 0deg);
-    filter: brightness(1.8) blur(1px) grayscale(0.7);
+    filter: brightness(2.2) blur(2.5px) grayscale(0.7);
   }
   25% {
     transform: translate(2px, -1.5px) skewX(0.2deg);
-    filter: brightness(1.5) blur(1.5px) grayscale(0.7);
+    filter: brightness(1.4) blur(1px) grayscale(0.7);
   }
   50% {
     transform: translate(-1.5px, 1.5px) skewX(-0.2deg);
-    filter: brightness(1.2) blur(2.5px) grayscale(0.7);
+    filter: brightness(2) blur(2px) grayscale(0.7);
   }
   75% {
     transform: translate(1px, -1px) skewX(0.1deg);
-    filter: brightness(1.4) blur(1.5px) grayscale(0.7);
+    filter: brightness(1.6) blur(1px) grayscale(0.7);
   }
 }
