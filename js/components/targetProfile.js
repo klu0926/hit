@@ -36,12 +36,17 @@ let _itemsBtn
 let currentTarget
 
 export function renderTargetProfile(container, target, isPlayer = false) {
-  if (_targetProfile) {
-    _targetProfile.remove()
-  }
+  removeTargetProfile()
+
   container.appendChild(targetProfile(target, isPlayer))
 }
 
+export function removeTargetProfile() {
+  if (_targetProfile) {
+    _targetProfile.remove()
+    _targetProfile = null
+  }
+}
 
 function targetProfile(target, isPlayer = false) {
   _targetProfile = document.createElement('div')

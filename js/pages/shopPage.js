@@ -9,6 +9,7 @@ import { updateProgressbar } from "../components/progressbar.js";
 import { notification } from "../modules/notification.js"
 import { backgroundCover } from "../components/backgroundCover.js"
 import { footer } from "../components/footer.js";
+import { sidebar } from "../components/sidebar.js";
 
 // player
 import { getLocalTokenPlayer, setTokenPlayer } from "../modules/storage.js";
@@ -145,6 +146,9 @@ function renderShopItems(renew = false) {
 
     // append to itemsDivs
     itemsDiv.appendChild(itemDiv)
+
+    // sidebar
+    sidebar()
 
     // Event
     itemDiv.addEventListener('click', () => {

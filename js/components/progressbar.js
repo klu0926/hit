@@ -59,6 +59,8 @@ export function progressbar() {
     const app = document.querySelector('#app')
     renderTargetProfile(app, getLocalTokenPlayer(), true)
   })
+
+  // return 
   return _progressbar;
 }
 

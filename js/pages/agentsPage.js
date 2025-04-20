@@ -13,6 +13,7 @@ import { footer } from "../components/footer.js";
 import { targetCard } from "../components/targetCard.js";
 import { backgroundCover } from "../components/backgroundCover.js"
 import { callPromptMessage } from "../../utils/promptMessage.js"
+import { sidebar } from "../components/sidebar.js";
 
 // events
 import { EVENTS, attachEvent } from "../events.js"
@@ -66,6 +67,9 @@ export async function agentsPage(app) {
 
     //Sort and Fill leaderboard 
     sortAndRenderTagets()
+
+    // sidebar
+    sidebar()
 
     // EVENTS
   } catch (err) {
