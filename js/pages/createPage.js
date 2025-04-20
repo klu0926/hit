@@ -4,6 +4,7 @@ import { isAuth } from "../modules/authentication.js";
 import { notification } from "../modules/notification.js";
 import { login } from "../api/reqresIn.js";
 import { setRoute } from "../../utils/setRoute.js";
+import { getRouteUrl } from "../../utils/setRoute.js";
 
 // element
 import { backgroundCover } from "../components/backgroundCover.js"
@@ -73,7 +74,7 @@ export function createPage(app) {
 
   // Create account link + button
   const loginLink = document.createElement('a');
-  loginLink.href = '/#/login';
+  loginLink.href = getRouteUrl('#/login')
   loginLink.innerText = 'Access Network'
   _createPage.appendChild(loginLink)
 

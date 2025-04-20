@@ -1,4 +1,5 @@
 import { progressbar } from './progressbar.js'
+import { getRouteUrl } from '../../utils/setRoute.js'
 
 let _navbar
 let _navLinks // all pages
@@ -37,7 +38,7 @@ export function navbar(currentPage) {
   // Agents page
   const agentList = document.createElement('li');
   const agentLink = document.createElement('a');
-  agentLink.href = '#/agents';
+  agentLink.href = getRouteUrl('#/agents')
   if (currentPage === 'agents') agentLink.classList.add('active');
   agentLink.innerHTML = `<i class="fa-solid fa-earth-asia"></i> AGENTS`;
   agentList.appendChild(agentLink);
@@ -46,7 +47,7 @@ export function navbar(currentPage) {
   // Shop page
   const shopList = document.createElement('li');
   const shopLink = document.createElement('a');
-  shopLink.href = '#/shop';
+  shopLink.href = getRouteUrl('#/shop')
   if (currentPage === 'shop') shopLink.classList.add('active');
   shopLink.innerHTML = `<i class="fa-regular fa-credit-card"></i> SHOP`;
   shopList.appendChild(shopLink);
@@ -55,7 +56,7 @@ export function navbar(currentPage) {
   // Rules page
   const rulesList = document.createElement('li');
   const rulesLink = document.createElement('a');
-  rulesLink.href = '#/rules';
+  rulesLink.href = getRouteUrl('#/rules')
   if (currentPage === 'rules') rulesLink.classList.add('active');
   rulesLink.innerHTML = `<i class="fa-solid fa-book"></i> RULES`;
   rulesList.appendChild(rulesLink);

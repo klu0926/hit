@@ -1,14 +1,14 @@
-export function setRoute(hashRoute = '#/') {
+export function getRouteUrl(hashRoute = '#/') {
   const path = window.location.pathname;
   let base = '/';
 
-  // check is this is on github page
+  // Check if this is on GitHub Pages
   if (path.includes('/hit/')) {
     base = '/hit/';
   }
-
-  // change location
-  window.location.replace(`${window.location.origin}${base}${hashRoute}`);
+  return `${window.location.origin}${base}${hashRoute}`;
 }
 
-setRoute('#/login');
+export function setRoute(hashRoute = '#/') {
+  window.location.replace(getRouteUrl(hashRoute));
+}

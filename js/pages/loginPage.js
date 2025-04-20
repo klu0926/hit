@@ -1,6 +1,7 @@
 import { login } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { notification } from "../modules/notification.js";
+import { getRouteUrl } from "../../utils/setRoute.js";
 
 // element
 import { backgroundCover } from "../components/backgroundCover.js";
@@ -64,7 +65,7 @@ export function loginPage(app) {
 
   // Create account link + button
   const createLink = document.createElement('a');
-  createLink.href = '/#/create';
+  createLink.href = getRouteUrl('#/create')
   createLink.innerText = 'Register Credential'
   _loginPage.appendChild(createLink)
 
