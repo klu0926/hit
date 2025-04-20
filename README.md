@@ -7,13 +7,10 @@
 **HIT** is a dark, stylish browser-based strategy game inspired by *Hitman* and *John Wick*.  
 You play as an elite assassin in a deadly world of rivals. Eliminate enemies, earn gold, and climb the ranks — or die trying.
 
----
-
 ## Live Demo
 
 [https://klu0926.github.io/hit/](https://klu0926.github.io/hit/)
 
----
 
 ## Table of Contents
 
@@ -28,8 +25,6 @@ You play as an elite assassin in a deadly world of rivals. Eliminate enemies, ea
 - [Future Development](#future-development)
 - [License](#license)
 
----
-
 ## Overview
 
 In HIT, players:
@@ -40,7 +35,6 @@ In HIT, players:
 - Upgrade gear and stats in the black market
 - Try to survive as long as possible while enemies grow stronger
 
----
 
 ## Setup Instructions
 
@@ -55,7 +49,6 @@ In HIT, players:
 
 3. Play the game in your browser
 
----
 
 ## Features
 
@@ -68,7 +61,6 @@ Supports multiple saved accounts.
 ![login](./assets/screenshot/login.png)  
 ![create](./assets/screenshot/create.png)
 
----
 
 ### Randomly Generated Enemy Targets
 
@@ -77,7 +69,6 @@ Each target is unique and randomized.
 
 ![agent](./assets/screenshot/agents.png)
 
----
 
 ### Target Stats & Profile
 
@@ -87,7 +78,6 @@ You see their real identity and photo only after defeating them.
 
 ![profile](./assets/screenshot/profile.png)
 
----
 
 ### Combat System
 
@@ -98,7 +88,6 @@ Combat is automatic and based on Lethality stats.
 
 ![combat](./assets/screenshot/combat.png)
 
----
 
 ### Shop
 
@@ -107,14 +96,12 @@ Boost your stats and improve survival.
 
 ![shop](./assets/screenshot/shop.png)
 
----
 
 ### Day Progression & Scaling
 
 Each fight advances one in-game day.  
 Enemies grow stronger, and the shop restocks with new gear.
 
----
 
 ### Permadeath
 
