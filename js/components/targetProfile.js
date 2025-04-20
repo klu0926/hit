@@ -6,6 +6,7 @@ import { getPlayerStatsWithGears } from "../modules/player.js"
 
 // element
 import { renderCombatDisplay } from "./combatDisplay.js";
+import { getLocalTokenPlayer } from "../modules/storage.js";
 
 // Cached elements for easy update
 let _targetProfile
@@ -26,6 +27,11 @@ let simulateBtn
 let hitBtn
 let close
 
+// items
+let _itemsDisplay
+let _itemsBtn
+
+
 // target
 let currentTarget
 
@@ -38,8 +44,6 @@ export function renderTargetProfile(container, target, isPlayer = false) {
 
 
 function targetProfile(target, isPlayer = false) {
-  console.log('targetProfile:', target)
-
   _targetProfile = document.createElement('div')
   _targetProfile.id = 'target-profile'
   _targetProfile.classList.add('active')
@@ -136,6 +140,13 @@ function targetProfile(target, isPlayer = false) {
   close.classList.add('close')
   _targetProfile.appendChild(close)
 
+  // player gear button
+  if (isPlayer) {
+    _itemsBtn = document.createElement('button')
+    _itemsBtn.classList.add('items-btn')
+    _itemsBtn.innerHTML = '<i class="fa-solid fa-briefcase"></i>'
+    _targetProfile.appendChild(_itemsBtn)
+  }
 
   // EVENT
   // close button
@@ -152,7 +163,6 @@ function targetProfile(target, isPlayer = false) {
       },
       endString: '%'
     })
-
   })
 
   // (on Hit btn press) combat display
@@ -162,5 +172,118 @@ function targetProfile(target, isPlayer = false) {
     renderCombatDisplay(app)
   })
 
+  // items button
+  if (_itemsBtn) {
+    _itemsBtn.addEventListener('click', itemDisplay)
+  }
+
+  // Profile
+  // click outside the profile to close profile
+  document.addEventListener('click', (event) => {
+    const profile = document.getElementById('target-profile');
+    if (!profile) return;
+
+    const isActive = profile.classList.contains('active');
+
+    let isInside = false
+    if (profile.contains(event.target)) isInside = true
+    if (_itemsDisplay) {
+      if (_itemsDisplay.contains(event.target)) isInside = true
+    }
+    if (isActive && !isInside) {
+      profile.classList.remove('active');
+      // remove itemsDisplay
+      removeItemDisplay()
+    }
+  });
   return _targetProfile
+}
+
+
+function itemDisplay() {
+  const app = document.querySelector('#app')
+  if (_itemsDisplay) {
+    removeItemDisplay()
+    return
+  }
+  _itemsDisplay = document.createElement('div')
+  _itemsDisplay.classList.add('items-display')
+
+  // render each items
+  const player = getLocalTokenPlayer()
+  const gears = player.gears
+
+  if (gears && gears.length > 0) {
+    gears.forEach(item => {
+      // render each item
+      const itemDiv = document.createElement('div')
+      itemDiv.classList.add('item-div')
+      _itemsDisplay.appendChild(itemDiv)
+
+      // hold icon and upperRight [type, name]
+      const upperDiv = document.createElement('div')
+      upperDiv.classList.add('item-upper-div')
+      itemDiv.appendChild(upperDiv)
+
+      const icon = document.createElement('div')
+      icon.classList.add('item-icon')
+      icon.innerHTML = item.icon
+      upperDiv.appendChild(icon)
+
+      // hold type and name
+      const upperDivRight = document.createElement('div')
+      upperDivRight.classList.add('item-upper-right')
+      upperDiv.appendChild(upperDivRight)
+
+      const type = document.createElement('div')
+      type.classList.add('item-type')
+      type.innerText = item.type
+      upperDivRight.appendChild(type)
+
+      const name = document.createElement('span')
+      name.classList.add('item-name')
+      name.innerText = item.name
+      upperDivRight.appendChild(name)
+
+      // stats
+      const statsDiv = document.createElement('div')
+      statsDiv.classList.add('stats-div')
+      itemDiv.appendChild(statsDiv)
+
+      const lethality = document.createElement('span')
+      lethality.classList.add('stats-lethality')
+      lethality.innerText = `LETH ${item.stats.lethality}`
+      statsDiv.appendChild(lethality)
+
+      const survival = document.createElement('span')
+      survival.classList.add('stats-survival')
+      survival.innerText = `SUR ${item.stats.survival}`
+      statsDiv.appendChild(survival)
+
+      const cool = document.createElement('span')
+      cool.classList.add('stats-cool')
+      cool.innerText = `CL ${item.stats.cool}`
+      statsDiv.appendChild(cool)
+
+      const price = document.createElement('span')
+      price.classList.add('item-price')
+      price.innerText = `$${item.price}`
+      itemDiv.appendChild(price)
+    })
+  }
+  // append to app
+  app.appendChild(_itemsDisplay)
+
+  // toggle item buttons .active class
+  _itemsBtn.classList.add('active')
+}
+
+
+function removeItemDisplay() {
+  if (_itemsDisplay) {
+    _itemsDisplay.remove()
+    _itemsDisplay = null
+    _itemsBtn.classList.remove('active')
+
+  }
 }

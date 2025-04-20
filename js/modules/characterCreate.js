@@ -1,6 +1,9 @@
 import { simplifyUsers } from "./simpleUsers.js";
 import { randomInRange } from "../../utils/randomInRange.js";
 
+const START_GOLD = 100000 // player start gold
+
+
 // Create base character on game start 
 const npcTier = {
   weak: {
@@ -72,7 +75,7 @@ export function playerCreate(player) {
     name: player.name,
     password: player.password,
     avatar: "./assets/images/avatar/player-avatar.png",
-    gold: 5000, // start gold
+    gold: START_GOLD, // start gold
     gears: [],
     rank: 0, // set up when game run
     day: 1,  // each player progression

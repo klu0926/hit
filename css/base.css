@@ -19,6 +19,14 @@
   box-sizing: border-box;
 }
 
+* {
+  scrollbar-color: red auto;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: red;
+}
+
 :root {
   --main: black;
   --main-hover: rgb(70, 70, 70);
