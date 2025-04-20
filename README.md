@@ -99,6 +99,12 @@ Enemies grow stronger, and the shop restocks with new gear.
 If you die in combat, your profile is erased.  
 There’s no restart — just legacy.
 
+### Responsive Design
+
+HIT works on smaller screen sizes too. It runs on **phones**, **tablets**, and **small devices**, not just desktops.
+
+![shop](./assets/screenshot/mobile.png)
+
 ## Game Rules
 
 **Perform a HIT**  
