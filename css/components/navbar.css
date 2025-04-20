@@ -29,9 +29,9 @@
   display: none;
   position: absolute;
   right: 25px;
-  top: 10px;
-  width: 32px;
-  height: 24px;
+  top: 13px;
+  width: 28px;
+  height: 22px;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -79,7 +79,7 @@
 }
 
 .nav-links a:hover {
-    color: white;
+  color: white;
 
   background-color: var(--main-hover);
 }
@@ -106,6 +106,7 @@
   justify-content: center;
   align-items: center;
   z-index: 20;
+  font-size: 14px;
 }
 
 .progressbar-player-div {
@@ -121,6 +122,7 @@
   justify-content: center;
   align-items: center;
   height: 40px;
+  width: 40px;
   gap: 5px;
   cursor: pointer;
 }
@@ -203,6 +205,14 @@
     border: 1px solid var(--red);
   }
 
+  .nav-links i {
+    display: flex;
+    width: 22px;
+    height: 22px;
+    margin-right: 4px;
+    font-size: 10px;
+  }
+
   .nav-links.show {
     display: flex;
   }
@@ -220,5 +230,17 @@
 
   .burger.show span {
     background-color: var(--red);
+  }
+
+  #progressbar {
+    font-size: 12px;
+  }
+
+  .progressbar-player-div {
+    gap: 10px;
+  }
+
+  .progressbar-player-name {
+    display: none;
   }
 }
