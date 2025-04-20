@@ -1,7 +1,7 @@
 import { simplifyUsers } from "./simpleUsers.js";
 import { randomInRange } from "../../utils/randomInRange.js";
 
-const START_GOLD = 100000 // player start gold
+const START_GOLD = 5000 // player start gold
 
 
 // Create base character on game start 
