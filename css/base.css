@@ -146,6 +146,7 @@ input::placeholder {
   gap: 20px;
   transform: translate(-50%, -50%);
   width: 400px;
+  max-width: 90%;
   min-height: 150px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgb(50, 50, 50));
   border: 1px solid var(--secondary);
@@ -214,5 +215,16 @@ input::placeholder {
   }
   100% {
     transform: translateX(0.05%) translateY(-0.03%);
+  }
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .page {
+    width: 440px;
+  }
+
+  .title {
+    font-size: 2rem;
   }
 }

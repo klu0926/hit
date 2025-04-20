@@ -9,6 +9,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 400px;
+  max-width: 95%;
   min-height: 50px;
   border-radius: 5px;
   padding: 10px;

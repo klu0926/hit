@@ -1,7 +1,8 @@
 .page.login-page {
   display: flex;
   flex-direction: column;
-  max-width: 450px;
+  width: 450px;
+  max-width: 100%;
   gap: 10px;
   padding-top: 200px;
 }
@@ -17,4 +18,12 @@
   flex-direction: column;
   width: 100%;
   gap: 10px;
+}
+
+
+@media (max-width: 768px) {
+  .page.login-page .title {
+    font-size: 2rem;
+    line-height: 2.2rem;
+  }
 }

@@ -146,6 +146,7 @@
   transform: translateX(-50%) translateY(-50%);
   border: 1px solid var(--secondary);
   width: 400px;
+  max-width: 95%;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1),
@@ -195,7 +196,6 @@
 .buy-menu-buy {
   width: 90%;
 }
-
 
 /* mobile */
 @media (max-width: 768px) {
