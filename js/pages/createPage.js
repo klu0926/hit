@@ -3,6 +3,7 @@ import { createAccount } from "../api/reqresIn.js";
 import { isAuth } from "../modules/authentication.js";
 import { notification } from "../modules/notification.js";
 import { login } from "../api/reqresIn.js";
+import { setRoute } from "../../utils/setRoute.js";
 
 // element
 import { backgroundCover } from "../components/backgroundCover.js"
@@ -15,7 +16,7 @@ export function createPage(app) {
   // Redirect if already logged in
   const player = isAuth();
   if (player) {
-    window.location.hash = '#/agents';
+    setRoute('#/agents')
     return;
   }
 
@@ -93,7 +94,7 @@ export function createPage(app) {
         // login
         const res = await login(name, password)
         if (res.ok) {
-          window.location.hash = '#/game'
+          setRoute('#/agents')
         } else {
           throw new Error(res.message)
         }

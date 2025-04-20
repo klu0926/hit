@@ -4,6 +4,7 @@ import { fetchTargets } from "../api/fetchTargets.js";
 import { sortTargets } from "../modules/sortTargets.js";
 import { getLocalTokenPlayer, getLocalTargets } from "../modules/storage.js";
 import { getCurrentPage } from "../router.js";
+import { setRoute } from "../../utils/setRoute.js";
 
 // elements
 import { navbar } from "../components/navbar.js";
@@ -24,7 +25,7 @@ export async function agentsPage(app) {
     // player is not login
     const player = isAuth()
     if (!player) {
-      window.location.hash = '#/login'
+      setRoute('#/login')
     }
 
     // clear 

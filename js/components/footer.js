@@ -1,6 +1,6 @@
 // logic 
 import { logout } from "../api/reqresIn.js";
-
+import { setRoute } from "../../utils/setRoute.js";
 
 // Elements
 import { musicToggleButton } from "../../utils/music.js";
@@ -45,7 +45,7 @@ async function onLogoutClick() {
 
     const res = logout()
     if (res.ok) {
-      window.location.hash = '#/login'
+      setRoute('#/login')
     } else {
       throw new Error(res.message)
     }

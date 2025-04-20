@@ -3,6 +3,7 @@ import { agentsPage } from "./pages/agentsPage.js";
 import { createPage } from "./pages/createPage.js";
 import { shopPage } from "./pages/shopPage.js";
 import { rulesPage } from "./pages/rulesPage.js";
+import { setRoute } from "../utils/setRoute.js";
 
 let currentPage = ''
 
@@ -36,6 +37,6 @@ export function router() {
       currentPage = "rules"
       break;
     default:
-      window.location.hash = '#/login' // default to login
+      setRoute('#/login')
   }
 }

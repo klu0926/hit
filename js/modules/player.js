@@ -1,5 +1,7 @@
 import { getLocalTokenPlayer, removeCurrentPlayer } from "./storage.js"
 import { callPromptMessage } from "../../utils/promptMessage.js"
+import { setRoute } from "../../utils/setRoute.js";
+
 
 export function getPlayerStatsWithGears() {
   const player = getLocalTokenPlayer()
@@ -43,5 +45,5 @@ export async function playerDie() {
   );
 
   // change to create page
-  window.location.href = '#/create'
+  setRoute('#/create')
 }

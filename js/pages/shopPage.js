@@ -1,6 +1,7 @@
 // logic
 import { isAuth } from "../modules/authentication.js";
 import { generateItems } from "./shopPageItems.js";
+import { setRoute } from "../../utils/setRoute.js";
 
 // element
 import { navbar } from "../components/navbar.js";
@@ -21,7 +22,7 @@ export async function shopPage(app) {
     // player is not login
     const plalyer = isAuth()
     if (!plalyer) {
-      window.location.hash = '#/login'
+      setRoute('#/login')
     }
     // clear
     app.innerHTML = ''

@@ -4,6 +4,7 @@ import { notification } from "../modules/notification.js";
 
 // element
 import { backgroundCover } from "../components/backgroundCover.js";
+import { setRoute } from "../../utils/setRoute.js";
 
 let _loginPage
 let form
@@ -12,7 +13,7 @@ export function loginPage(app) {
   // player already login, return to game page
   const player = isAuth()
   if (player) {
-    window.location.hash = '#/agents'
+    setRoute('#/agents')
   }
 
   // Page Render
@@ -83,7 +84,7 @@ export function loginPage(app) {
       // login
       const res = await login(name, password)
       if (res.ok) {
-        window.location.hash = '#/game'
+        setRoute('#/agents')
       } else {
         throw new Error(res.message)
       }
