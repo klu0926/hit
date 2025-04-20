@@ -10,7 +10,7 @@
   color: var(--secondary);
   padding: 0px 5% 1px 5%;
   font-family: sans-serif;
-  z-index: 20;
+  z-index: 50;
 }
 
 .navbar::after {

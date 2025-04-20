@@ -37,7 +37,7 @@ let currentTarget
 
 export function renderTargetProfile(container, target, isPlayer = false) {
   removeTargetProfile()
-
+  removeItemDisplay()
   container.appendChild(targetProfile(target, isPlayer))
 }
 
