@@ -3,7 +3,10 @@ import { router } from './router.js'
 
 async function appStart() {
   router()
-  window.addEventListener('hashchange', router)
+  window.addEventListener('hashchange', () => {
+    router()
+    window.scrollTo(0, 0);
+  })
 }
 
 // RUN

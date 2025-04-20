@@ -32,6 +32,11 @@
   color: var(--red);
 }
 
+#sidebar i {
+  font-size: 1.6rem;
+  color: white;
+}
+
 .sidebar-player-icon {
   display: flex;
   justify-content: center;
@@ -52,7 +57,31 @@
 }
 
 .sidebar-player-icon i {
-  font-size: 1.8rem;
-  color: white;
-  padding-top: 8px;
+  padding-top: 10px;
+  padding-left: 1px;
+}
+
+.sidebar-scroll-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 36px;
+  height: 36px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.sidebar-scroll-icon:hover {
+  transform: scale(0.97);
+}
+
+#sidebar .sidebar-scroll-icon i {
+  padding-top: 2px;
+  padding-left: 1px;
+  font-size: 1.4rem;
 }

@@ -39,6 +39,13 @@ export function sidebar() {
   playerIcon.innerHTML = `<i class="fa-solid fa-user-tie"></i>`
   _sidebar.appendChild(playerIcon)
 
+  // Scroll to player
+  const scrollIcon = document.createElement('div');
+  scrollIcon.classList.add('sidebar-scroll-icon')
+  scrollIcon.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`
+  _sidebar.appendChild(scrollIcon)
+
+
 
   // music ?
 
@@ -51,21 +58,27 @@ export function sidebar() {
 
 
   // Event
+
+
   // open player profile
   playerIcon.addEventListener('click', (e) => {
     e.stopPropagation();
     const profile = getProfile()
-
-    if (profile) {
-
-      // is player
-      if (profile.classList.contains('player')) {
-        removeTargetProfile()
-      } else {
-        renderTargetProfile(app, getLocalTokenPlayer(), true)
-      }
+    if (profile && profile.classList.contains('player')) {
+      removeTargetProfile()
     } else {
       renderTargetProfile(app, getLocalTokenPlayer(), true)
+    }
+  })
+
+  // scroll to player
+  scrollIcon.addEventListener('click', () => {
+    if (location.hash == '#/agents') {
+      const player = document.querySelector('#player')
+      if (!player) return
+      const offset = -100
+      const top = player.getBoundingClientRect().top + window.scrollY + offset
+      window.scrollTo({ top, behavior: 'smooth' })
     }
   })
 
