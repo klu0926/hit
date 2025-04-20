@@ -7,7 +7,6 @@ let _godMode = false
 let currentTarget = null
 
 export function setCurrentTarget(target) {
-  console.log('setCurrentTarget:', target)
   currentTarget = target
 }
 
@@ -20,7 +19,6 @@ export function roll(chance, min = 0) {
     console.log('God Mode Roll')
     return true
   }
-  console.log('Ro;l chance:', chance)
   return Math.random() < (chance + min)
 }
 
@@ -70,7 +68,6 @@ export function getCombatResult() {
   // win / lose
   const winChance = getChance(playerLeth, targetLeth)
   isWon = roll(winChance)
-  console.log('winChance:', winChance)
 
   // if lose, survived?
   if (!isWon) {

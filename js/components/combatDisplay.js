@@ -23,8 +23,6 @@ export function renderCombatDisplay(container) {
 function combatDisplay() {
 
   const result = getCombatResult()
-  console.log(result)
-
   // create new 
   _combatDisplay = document.createElement('div')
   _combatDisplay.id = 'combat-display'

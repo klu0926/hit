@@ -12,7 +12,6 @@ export async function createAccount(name, password) {
   try {
     if (name.trim() === '') throw new Error('Missing codename');
     if (password.trim() === '') throw new Error('Missing access key');
-    console.log('Creating new account...');
 
     // check if user name exist
     const existingPlayers = getLocalPlayers() || [];
@@ -58,7 +57,6 @@ export async function createAccount(name, password) {
 // Simulate login by checking against stored hashed players
 export async function login(name, password) {
   try {
-    console.log('login...')
     if (name.trim() === '') throw new Error('Missing codename');
     if (password.trim() === '') throw new Error('Missing access key');
 
@@ -97,7 +95,6 @@ export async function login(name, password) {
 
 export function logout() {
   try {
-    console.log('logout...')
     removeLocalToken();
     return resMessage(true, null, 'logout successful');
   } catch (err) {

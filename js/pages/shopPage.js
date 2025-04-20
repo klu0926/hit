@@ -82,7 +82,6 @@ function renderShopItems(renew = false) {
   } else {
     getNewItems()
   }
-  console.log('items', items)
 
   // render each item
   items.forEach(item => {
