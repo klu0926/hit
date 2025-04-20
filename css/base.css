@@ -121,9 +121,14 @@ a:hover {
   scale: 0.97;
 }
 
+input,
+textarea,
+select {
+  font-size: 16px !important;
+}
+
 input {
   padding: 5px 10px;
-  font-size: 16px;
 }
 
 input::placeholder {
