@@ -321,8 +321,6 @@
 
 @media (max-width: 768px) {
   #target-profile {
-    display: none;
-    position: fixed;
     top: 100px;
     left: 50%;
     width: 345px;
@@ -342,15 +340,15 @@
 
   .items-display {
     position: fixed;
-    top: 102px;
+    top: 126px;
     left: 50%;
-    transform: translate(-47%, 0%);
+    transform: translate(-41%, 0%);
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 1),
-      rgba(28, 28, 28, 0.9)
+      rgba(5, 4, 4, 0.9)
     );
     height: 400px;
-    width: 260px;
+    width: 280px;
   }
 }
