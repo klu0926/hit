@@ -14,7 +14,7 @@
   --avatar-scale: 1.45;
   --picture-translate-x: 0%;
   --picture-scale: 1.05;
-  z-index: 10px;
+  z-index: 20 !important;
 }
 
 #target-profile.active {

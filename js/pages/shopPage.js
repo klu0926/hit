@@ -174,17 +174,21 @@ function renderBuyMenu(item) {
   itemPrice.classList.add('buy-menu-price')
   buyMenu.appendChild(itemPrice)
 
+  const buttonsDiv = document.createElement('div')
+  buttonsDiv.classList.add('buttons-div')
+  buyMenu.appendChild(buttonsDiv)
+
   const close = document.createElement('button')
-  close.innerText = 'X'
+  close.innerText = 'Cancel'
   close.type = 'button'
   close.classList.add('buy-menu-close')
-  buyMenu.appendChild(close)
+  buttonsDiv.appendChild(close)
 
   const buy = document.createElement('button')
   buy.innerText = 'Purchase'
   buy.type = 'button'
   buy.classList.add('buy-menu-buy')
-  buyMenu.appendChild(buy)
+  buttonsDiv.appendChild(buy)
 
   // Event
   close.addEventListener('click', removeBuyMenu)
