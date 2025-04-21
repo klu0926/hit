@@ -75,18 +75,24 @@
   0%,
   100% {
     transform: translate(0px, 0px) skew(0deg, 0deg);
-    filter: brightness(2.2) blur(2.5px) grayscale(0.7);
+    filter: brightness(3) blur(3px) grayscale(0.8);
   }
   25% {
     transform: translate(2px, -1.5px) skewX(0.2deg);
-    filter: brightness(1.4) blur(1px) grayscale(0.7);
+    filter: brightness(2.6) blur(2px) grayscale(0.8);
   }
   50% {
     transform: translate(-1.5px, 1.5px) skewX(-0.2deg);
-    filter: brightness(2) blur(2px) grayscale(0.7);
+    filter: brightness(2.2) blur(1px) grayscale(0.7);
   }
   75% {
     transform: translate(1px, -1px) skewX(0.1deg);
-    filter: brightness(1.6) blur(1px) grayscale(0.7);
+    filter: brightness(2.6) blur(2px) grayscale(0.7);
+  }
+}
+
+@media (max-width: 768px) {
+  .background-wrapper .background-cover {
+    background-position: 55% 100%;
   }
 }

@@ -5,12 +5,12 @@
   max-width: 85%;
   gap: 10px;
   padding-top: 200px;
+  text-align: center;
 }
 
 .page.login-page .title {
   font-size: 4rem;
   text-align: start;
-  line-height: 4.2rem;
 }
 
 .login-form {
@@ -23,7 +23,6 @@
 
 @media (max-width: 768px) {
   .page.login-page .title {
-    font-size: 2rem;
-    line-height: 2.2rem;
+    font-size: 2.6rem;
   }
 }
