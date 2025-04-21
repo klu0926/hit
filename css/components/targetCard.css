@@ -193,3 +193,24 @@
     transform: scale(var(--player-zoom-in-scale)) translate(0px, 0px);
   }
 }
+
+/* skeleton imge */
+.skeleton-img {
+  background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 3s infinite;
+  display: block;
+}
+
+.skeleton-img:not([src]) {
+  visibility: hidden;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

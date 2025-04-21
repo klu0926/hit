@@ -26,6 +26,12 @@ export function targetCard(target, isPlayer = false) {
   image.loading = 'lazy';
   innerDiv.appendChild(image);
 
+  // Add sekeleton img
+  image.classList.add('skeleton-img')
+  image.onload = () => {
+    image.classList.remove('skeleton-img')
+  }
+
   // Rank
   const Rankspan = document.createElement('span');
   Rankspan.innerText = target.rank || "?"
