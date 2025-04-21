@@ -25,7 +25,7 @@
   display: block;
   inset: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: url('../assets/images/background/put-on-glove.png');
   background-size: cover;
   background-position: center;
@@ -34,6 +34,7 @@
   z-index: -1;
   overflow: hidden;
   animation: subtleMove 3.5s ease-in-out infinite;
+  will-change: transform, filter;
 }
 
 .background-cover::after {

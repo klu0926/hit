@@ -23,6 +23,7 @@ export function targetCard(target, isPlayer = false) {
   // Image
   const image = document.createElement('img');
   image.src = target.avatar;
+  image.loading = 'lazy';
   innerDiv.appendChild(image);
 
   // Rank
