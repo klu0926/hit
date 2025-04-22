@@ -48,9 +48,6 @@ export async function agentsPage(app) {
     // show loading 
     displayLoading(app)
 
-    // Test
-    return
-
     // fetch targets
     await fetchTargets()
 
