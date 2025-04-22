@@ -5,6 +5,7 @@
   max-width: 85%;
   gap: 10px;
   text-align: center;
+  margin-top: -150px;
 }
 
 .page.login-page .title {
