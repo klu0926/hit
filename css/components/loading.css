@@ -7,10 +7,23 @@
   color: var(--red);
   border: 2px solid var(--red);
   padding: 5px 10px;
-  width: 200px;
+  width: 220px;
+  max-width: 60%;
   font-family: monospace;
   font-weight: bold;
   background-color: rgba(255, 0, 0, 0.2);
+  overflow: visible;
+}
+
+.loading .info {
+  position: absolute;
+  top: -35px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  font-size: 1.3rem;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .loading::after {
@@ -22,18 +35,18 @@
 
 @keyframes dots {
   0% {
-    content: ' Loading';
+    content: 'Scanning';
   }
   25% {
-    content: ' Loading.';
+    content: 'Scanning.';
   }
   50% {
-    content: ' Loading..';
+    content: 'Scanning..';
   }
   75% {
-    content: ' Loading...';
+    content: 'Scanning...';
   }
   100% {
-    content: ' Loading';
+    content: 'Scanning';
   }
 }

@@ -22,8 +22,16 @@ let _agentsPage
 let targetsDiv
 
 function displayLoading(app) {
+  // loading
   const loading = document.createElement('div')
   loading.classList.add('loading')
+
+  // info
+  const info = document.createElement('p')
+  info.innerText = 'Tracking targets'
+  info.classList.add('info')
+  loading.appendChild(info)
+
   app.appendChild(loading)
 }
 
@@ -39,6 +47,9 @@ export async function agentsPage(app) {
 
     // show loading 
     displayLoading(app)
+
+    // Test
+    return
 
     // fetch targets
     await fetchTargets()
