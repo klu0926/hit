@@ -1,9 +1,10 @@
-.agents-page {
+.page.agents-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   max-width: 100%;
+  padding-top: 100px;
 }
 
 #targets-div {

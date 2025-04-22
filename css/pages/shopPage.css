@@ -1,10 +1,11 @@
-.shop-page {
+.page.shop-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 555px;
   gap: 10px;
+  padding-top: 100px;
 }
 
 #items-div {

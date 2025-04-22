@@ -21,6 +21,12 @@ import { EVENTS, attachEvent } from "../events.js"
 let _agentsPage
 let targetsDiv
 
+function displayLoading(app) {
+  const loading = document.createElement('div')
+  loading.classList.add('loading')
+  app.appendChild(loading)
+}
+
 export async function agentsPage(app) {
   try {
     // player is not login
@@ -28,18 +34,26 @@ export async function agentsPage(app) {
     if (!player) {
       setRoute('#/login')
     }
-
     // clear 
     app.innerHTML = ''
 
-    // Background Cover
-    const _backgroundCover = backgroundCover('agents')
-    app.appendChild(_backgroundCover);
+    // show loading 
+    displayLoading(app)
+
+    // fetch targets
+    await fetchTargets()
+
+    // Fetch complete ---- clear loading
+    app.innerHTML = ''
 
     // navbar
     const _navbar = navbar('agents')
     app.appendChild(_navbar)
     updateProgressbar()
+
+    // Background Cover
+    const _backgroundCover = backgroundCover('agents')
+    app.appendChild(_backgroundCover);
 
     // page
     const _agentsPage = document.createElement('div')
@@ -58,18 +72,16 @@ export async function agentsPage(app) {
     targetsDiv.id = 'targets-div'
     _agentsPage.appendChild(targetsDiv)
 
-    // footer 
-    const _footer = footer()
-    app.appendChild(_footer)
-
-    // fetch targets
-    await fetchTargets()
 
     //Sort and Fill leaderboard 
     sortAndRenderTagets()
 
     // sidebar
     sidebar()
+
+    // footer 
+    const _footer = footer()
+    app.appendChild(_footer)
 
     // EVENTS
   } catch (err) {
