@@ -74,7 +74,7 @@ export function playerCreate(player) {
     id: player.id,
     name: player.name,
     password: player.password,
-    avatar: "./assets/images/avatar/player-avatar.png",
+    avatar: "./assets/images/avatar/player-avatar.webp",
     gold: START_GOLD, // start gold
     gears: [],
     rank: 0, // set up when game run
@@ -106,14 +106,14 @@ export function bulkTargetsCreate(userArray) {
     // set avatar
     if (targets[i].gender === 'male') {
       const maleAvatars = [
-        './assets/images/avatar/male-1.png',
-        './assets/images/avatar/male-2.png'
+        './assets/images/avatar/male-1.webp',
+        './assets/images/avatar/male-2.webp'
       ];
       targets[i].avatar = maleAvatars[Math.floor(Math.random() * maleAvatars.length)];
     } else {
       const femaleAvatars = [
-        './assets/images/avatar/female-1.png',
-        './assets/images/avatar/female-2.png'
+        './assets/images/avatar/female-1.webp',
+        './assets/images/avatar/female-2.webp'
       ];
       targets[i].avatar = femaleAvatars[Math.floor(Math.random() * femaleAvatars.length)];
     }
