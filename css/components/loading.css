@@ -1,5 +1,62 @@
+.loading-wrapper {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.loading-image-loop {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.loading-image-loop::before,
+.loading-image-loop::after {
+  content: '';
+  position: absolute;
+  width: 300vw;
+  height: 300vh;
+  aspect-ratio: 1536 / 1024;
+  background-image: url('../../assets/images/background/profiles.webp');
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  filter: brightness(0.6);
+  animation: scroll-loop 10s linear infinite;
+  will-change: transform, filter;
+}
+.loading-image-loop::before {
+  top: 0;
+}
+.loading-image-loop::after {
+  top: 120%;
+}
+
+.loading-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background-image: url('../../assets/images/noise.png');
+  opacity: 0.08;
+  animation: noise 0.2s linear infinite both;
+  pointer-events: none;
+  overflow: hidden;
+  scale: 1.5;
+}
+
 .loading {
-  position: relative;
+  position: fixed;
   display: block;
   margin: auto;
   margin-top: auto;
@@ -8,11 +65,19 @@
   border: 2px solid var(--red);
   padding: 5px 10px;
   width: 220px;
-  max-width: 60%;
   font-family: monospace;
   font-weight: bold;
   background-color: rgba(255, 0, 0, 0.2);
   overflow: visible;
+}
+
+.loading:before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  display: block;
+  height: 100vh;
+  width: 100%;
 }
 
 .loading .info {
@@ -48,5 +113,20 @@
   }
   100% {
     content: 'Scanning';
+  }
+}
+
+@keyframes scroll-loop {
+  0% {
+    transform: translateY(0%) skewX(-0.6deg);
+    filter: brightness(0.4) blur(1px) grayscale(0.8);
+  }
+  50% {
+    transform: translateY(-50%) skewX(0.4deg);
+    filter: brightness(0.7) blur(3px) grayscale(0.6);
+  }
+  100% {
+    transform: translateY(-100%) skewX(-0.6deg);
+    filter: brightness(0.4) blur(1px) grayscale(0.8);
   }
 }

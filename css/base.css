@@ -12,6 +12,7 @@
 @import url('./pages/rulesPage.css');
 @import url('./components//sidebar.css');
 @import url('./components/loading.css');
+@import url('./components//displayCode.css');
 
 html {
   font-family: Arial, Helvetica, sans-serif;

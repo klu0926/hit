@@ -17,23 +17,14 @@ import { sidebar } from "../components/sidebar.js";
 
 // events
 import { EVENTS, attachEvent } from "../events.js"
+import { displayLoading, } from "../components/loading.js";
+import { displayCode, clearDisplayCodeInterval } from "../components/displayCode.js";
+
+
+
 
 let _agentsPage
 let targetsDiv
-
-function displayLoading(app) {
-  // loading
-  const loading = document.createElement('div')
-  loading.classList.add('loading')
-
-  // info
-  const info = document.createElement('p')
-  info.innerText = 'Tracking targets'
-  info.classList.add('info')
-  loading.appendChild(info)
-
-  app.appendChild(loading)
-}
 
 export async function agentsPage(app) {
   try {
@@ -48,10 +39,18 @@ export async function agentsPage(app) {
     // show loading 
     displayLoading(app)
 
+    // display code
+    displayCode()
+
     // fetch targets
     await fetchTargets()
 
-    // Fetch complete ---- clear loading
+    // Fetch completed -----------------------------
+
+    // Stop loading display code interval
+    clearDisplayCodeInterval()
+
+    // Clear loading
     app.innerHTML = ''
 
     // navbar

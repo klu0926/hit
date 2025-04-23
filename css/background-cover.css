@@ -12,7 +12,7 @@
   content: '';
   position: absolute;
   inset: -100%;
-  background-image: url('../assets/images/noise.webp');
+  background-image: url('../assets/images/noise.png');
   opacity: 0.08;
   animation: noise 0.2s linear infinite both;
   pointer-events: none;
