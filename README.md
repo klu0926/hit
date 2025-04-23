@@ -62,6 +62,8 @@ Supports multiple saved accounts.
 Enemies are created using Random User Generator and AI-generated avatars.  
 Each target is unique and randomized.
 
+![loading](./assets/screenshot/loading.webp)
+
 ![agent](./assets/screenshot/agents.png)
 
 ### Target Stats & Profile
