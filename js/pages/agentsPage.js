@@ -42,8 +42,6 @@ export async function agentsPage(app) {
     // display code
     displayCode()
 
-    // [TEST]
-    return
 
     // fetch targets
     await fetchTargets()
