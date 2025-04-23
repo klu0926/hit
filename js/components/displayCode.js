@@ -27,3 +27,5 @@ export function clearDisplayCodeInterval() {
     clearInterval(_intervalDisplayCode)
   }
 }
+
+

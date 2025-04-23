@@ -33,7 +33,7 @@
   background-position: top center;
   background-repeat: no-repeat;
   filter: brightness(0.6);
-  animation: scroll-loop 10s linear infinite;
+  animation: scroll-loop 20s linear infinite;
   will-change: transform, filter;
 }
 .loading-image-loop::before {
@@ -128,5 +128,33 @@
   100% {
     transform: translateY(-100%) skewX(-0.6deg);
     filter: brightness(0.4) blur(1px) grayscale(0.8);
+  }
+}
+
+@keyframes scroll-loop-mobile {
+  0% {
+    transform: translateY(0%) skewX(-0.6deg);
+    filter: brightness(2) blur(1px) grayscale(0.8);
+  }
+  50% {
+    transform: translateY(-50%) skewX(0.4deg);
+    filter: brightness(1.6) blur(3px) grayscale(0.6);
+  }
+  100% {
+    transform: translateY(-100%) skewX(-0.6deg);
+    filter: brightness(2) blur(1px) grayscale(0.8);
+  }
+}
+
+@media (max-width: 768px) {
+  .loading-image-loop::before,
+  .loading-image-loop::after {
+    width: 100vw;
+    height: 150vh;
+    background-position: top center;
+    background-repeat: no-repeat;
+    filter: brightness(0.6);
+    animation: scroll-loop-mobile 20s linear infinite;
+    will-change: transform, filter;
   }
 }
