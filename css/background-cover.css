@@ -92,8 +92,32 @@
   }
 }
 
+@keyframes subtleMove-brigher {
+  0%,
+  100% {
+    transform: translate(0px, 0px) skew(0deg, 0deg);
+    filter: brightness(5) blur(3px) grayscale(0.8);
+  }
+  25% {
+    transform: translate(2px, -1.5px) skewX(0.2deg);
+    filter: brightness(4.6) blur(2px) grayscale(0.8);
+  }
+  50% {
+    transform: translate(-1.5px, 1.5px) skewX(-0.2deg);
+    filter: brightness(4.2) blur(1px) grayscale(0.7);
+  }
+  75% {
+    transform: translate(1px, -1px) skewX(0.1deg);
+    filter: brightness(4.6) blur(2px) grayscale(0.7);
+  }
+}
+
 @media (max-width: 768px) {
   .background-wrapper .background-cover {
     background-position: 55% 100%;
+  }
+
+  .background-cover {
+    animation: subtleMove-brigher 3.5s ease-in-out infinite;
   }
 }
