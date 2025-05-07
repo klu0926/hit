@@ -27,7 +27,10 @@ export async function createAccount(name, password) {
     // Simulate API POST (won’t store anything remotely)
     const res = await fetch('https://reqres.in/api/users', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': 'reqres-free-v1'
+      },
       body: JSON.stringify({
         name,
         password: hash,
@@ -76,7 +79,10 @@ export async function login(name, password) {
     // Simulate login with dummy request
     await fetch('https://reqres.in/api/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': 'reqres-free-v1'
+      },
       body: JSON.stringify({
         email: 'eve.holt@reqres.in', // placeholder (doesn't matter)
         password: 'cityslicka' // placeholder (doesn't matter)

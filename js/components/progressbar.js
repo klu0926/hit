@@ -15,6 +15,8 @@ let playerRank
 
 export function progressbar() {
   const player = getLocalTokenPlayer()
+
+
   _progressbar = document.createElement('div');
   _progressbar.id = ('progressbar');
 
@@ -27,7 +29,7 @@ export function progressbar() {
   playerDiv.appendChild(playerAvatarDiv)
 
   playerAvatar = document.createElement('img')
-  playerAvatar.src = player.avatar
+  playerAvatar.src = player.avatar || './assets/images/avatar/player-avatar.webp'
   playerAvatar.classList.add('progressbar-player-avatar')
   playerAvatarDiv.appendChild(playerAvatar)
 
