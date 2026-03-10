@@ -2,7 +2,7 @@ import {
   getLocalPlayers,
   setLocalPlayers,
   removeLocalToken,
-  setLocalToken
+  setLocalToken,
 } from "../modules/storage.js";
 import { resMessage } from "../../utils/resMessage.js";
 import { playerCreate } from "../modules/characterCreate.js";
@@ -10,14 +10,14 @@ import { playerCreate } from "../modules/characterCreate.js";
 // Simulate POST to create an account and store hashed user locally
 export async function createAccount(name, password) {
   try {
-    if (name.trim() === '') throw new Error('Missing codename');
-    if (password.trim() === '') throw new Error('Missing access key');
+    if (name.trim() === "") throw new Error("Missing codename");
+    if (password.trim() === "") throw new Error("Missing access key");
 
     // check if user name exist
     const existingPlayers = getLocalPlayers() || [];
-    const oldPlayer = existingPlayers.find(p => p.name === name)
+    const oldPlayer = existingPlayers.find((p) => p.name === name);
     if (oldPlayer) {
-      throw new Error('Codename already exists')
+      throw new Error("Codename already exists");
     }
 
     // Using bcrypt CDN from index.html
@@ -25,16 +25,16 @@ export async function createAccount(name, password) {
     const hash = dcodeIO.bcrypt.hashSync(password, salt);
 
     // Simulate API POST (won’t store anything remotely)
-    const res = await fetch('https://reqres.in/api/users', {
-      method: 'POST',
+    const res = await fetch("https://reqres.in/api/users", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': 'reqres-free-v1'
+        "Content-Type": "application/json",
+        "x-api-key": "reqres_160b400b1efa4fd88f1d09919b767f2d",
       },
       body: JSON.stringify({
         name,
         password: hash,
-      })
+      }),
     });
 
     const { id } = await res.json();
@@ -43,16 +43,16 @@ export async function createAccount(name, password) {
     const player = playerCreate({
       id,
       name,
-      password: hash
-    })
+      password: hash,
+    });
 
     // Append player to local players array
     existingPlayers.push(player);
     setLocalPlayers(existingPlayers);
 
-    return resMessage(true, player, 'Account created');
+    return resMessage(true, player, "Account created");
   } catch (err) {
-    console.error('[ERROR] createAccount:', err);
+    console.error("[ERROR] createAccount:", err);
     return resMessage(false, null, err);
   }
 }
@@ -60,41 +60,41 @@ export async function createAccount(name, password) {
 // Simulate login by checking against stored hashed players
 export async function login(name, password) {
   try {
-    if (name.trim() === '') throw new Error('Missing codename');
-    if (password.trim() === '') throw new Error('Missing access key');
+    if (name.trim() === "") throw new Error("Missing codename");
+    if (password.trim() === "") throw new Error("Missing access key");
 
     const players = getLocalPlayers();
     if (!players || players.length === 0) {
-      throw new Error('No codename in network');
+      throw new Error("No codename in network");
     }
 
     // Find player with matching name
-    const player = players.find(p => p.name === name);
-    if (!player) throw new Error('Codename not found');
+    const player = players.find((p) => p.name === name);
+    if (!player) throw new Error("Codename not found");
 
     // Check password
     const isMatch = dcodeIO.bcrypt.compareSync(password, player.password);
-    if (!isMatch) throw new Error('Incorrect codeman or access key');
+    if (!isMatch) throw new Error("Incorrect codeman or access key");
 
     // Simulate login with dummy request
-    await fetch('https://reqres.in/api/login', {
-      method: 'POST',
+    await fetch("https://reqres.in/api/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': 'reqres-free-v1'
+        "Content-Type": "application/json",
+        "x-api-key": "reqres-free-v1",
       },
       body: JSON.stringify({
-        email: 'eve.holt@reqres.in', // placeholder (doesn't matter)
-        password: 'cityslicka' // placeholder (doesn't matter)
-      })
+        email: "eve.holt@reqres.in", // placeholder (doesn't matter)
+        password: "cityslicka", // placeholder (doesn't matter)
+      }),
     });
 
     // Store login session token locally
     setLocalToken(player);
 
-    return resMessage(true, player, 'Login successful');
+    return resMessage(true, player, "Login successful");
   } catch (err) {
-    console.error('[ERROR] login:', err.message);
+    console.error("[ERROR] login:", err.message);
     return resMessage(false, null, err.message);
   }
 }
@@ -102,9 +102,9 @@ export async function login(name, password) {
 export function logout() {
   try {
     removeLocalToken();
-    return resMessage(true, null, 'logout successful');
+    return resMessage(true, null, "logout successful");
   } catch (err) {
-    console.error('[ERROR] logout:', err.message);
+    console.error("[ERROR] logout:", err.message);
     return resMessage(false, null, err.message);
   }
 }
