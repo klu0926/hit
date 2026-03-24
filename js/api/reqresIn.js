@@ -7,7 +7,7 @@ import {
 import { resMessage } from "../../utils/resMessage.js";
 import { playerCreate } from "../modules/characterCreate.js";
 
-// Simulate POST to create an account and store hashed user locally
+// Local-only account creation
 export async function createAccount(name, password) {
   try {
     if (name.trim() === "") throw new Error("Missing codename");
@@ -24,20 +24,8 @@ export async function createAccount(name, password) {
     const salt = dcodeIO.bcrypt.genSaltSync(10);
     const hash = dcodeIO.bcrypt.hashSync(password, salt);
 
-    // Simulate API POST (won’t store anything remotely)
-    const res = await fetch("https://reqres.in/api/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "reqres_160b400b1efa4fd88f1d09919b767f2d",
-      },
-      body: JSON.stringify({
-        name,
-        password: hash,
-      }),
-    });
-
-    const { id } = await res.json();
+    // Local-only id for this profile
+    const id = Date.now();
 
     // Create new player object
     const player = playerCreate({
@@ -57,7 +45,7 @@ export async function createAccount(name, password) {
   }
 }
 
-// Simulate login by checking against stored hashed players
+// Local-only login by checking against stored hashed players
 export async function login(name, password) {
   try {
     if (name.trim() === "") throw new Error("Missing codename");
@@ -76,23 +64,21 @@ export async function login(name, password) {
     const isMatch = dcodeIO.bcrypt.compareSync(password, player.password);
     if (!isMatch) throw new Error("Incorrect codeman or access key");
 
-    // Simulate login with dummy request
-    await fetch("https://reqres.in/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "reqres-free-v1",
-      },
-      body: JSON.stringify({
-        email: "eve.holt@reqres.in", // placeholder (doesn't matter)
-        password: "cityslicka", // placeholder (doesn't matter)
-      }),
-    });
-
     // Store login session token locally
     setLocalToken(player);
 
-    return resMessage(true, player, "Login successful");
+    return resMessage(
+      true,
+      {
+        player,
+        session: {
+          token: `local-${player.id}-${Date.now()}`,
+          provider: "local",
+          issuedAt: new Date().toISOString(),
+        },
+      },
+      "Login successful"
+    );
   } catch (err) {
     console.error("[ERROR] login:", err.message);
     return resMessage(false, null, err.message);
