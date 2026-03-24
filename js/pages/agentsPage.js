@@ -32,6 +32,7 @@ export async function agentsPage(app) {
     const player = isAuth()
     if (!player) {
       setRoute('#/login')
+      return
     }
     // clear 
     app.innerHTML = ''

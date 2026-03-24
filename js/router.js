@@ -4,11 +4,17 @@ import { createPage } from "./pages/createPage.js";
 import { shopPage } from "./pages/shopPage.js";
 import { rulesPage } from "./pages/rulesPage.js";
 import { setRoute } from "../utils/setRoute.js";
+import { getLocalPlayers } from "./modules/storage.js";
 
 let currentPage = ''
 
 export function getCurrentPage() {
   return currentPage
+}
+
+function getLandingRoute() {
+  const players = getLocalPlayers() || []
+  return players.length > 0 ? '#/login' : '#/create'
 }
 
 export function router() {
@@ -37,6 +43,6 @@ export function router() {
       currentPage = "rules"
       break;
     default:
-      setRoute('#/login')
+      setRoute(getLandingRoute())
   }
 }

@@ -34,6 +34,7 @@ let _itemsBtn
 
 // target
 let currentTarget
+let _profileOutsideClickHandler
 
 export function renderTargetProfile(container, target, isPlayer = false) {
   removeTargetProfile()
@@ -97,7 +98,8 @@ function targetProfile(target, isPlayer = false) {
   infoDiv.appendChild(gender)
 
   idSpan = document.createElement('span')
-  idSpan.innerText = 'ID : ' + (target.id || '?').slice(0, 10)
+  const idText = target.id == null ? '?' : String(target.id)
+  idSpan.innerText = 'ID : ' + idText.slice(0, 10)
   infoDiv.appendChild(idSpan)
 
   status = document.createElement('span')
@@ -184,7 +186,10 @@ function targetProfile(target, isPlayer = false) {
 
   // Profile
   // click outside the profile to close profile
-  document.addEventListener('click', (event) => {
+  if (_profileOutsideClickHandler) {
+    document.removeEventListener('click', _profileOutsideClickHandler)
+  }
+  _profileOutsideClickHandler = (event) => {
     const profile = document.getElementById('target-profile');
     if (!profile) return;
 
@@ -200,7 +205,8 @@ function targetProfile(target, isPlayer = false) {
       // remove itemsDisplay
       removeItemDisplay()
     }
-  });
+  };
+  document.addEventListener('click', _profileOutsideClickHandler);
   return _targetProfile
 }
 

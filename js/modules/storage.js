@@ -9,6 +9,7 @@ const TOKEN_KEY = 'HIT_TOKEN' // current player id
 export function getLocalTargets() {
   try {
     const player = getLocalTokenPlayer()
+    if (!player) return []
     return player.targets
   } catch (err) {
     console.error('[ERROR] getLocalTargets:', err.message)
@@ -17,6 +18,10 @@ export function getLocalTargets() {
 export function setLocalTargets(targets) {
   try {
     const player = getLocalTokenPlayer()
+    if (!player) {
+      console.warn('Cannot set targets without active player')
+      return
+    }
     player.targets = targets
     setTokenPlayer(player)
   } catch (err) {
@@ -40,7 +45,6 @@ export function getLocalPlayers() {
 export function setLocalPlayers(playerArray) {
   try {
     localStorage.setItem(PLAYER_KEY, JSON.stringify(playerArray))
-    console.log('setLocalPlayer:', playerArray)
   } catch (err) {
     console.error('[ERROR] setLocalPlayers:', err.message)
   }
@@ -61,7 +65,6 @@ export function getLocalToken() {
 
 export function getLocalTokenPlayer() {
   try {
-    console.log('Getting player data with token...')
     const token = getLocalToken()
     if (!token) {
       console.warn('No saved token')
@@ -84,7 +87,6 @@ export function getLocalTokenPlayer() {
 
 export function setTokenPlayer(player) {
   try {
-    console.log('Updating player data with token...');
     const token = getLocalToken();
     if (!token) {
       console.warn('No saved token');
@@ -126,7 +128,6 @@ export function afterCombatTokenPlayerSave(result) {
 
     // update current target
     const targetToUpdate = targets.find(t => t.id === currentTarget.id);
-    console.log('targetToUpdate', targetToUpdate)
     if (targetToUpdate) {
       targetToUpdate.isDead = true;
     }

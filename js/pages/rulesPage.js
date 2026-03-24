@@ -14,7 +14,8 @@ export async function rulesPage(app) {
     // player is not login
     const plalyer = isAuth()
     if (!plalyer) {
-      setRoute('#login')
+      setRoute('#/login')
+      return
     }
     // clear
     app.innerHTML = ''

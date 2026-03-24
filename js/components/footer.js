@@ -2,9 +2,6 @@
 import { logout } from "../api/reqresIn.js";
 import { setRoute } from "../../utils/setRoute.js";
 
-// Elements
-import { musicToggleButton } from "../../utils/music.js";
-
 import { callPromptMessage } from '../../utils/promptMessage.js'
 
 let _footer
@@ -27,10 +24,6 @@ export function footer() {
   logout.id = 'logout'
   logout.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i>'
   buttonsDiv.append(logout)
-
-  // music toggle
-  const _musicToggleButton = musicToggleButton()
-  buttonsDiv.append(_musicToggleButton)
 
   // Event
   logout.addEventListener('click', onLogoutClick)

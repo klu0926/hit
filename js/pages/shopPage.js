@@ -24,6 +24,7 @@ export async function shopPage(app) {
     const plalyer = isAuth()
     if (!plalyer) {
       setRoute('#/login')
+      return
     }
     // clear
     app.innerHTML = ''
@@ -59,6 +60,7 @@ export async function shopPage(app) {
 
     // render
     renderShopItems()
+    sidebar()
 
   }
   catch (err) {
@@ -146,9 +148,6 @@ function renderShopItems(renew = false) {
 
     // append to itemsDivs
     itemsDiv.appendChild(itemDiv)
-
-    // sidebar
-    sidebar()
 
     // Event
     itemDiv.addEventListener('click', () => {

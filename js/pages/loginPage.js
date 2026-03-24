@@ -15,6 +15,7 @@ export function loginPage(app) {
   const player = isAuth()
   if (player) {
     setRoute('#/agents')
+    return
   }
 
   // Page Render

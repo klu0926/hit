@@ -34,7 +34,7 @@ export function targetCard(target, isPlayer = false) {
 
   // Rank
   const Rankspan = document.createElement('span');
-  Rankspan.innerText = target.rank || "?"
+  Rankspan.innerText = `Rank : ${target.rank || "?"}`
   Rankspan.classList.add('rank')
   innerDiv.appendChild(Rankspan);
 

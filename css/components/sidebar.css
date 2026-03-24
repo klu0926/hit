@@ -89,3 +89,22 @@
   padding-left: 1px;
   font-size: 1.4rem;
 }
+
+#sidebar .music-toggle-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#sidebar .music-toggle-btn i {
+  font-size: 1.2rem;
+  color: white;
+}
+
+#sidebar .music-toggle-btn:hover {
+  transform: scale(0.97);
+}

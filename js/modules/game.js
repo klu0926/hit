@@ -16,7 +16,6 @@ export function getCurrentTarget() {
 
 export function roll(chance, min = 0) {
   if (_godMode) {
-    console.log('God Mode Roll')
     return true
   }
   return Math.random() < (chance + min)

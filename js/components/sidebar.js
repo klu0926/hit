@@ -1,6 +1,7 @@
 import { getRouteUrl } from "../../utils/setRoute.js"
 import { getLocalTokenPlayer } from "../modules/storage.js"
 import { renderTargetProfile, removeTargetProfile } from "./targetProfile.js"
+import { musicToggleButton } from "../../utils/music.js"
 
 let _sidebar
 
@@ -12,7 +13,6 @@ export function sidebar() {
   const player = getLocalTokenPlayer()
 
   const hash = location.hash
-  console.log('hash:', hash)
 
 
   _sidebar = document.createElement('div')
@@ -45,9 +45,9 @@ export function sidebar() {
   scrollIcon.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`
   _sidebar.appendChild(scrollIcon)
 
-
-
-  // music ?
+  // music toggle (last item)
+  const _musicToggleButton = musicToggleButton()
+  _sidebar.appendChild(_musicToggleButton)
 
   // logout? 
 

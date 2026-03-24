@@ -5,6 +5,9 @@ import { setRoute } from "../../utils/setRoute.js";
 
 export function getPlayerStatsWithGears() {
   const player = getLocalTokenPlayer()
+  if (!player) {
+    return { lethality: 0, survival: 0, cool: 0 }
+  }
   // return raw stats
   const gears = player.gears
   if (!gears || gears.length === 0) {

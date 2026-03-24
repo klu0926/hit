@@ -9,6 +9,7 @@ let _navLinks // all pages
 // hide NavLink by default
 let _isNavLinkHidden = true
 let _burger
+let _outsideClickHandler
 
 export function navbar(currentPage) {
   if (_navbar) {
@@ -76,7 +77,10 @@ export function navbar(currentPage) {
   _burger.addEventListener('click', toggleNavLink)
 
   // check click out side while menu open 
-  document.addEventListener('click', (e) => {
+  if (_outsideClickHandler) {
+    document.removeEventListener('click', _outsideClickHandler)
+  }
+  _outsideClickHandler = (e) => {
     // menu is hidden
     if (_isNavLinkHidden) return
 
@@ -87,7 +91,8 @@ export function navbar(currentPage) {
 
     // click outside : hide menu
     toggleNavLink()
-  })
+  }
+  document.addEventListener('click', _outsideClickHandler)
 
   // scroll to top when change page
   const links = [shopLink, agentLink, rulesLink]
